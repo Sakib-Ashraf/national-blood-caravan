@@ -1,0 +1,32 @@
+.span1{
+    color: var(--heading-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+}
+.span1p{
+    outline: none;
+    -webkit-font-smoothing: antialiased;
+    margin-bottom: 10px;
+    color: rgb(135, 138, 149);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+}
+.right-content-area .title{
+    outline: none;
+    -webkit-font-smoothing: antialiased;
+    margin-bottom: 15px;
+    font-weight: 600;
+    line-height: 30px;
+    font-size: 20px;
+    color: var(--heading-color)
+}
+.right-content-area .title .span{
+    color: rgb(135, 138, 149);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+.blood-group .img, .thumb .img{
+    max-width: 200px;
+}
