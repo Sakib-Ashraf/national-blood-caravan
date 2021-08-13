@@ -4,20 +4,20 @@ import '../../containers/App.css';
 const Profile = () => {
 	return (
 		<section>
-			<div class='breadcrumb-area'>
-				<div class='container'>
-					<div class='row'>
-						<div class='col-lg-12'>
-							<div class='breadcrumb-inner'>
-								<h2 class='page-title'>Donor Details</h2>
-								<ul class='page-list'>
+			<div className='breadcrumb-area'>
+				<div className='container'>
+					<div className='row'>
+						<div className='col-lg-12'>
+							<div className='breadcrumb-inner'>
+								<h2 className='page-title'>Donor Details</h2>
+								<ul className='page-list'>
 									<li>
-										<a href='https://nationalbloodcaravan.com/home'>
+										<a href='/'>
 											Home
 										</a>
 									</li>
 									<li>
-										<a href='https://nationalbloodcaravan.com/profile'>
+										<a href='/profile'>
 											Donor Details
 										</a>
 									</li>
@@ -27,26 +27,26 @@ const Profile = () => {
 					</div>
 				</div>
 			</div>
-			<div class='donor-dashboard-page-content padding-120'>
-				<div class='container'>
-					<div class='row'>
-						<div class='col-lg-12'></div>
-						<div class='col-lg-4'>
-							<div class='donor-sidebar'>
-								<div class='profile-img'>
+			<div className='donor-dashboard-page-content padding-120'>
+				<div className='container'>
+					<div className='row'>
+						<div className='col-lg-12'></div>
+						<div className='col-lg-4'>
+							<div className='donor-sidebar'>
+								<div className='profile-img'>
 									<img
 										src='../../assets/uploads/donors/donor-pic-5.jpg'
 										alt='James Long'
 									/>
 								</div>
-								<div class='donor-info'>
-									<h4 class='username'> James Long</h4>
-									<div class='btn-wrapper'>
+								<div className='donor-info'>
+									<h4 className='username'> James Long</h4>
+									<div className='btn-wrapper'>
 										<a
 											href='#donor_contact'
 											data-toggle='modal'
 											data-target='#donor_contact'
-											class='boxed-btn'
+											className='boxed-btn'
 										>
 											Contact
 										</a>
@@ -54,44 +54,44 @@ const Profile = () => {
 								</div>
 							</div>
 						</div>
-						<div class='col-lg-8'>
-							<div class='donor-content-area'>
-								<h2 class='title'>Donor Profile</h2>
+						<div className='col-lg-8'>
+							<div className='donor-content-area'>
+								<h2 className='title'>Donor Profile</h2>
 								<ul>
 									<li>
 										<strong>Birth Date: </strong>{' '}
-										<span class='right'>1972-01-17</span>
+										<span className='right'>1972-01-17</span>
 									</li>
 									<li>
 										<strong>Blood Group: </strong>{' '}
-										<span class='right'>O+</span>
+										<span className='right'>O+</span>
 									</li>
 									<li>
 										<strong>Total Blood Donate: </strong>{' '}
-										<span class='right'>1 Times</span>
+										<span className='right'>1 Times</span>
 									</li>
 									<li>
 										<strong>Mobile: </strong>{' '}
-										<span class='right'>949-860-7949</span>
+										<span className='right'>949-860-7949</span>
 									</li>
 									<li>
 										<strong>Gender: </strong>{' '}
-										<span class='right'>Male</span>
+										<span className='right'>Male</span>
 									</li>
 									<li>
 										<strong>Address: </strong>{' '}
-										<span class='right'>
+										<span className='right'>
 											905 Hillcrest Lane Los Angeles, CA
 											90017
 										</span>
 									</li>
 									<li>
 										<strong>Area: </strong>{' '}
-										<span class='right'>New Mexico</span>
+										<span className='right'>New Mexico</span>
 									</li>
 									<li>
 										<strong>Last Donate Date: </strong>{' '}
-										<span class='right'>12/06/2019</span>
+										<span className='right'>12/06/2019</span>
 									</li>
 								</ul>
 							</div>
@@ -100,21 +100,21 @@ const Profile = () => {
 				</div>
 			</div>
 			<div
-				class='modal fade'
+				className='modal fade'
 				id='donor_contact'
-				tabindex='-1'
+				tabIndex-1
 				role='dialog'
-				aria-hidden='true'
+				aria-hidden
 			>
-				<div class='modal-dialog' role='document'>
-					<div class='modal-content'>
-						<div class='modal-header'>
-							<h5 class='modal-title' id='exampleModalLabel'>
+				<div className='modal-dialog' role='document'>
+					<div className='modal-content'>
+						<div className='modal-header'>
+							<h5 className='modal-title' id='exampleModalLabel'>
 								Contact With Donor
 							</h5>
 							<button
 								type='button'
-								class='close'
+								className='close'
 								data-dismiss='modal'
 								aria-label='Close'
 							>
@@ -125,53 +125,53 @@ const Profile = () => {
 							action='https://nationalbloodcaravan.com/donor-contact'
 							method='post'
 						>
-							<div class='modal-body'>
+							<div className='modal-body'>
 								<input
 									type='hidden'
 									name='_token'
 									value='0FuC0bAIo7Kb9co0XcJC5BNiYMnAMR8bvWIKq1k4'
 								/>{' '}
 								<input type='hidden' name='user_id' value='5' />
-								<div class='form-group'>
-									<label for='subject'>Subject</label>
+								<div className='form-group'>
+									<label htmlFor='subject'>Subject</label>
 									<input
 										type='text'
 										name='subject'
 										id='subject'
-										class='form-control'
+										className='form-control'
 										placeholder='Subject'
 									/>
 								</div>
-								<div class='form-group'>
-									<label for='email'>Email</label>
+								<div className='form-group'>
+									<label htmlFor='email'>Email</label>
 									<input
 										type='text'
 										name='email'
 										id='email'
-										class='form-control'
+										className='form-control'
 										placeholder='Email'
 									/>
 								</div>
-								<div class='form-group'>
+								<div className='form-group'>
 									<textarea
 										name='message'
 										id='message'
-										class='form-control max-height-150'
-										cols='30'
-										rows='10'
+										className='form-control max-height-150'
+										cols-30
+										rows-10
 										placeholder='Message'
 									></textarea>
 								</div>
 							</div>
-							<div class='modal-footer'>
+							<div className='modal-footer'>
 								<button
 									type='button'
-									class='btn btn-secondary'
+									className='btn btn-secondary'
 									data-dismiss='modal'
 								>
 									Close
 								</button>
-								<button type='submit' class='btn btn-primary'>
+								<button type='submit' className='btn btn-primary'>
 									Send Mail
 								</button>
 							</div>

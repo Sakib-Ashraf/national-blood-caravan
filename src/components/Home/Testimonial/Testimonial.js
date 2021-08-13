@@ -1,8 +1,5 @@
 import React from 'react';
-import TP1 from './testimonial-pic-1.jpg';
-import TP2 from './testimonial-pic-2.jpg';
-import TP3 from './testimonial-pic-3.jpg';
-
+import TP from './testimonial.png';
 const Testimonial = () => {
     return (
 <div className="testimonial-area padding-120">
@@ -20,7 +17,7 @@ const Testimonial = () => {
                 <div className="testimonial-carousel owl-carousel">
                     <div className="single-testimonial-item">
                         <div className="thumb">
-                            <img src={TP1} alt="Javier Jeffery"/>
+                            <img src={TP} alt="Javier Jeffery"/>
 
                         </div>
                         <div className="content">
@@ -40,7 +37,7 @@ const Testimonial = () => {
                     </div>
                     <div className="single-testimonial-item">
                         <div className="thumb">
-                            <img src={TP2} alt="David Barnes"/>
+                            <img src={TP} alt="David Barnes"/>
 
                         </div>
                         <div className="content">
@@ -60,7 +57,7 @@ const Testimonial = () => {
                     </div>
                     <div className="single-testimonial-item">
                         <div className="thumb">
-                            <img src={TP3} alt="Victor Ryan"/>
+                            <img src={TP} alt="Victor Ryan"/>
 
                         </div>
                         <div className="content">

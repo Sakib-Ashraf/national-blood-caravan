@@ -12,32 +12,33 @@ import Counter from './Counter/Counter';
 import Testimonial from './Testimonial/Testimonial';
 import CTA from './CTA/CTA';
 import News from './News/News';
+import Profile from '../Profile/Profile';
 
-// import JoinAsDonor from '../../components/JoinAsDonor/JoinAsDonor';
-// import Contact from '../../components/Contact/Contact';
+import JoinAsDonor from '../../components/JoinAsDonor/JoinAsDonor';
+import Contact from '../../components/Contact/Contact';
 
-// import Anegetive from './BGCard/A-/A-';
-// import Aposetive from './BGCard/A+/A+';
-// import ABnegetive from './BGCard/AB-/AB-';
-// import ABposetive from './BGCard/AB+/AB+';
-// import Bnegetive from './BGCard/B-/B-';
-// import Bposetive from './BGCard/B+/B+';
-// import Onegetive from './BGCard/O-/O-';
-// import Oposetive from './BGCard/O+/O+';
+import Anegetive from './BGCard/A-/A-';
+import Aposetive from './BGCard/A+/A+';
+import ABnegetive from './BGCard/AB-/AB-';
+import ABposetive from './BGCard/AB+/AB+';
+import Bnegetive from './BGCard/B-/B-';
+import Bposetive from './BGCard/B+/B+';
+import Onegetive from './BGCard/O-/O-';
+import Oposetive from './BGCard/O+/O+';
 import ErrorPage from '../../components/ErrorPage/ErrorPage';
 
 const Home = () => {
     return (
 		<Router>
 			<Header />
-			{/* <Switch>
+			<Switch>
 				<Route exact path='/contact' component={Contact} />
 				<Route exact path='/join-donor' component={JoinAsDonor} />
-			</Switch> */}
+			</Switch>
 			<SearchBox />
 			<DonationProcess />
 			<BGCard />
-			{/* <Switch>
+			<Switch>
 				<Route exact path='/a-' component={Anegetive} />
 				<Route exact path='/a+' component={Aposetive} />
 				<Route exact path='/ab-' component={ABnegetive} />
@@ -47,11 +48,14 @@ const Home = () => {
 				<Route exact path='/o-' component={Onegetive} />
 				<Route exact path='/o+' component={Oposetive} />
 				<Route component={ErrorPage} />
-			</Switch> */}
+			</Switch>
 			<ReqBGInfo />
 			<RecentDonors />
 			<Motivation />
 			<Volunteers />
+			<Switch>
+				<Route exact path='/profile' component={Profile} />
+			</Switch>
 			<Counter />
 			<Testimonial />
 			<CTA />

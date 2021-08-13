@@ -20,7 +20,7 @@ const BGCard = () => {
                                 <span className="blood-group">A+</span>
                             </div>
                             <div className="btn-wrapper">
-                                <NavLink to="/bgcard/a+" className="boxed-btn">View All</NavLink>
+                                <NavLink to="/a+" className="boxed-btn">View All</NavLink>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@ const BGCard = () => {
                                 <span className="blood-group">A-</span>
                             </div>
                             <div className="btn-wrapper">
-                                <NavLink to="/bgcard/a-" className="boxed-btn">View All</NavLink>
+                                <NavLink to="/a-" className="boxed-btn">View All</NavLink>
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@ const BGCard = () => {
                                 <span className="blood-group">O+</span>
                             </div>
                             <div className="btn-wrapper">
-                                <NavLink to="/bgcard/o+" className="boxed-btn">View All</NavLink>
+                                <NavLink to="/o+" className="boxed-btn">View All</NavLink>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@ const BGCard = () => {
                                 <span className="blood-group">O-</span>
                             </div>
                             <div className="btn-wrapper">
-                                <NavLink to="/bgcard/o-" className="boxed-btn">View All</NavLink>
+                                <NavLink to="/o-" className="boxed-btn">View All</NavLink>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@ const BGCard = () => {
                                 <span className="blood-group">B+</span>
                             </div>
                             <div className="btn-wrapper">
-                                <NavLink to="/bgcard/b+" className="boxed-btn">View All</NavLink>
+                                <NavLink to="/b+" className="boxed-btn">View All</NavLink>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ const BGCard = () => {
                                 <span className="blood-group">B-</span>
                             </div>
                             <div className="btn-wrapper">
-                                <NavLink to="/bgcard/b-" className="boxed-btn">View All</NavLink>
+                                <NavLink to="/b-" className="boxed-btn">View All</NavLink>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@ const BGCard = () => {
                                 <span className="blood-group">AB+</span>
                             </div>
                             <div className="btn-wrapper">
-                                <NavLink to="/bgcard/ab+" className="boxed-btn">View All</NavLink>
+                                <NavLink to="/ab+" className="boxed-btn">View All</NavLink>
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@ const BGCard = () => {
                                 <span className="blood-group">AB-</span>
                             </div>
                             <div className="btn-wrapper">
-                                <NavLink to="/bgcard/ab-" className="boxed-btn">View All</NavLink>
+                                <NavLink to="/ab-" className="boxed-btn">View All</NavLink>
                             </div>
                         </div>
                     </div>

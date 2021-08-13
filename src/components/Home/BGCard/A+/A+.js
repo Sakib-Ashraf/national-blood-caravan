@@ -6,16 +6,16 @@ import { NavLink } from 'react-router-dom';
 const Aposetive = () => {
 	return (
 		<>
-			<div class='breadcrumb-area'>
-				<div class='container'>
-					<div class='row'>
-						<div class='col-lg-12'>
-							<div class='breadcrumb-inner'>
-								<h2 class='page-title'>
+			<div className='breadcrumb-area'>
+				<div className='container'>
+					<div className='row'>
+						<div className='col-lg-12'>
+							<div className='breadcrumb-inner'>
+								<h2 className='page-title'>
 									{' '}
 									All Available Donors In A+
 								</h2>
-								<ul class='page-list'>
+								<ul className='page-list'>
 									<li>
 										<NavLink to='/'>Home</NavLink>
 									</li>
@@ -32,79 +32,79 @@ const Aposetive = () => {
 				</div>
 			</div>
 
-			<section class='dedicated-team-area padding-120 '>
-				<div class='container'>
-					<div class='row'>
-						<div class='col-lg-12'></div>
-						<div class='col-lg-3 col-md-6'>
-							<div class='single-donors-item margin-bottom-30'>
-								<div class='thumb'>
+			<section className='dedicated-team-area padding-120 '>
+				<div className='container'>
+					<div className='row'>
+						<div className='col-lg-12'></div>
+						<div className='col-lg-3 col-md-6'>
+							<div className='single-donors-item margin-bottom-30'>
+								<div className='thumb'>
 									<img
 										src={dp}
 										alt='dp'
 									/>
 								</div>
-								<div class='content'>
+								<div className='content'>
 									<NavLink to='/donor-profile/17/nannie-jude'>
 										{' '}
-										<h4 class='title'>Nannie Jude</h4>
+										<h4 className='title'>Nannie Jude</h4>
 									</NavLink>
-									<span class='blood-group'>
+									<span className='blood-group'>
 										Blood Group: <strong>A+</strong>
 									</span>
-									<span class='total-donate'>
+									<span className='total-donate'>
 										Total Donate: <strong>0</strong> Times
 									</span>
 								</div>
 							</div>
 						</div>
-						<div class='col-lg-3 col-md-6'>
-							<div class='single-donors-item margin-bottom-30'>
-								<div class='thumb'>
+						<div className='col-lg-3 col-md-6'>
+							<div className='single-donors-item margin-bottom-30'>
+								<div className='thumb'>
 									<img
 										src={dp}
 										alt='dp'
 									/>
 								</div>
-								<div class='content'>
+								<div className='content'>
 									<NavLink to='/donor-profile/9/charles-beckham'>
 										{' '}
-										<h4 class='title'>Charles Beckham</h4>
+										<h4 className='title'>Charles Beckham</h4>
 									</NavLink>
-									<span class='blood-group'>
+									<span className='blood-group'>
 										Blood Group: <strong>A+</strong>
 									</span>
-									<span class='total-donate'>
+									<span className='total-donate'>
 										Total Donate: <strong>1</strong> Times
 									</span>
 								</div>
 							</div>
 						</div>
-						<div class='col-lg-3 col-md-6'>
-							<div class='single-donors-item margin-bottom-30'>
-								<div class='thumb'>
+						<div className='col-lg-3 col-md-6'>
+							<div className='single-donors-item margin-bottom-30'>
+								<div className='thumb'>
 									<img
 										src={dp}
 										alt='dp'
 									/>
 								</div>
-								<div class='content'>
+								<div className='content'>
 									<NavLink to='/donor-profile/7/susan-shaw'>
 										{' '}
-										<h4 class='title'>Susan Shaw</h4>
+										<h4 className='title'>Susan Shaw</h4>
 									</NavLink>
-									<span class='blood-group'>
+									<span className='blood-group'>
 										Blood Group: <strong>A+</strong>
 									</span>
-									<span class='total-donate'>
+									<span className='total-donate'>
 										Total Donate: <strong>1</strong> Times
 									</span>
 								</div>
 							</div>
 						</div>
-						<div class='col-lg-12'>
+						<div className='col-lg-12'>
 							<nav
-								class='pagination-wrapper'
+								className='pagination-wrapper'
 								ariaLabel='Page navigation '
 							></nav>
 						</div>

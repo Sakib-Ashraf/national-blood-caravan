@@ -2,14 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import OwlCarousel from 'react-owl-carousel';
 import { faFacebook, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import VP3 from './volunteers-pic-3.jpg';
-import VP4 from './volunteers-pic-4.jpg';
-import VP5 from './volunteers-pic-5.jpg';
-import VP6 from './volunteers-pic-6.jpg';
-import VP7 from './volunteers-pic-7.jpg';
-import VP8 from './volunteers-pic-8.jpg';
-import VP9 from './volunteers-pic-9.jpg';
-import VP10 from './volunteers-pic-10.jpg';
+import VP from './volunteer.png';
 import options from '../../../containers/OwlCarouselOptions';
 
 const Volunteers = () => {
@@ -31,7 +24,7 @@ const Volunteers = () => {
 								<div className='thumb'>
 									<span className='blood-group'>o+</span>
 									<img
-										src={VP3}
+										src={VP}
 										alt='Jorge Amos'
 									/>
 								</div>
@@ -74,7 +67,7 @@ const Volunteers = () => {
 								<div className='thumb'>
 									<span className='blood-group'>o+</span>
 									<img
-										src={VP4}
+										src={VP}
 										alt='Earl Cho'
 									/>
 								</div>
@@ -117,7 +110,7 @@ const Volunteers = () => {
 								<div className='thumb'>
 									<span className='blood-group'>b+</span>
 									<img
-										src={VP5}
+										src={VP}
 										alt='Roberto McDermott'
 									/>
 								</div>
@@ -158,7 +151,7 @@ const Volunteers = () => {
 								<div className='thumb'>
 									<span className='blood-group'>a+</span>
 									<img
-										src={VP6}
+										src={VP}
 										alt='Michael Hughes'
 									/>
 								</div>
@@ -201,7 +194,7 @@ const Volunteers = () => {
 								<div className='thumb'>
 									<span className='blood-group'>a-</span>
 									<img
-										src={VP7}
+										src={VP}
 										alt='Charlie Buckner'
 									/>
 								</div>
@@ -242,7 +235,7 @@ const Volunteers = () => {
 								<div className='thumb'>
 									<span className='blood-group'>b+</span>
 									<img
-										src={VP8}
+										src={VP}
 										alt='Gary  Ladner'
 									/>
 								</div>
@@ -285,7 +278,7 @@ const Volunteers = () => {
 								<div className='thumb'>
 									<span className='blood-group'>a+</span>
 									<img
-										src={VP9}
+										src={VP}
 										alt='Larry Ford'
 									/>
 								</div>
@@ -328,7 +321,7 @@ const Volunteers = () => {
 								<div className='thumb'>
 									<span className='blood-group'>a+</span>
 									<img
-										src={VP10}
+										src={VP}
 										alt='Myron Merritt'
 									/>
 								</div>

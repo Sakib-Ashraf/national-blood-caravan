@@ -1,12 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
-import DP7 from './donor-pic-7.jpg';
-import DP11 from './donor-pic-11.jpg';
-import DP10 from './donor-pic-10.jpg';
-import DP9 from './donor-pic-9.jpg';
-import DP5 from './donor-pic-5.jpg';
-import DP15 from './donor-pic-15.jpg';
+import DP from './Donor.png';
 import options from '../../../containers/OwlCarouselOptions';
 
 const RecentDonors = (props) => {
@@ -32,7 +27,7 @@ const RecentDonors = (props) => {
                     <OwlCarousel className="recently-donated-donors-carousel owl-carousel" {...options}>
                         <div className="single-donors-item">
                             <div className="thumb">
-                                <img style={{maxWidth: '300px'}} src={DP15} alt="dp15"/>
+                                <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
                                 <NavLink to="/recent-donors/donor-profile/15/john-schroyer">
@@ -44,7 +39,7 @@ const RecentDonors = (props) => {
                         </div>
                         <div className="single-donors-item">
                             <div className="thumb">
-                                <img style={{maxWidth: '300px'}} src={DP7} alt="dp7"/>
+                                <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
                                 <NavLink to="/recent-donors/donor-profile/7/susan-shaw">
@@ -56,7 +51,7 @@ const RecentDonors = (props) => {
                         </div>
                         <div className="single-donors-item">
                             <div className="thumb">
-                                <img style={{maxWidth: '300px'}} src={DP10} alt="dp10"/>
+                                <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
                                 <NavLink to="/recent-donors/donor-profile/10/ardelia-rice">
@@ -68,7 +63,7 @@ const RecentDonors = (props) => {
                         </div>
                         <div className="single-donors-item">
                             <div className="thumb">
-                                <img style={{maxWidth: '300px'}} src={DP9} alt="dp9"/>
+                                <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
                                 <NavLink to="/recent-donors/donor-profile/9/charles-beckham">
@@ -80,7 +75,7 @@ const RecentDonors = (props) => {
                         </div>
                         <div className="single-donors-item">
                             <div className="thumb">
-                                <img style={{maxWidth: '300px'}} src={DP5} alt="dp5"/>
+                                <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
                                 <NavLink to="/recent-donors/donor-profile/5/james-long">
@@ -92,7 +87,7 @@ const RecentDonors = (props) => {
                         </div>
                         <div className="single-donors-item">
                             <div className="thumb">
-                                <img style={{maxWidth: '300px'}} src={DP11} alt="dp11"/>
+                                <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
                                 <NavLink to="/recent-donors/donor-profile/11/richard-donahue">
