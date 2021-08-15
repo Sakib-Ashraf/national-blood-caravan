@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
 
 const JoinAsDonor = () => {
@@ -12,15 +13,15 @@ const JoinAsDonor = () => {
 								<h2 className='page-title'> Join As Donor</h2>
 								<ul className='page-list'>
 									<li>
-										<a href='https://nationalbloodcaravan.com/home'>
+										<NavLink to='/home'>
 											Home
-										</a>
+										</NavLink>
 									</li>
 									<li>
-										<a href='https://nationalbloodcaravan.com/register-as-donor'>
+										<NavLink to='/register-as-donor'>
 											{' '}
 											Join As Donor
-										</a>
+										</NavLink>
 									</li>
 								</ul>
 							</div>
@@ -34,8 +35,15 @@ const JoinAsDonor = () => {
 						<div className='col-lg-12'>
 							<div className='righti-content-area'>
 								<div className='contact-page-form-wrap'>
+									<div className='alert alert-danger'>
+										<ul>
+											<li>
+												The state field is required.
+											</li>
+										</ul>
+									</div>
 									<form
-										action='https://nationalbloodcaravan.com/register-as-donor'
+										action='/register-as-donor'
 										method='post'
 										id='contact_page_form'
 										className='contact-page-form'

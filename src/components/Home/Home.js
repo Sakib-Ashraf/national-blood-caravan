@@ -31,31 +31,13 @@ const Home = () => {
     return (
 		<Router>
 			<Header />
-			<Switch>
-				<Route exact path='/contact' component={Contact} />
-				<Route exact path='/join-donor' component={JoinAsDonor} />
-			</Switch>
 			<SearchBox />
 			<DonationProcess />
 			<BGCard />
-			<Switch>
-				<Route exact path='/a-' component={Anegetive} />
-				<Route exact path='/a+' component={Aposetive} />
-				<Route exact path='/ab-' component={ABnegetive} />
-				<Route exact path='/ab+' component={ABposetive} />
-				<Route exact path='/b-' component={Bnegetive} />
-				<Route exact path='/b+' component={Bposetive} />
-				<Route exact path='/o-' component={Onegetive} />
-				<Route exact path='/o+' component={Oposetive} />
-				<Route component={ErrorPage} />
-			</Switch>
 			<ReqBGInfo />
 			<RecentDonors />
 			<Motivation />
 			<Volunteers />
-			<Switch>
-				<Route exact path='/profile' component={Profile} />
-			</Switch>
 			<Counter />
 			<Testimonial />
 			<CTA />

@@ -21,21 +21,21 @@ const Counter = () => {
 					<div className='col-lg-3 col-md-6'>
 						<div className='single-counterup-item'>
 							<div className='icon'>
-								<FontAwesomeIcon icon={faTint} />
+								<FontAwesomeIcon icon={faGrin} />
 							</div>
 							<div className='content'>
 								<span className='count-num'>20</span>
-								<h4 className='title'>Blood Group</h4>
+								<h4 className='title'>Blood Recipient</h4>
 							</div>
 						</div>
 					</div>
 					<div className='col-lg-3 col-md-6'>
 						<div className='single-counterup-item'>
 							<div className='icon'>
-								<FontAwesomeIcon icon={faGrin} />
+								<FontAwesomeIcon icon={faTint} />
 							</div>
 							<div className='content'>
-								<span className='count-num'>203</span>
+								<span className='count-num'>8</span>
 								<h4 className='title'>Blood Group</h4>
 							</div>
 						</div>
@@ -46,7 +46,7 @@ const Counter = () => {
 								<FontAwesomeIcon icon={faTrophy} />
 							</div>
 							<div className='content'>
-								<span className='count-num'>20</span>
+								<span className='count-num'>5</span>
 								<h4 className='title'>Total Awards</h4>
 							</div>
 						</div>

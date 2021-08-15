@@ -6,7 +6,7 @@ import { faTint } from '@fortawesome/free-solid-svg-icons';
 const FloatingWidget = () => {
     return (
 		<div className='request-for-blood'>
-			<NavLink to='/login' target='_blank' className='request-link'>
+			<NavLink to='/login' className='request-link'>
                 <FontAwesomeIcon icon={faTint} style={ {marginRight : '10px'} }/>
 				 Request For Blood
 			</NavLink>
