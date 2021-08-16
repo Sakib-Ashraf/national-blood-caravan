@@ -16,9 +16,7 @@ const ReqForBlood = () => {
 								</h2>
 								<ul className='page-list'>
 									<li>
-										<NavLink to='/'>
-											Home
-										</NavLink>
+										<NavLink to='/'>Home</NavLink>
 									</li>
 									<li>
 										<NavLink to='/blood-request'>
@@ -38,6 +36,11 @@ const ReqForBlood = () => {
 						<div className='col-lg-12'>
 							<div className='right-content-area'>
 								<div className='contact-page-form-wrap'>
+									<div className='alert alert-danger'>
+										<ul>
+											<li>Every field is required.</li>
+										</ul>
+									</div>
 									<form
 										action='/blood-request'
 										method='post'

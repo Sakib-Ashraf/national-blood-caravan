@@ -169,13 +169,13 @@ const Contact = () => {
 					</div>
 				</div>
 			</div>
-			<div className='contact-map'>
+			{/* <div className='contact-map'>
 				<div
 					id='map'
 					data-latitude='23.7797664'
 					data-longitude='90.4234868'
 				></div>
-			</div>
+			</div> */}
 		</div>
 	);
 };

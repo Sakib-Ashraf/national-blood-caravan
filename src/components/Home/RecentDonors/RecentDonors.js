@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
 import DP from './Donor.png';
-import options from '../../../containers/OwlCarouselOptions';
+import {options} from '../../../containers/OwlCarouselOptions';
 
 const RecentDonors = (props) => {
     

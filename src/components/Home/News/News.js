@@ -1,8 +1,11 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom'
 import './News.css';
 import BGrid2 from './blog-grid-2.jpg';
 import BGrid3 from './blog-grid-3.jpg';
 import BGrid4 from './blog-grid-4.jpg';
+
+
 const News = () => {
     return (
 		<section className='news-area padding-120'>
@@ -29,10 +32,10 @@ const News = () => {
 									Posted By Sharifur
 								</span>
 								<h4 className='title'>
-									<a href='blog/4/subjects-to-ecstatic-children-up-as-built-match-gravida.html'>
+									<NavLink to='/blog/4/subjects-to-ecstatic-children-up-as-built-match-gravida'>
 										Subjects to ecstatic children up as
 										built match gravida
-									</a>
+									</NavLink>
 								</h4>
 								<div className='description'>
 									<p className='p1'>
@@ -45,12 +48,11 @@ const News = () => {
 										tellus...
 									</p>
 								</div>
-								<a
-									href='blog/4/subjects-to-ecstatic-children-up-as-built-match-gravida.html'
+								<NavLink to='/blog/4/subjects-to-ecstatic-children-up-as-built-match-gravida'
 									className='readmore'
 								>
 									Read More
-								</a>
+								</NavLink>
 							</div>
 						</div>
 					</div>
@@ -67,10 +69,10 @@ const News = () => {
 									Posted By Sharifur
 								</span>
 								<h4 className='title'>
-									<a href='blog/3/nam-nec-tellus-sed-odio-sit-amet-nibh-vulputate-cursus.html'>
+									<NavLink to='/blog/3/nam-nec-tellus-sed-odio-sit-amet-nibh-vulputate-cursus'>
 										Nam nec tellus sed odio sit amet nibh
 										vulputate cursus
-									</a>
+									</NavLink>
 								</h4>
 								<div className='description'>
 									<p>
@@ -84,12 +86,11 @@ const News = () => {
 										cursus a...
 									</p>
 								</div>
-								<a
-									href='blog/3/nam-nec-tellus-sed-odio-sit-amet-nibh-vulputate-cursus.html'
+								<NavLink to='/blog/3/nam-nec-tellus-sed-odio-sit-amet-nibh-vulputate-cursus'
 									className='readmore'
 								>
 									Read More
-								</a>
+								</NavLink>
 							</div>
 						</div>
 					</div>
@@ -106,10 +107,10 @@ const News = () => {
 									Posted By Sharifur
 								</span>
 								<h4 className='title'>
-									<a href='blog/2/dejection-agreeable-attention-set-led-offending.html'>
+									<NavLink to='/blog/2/dejection-agreeable-attention-set-led-offending'>
 										Dejection agreeable attention set led
 										offending
-									</a>
+									</NavLink>
 								</h4>
 								<div className='description'>
 									<p>
@@ -123,12 +124,11 @@ const News = () => {
 										cursus a...
 									</p>
 								</div>
-								<a
-									href='blog/2/dejection-agreeable-attention-set-led-offending.html'
+								<NavLink to='/blog/2/dejection-agreeable-attention-set-led-offending'
 									className='readmore'
 								>
 									Read More
-								</a>
+								</NavLink>
 							</div>
 						</div>
 					</div>

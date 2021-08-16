@@ -55,14 +55,46 @@ function App() {
 					<DonationProcess />
 					<BGCard />
 					<Switch>
-						<Route exact path='/a-' component={Anegetive} />
-						<Route exact path='/a+' component={Aposetive} />
-						<Route exact path='/ab-' component={ABnegetive} />
-						<Route exact path='/ab+' component={ABposetive} />
-						<Route exact path='/b-' component={Bnegetive} />
-						<Route exact path='/b+' component={Bposetive} />
-						<Route exact path='/o-' component={Onegetive} />
-						<Route exact path='/o+' component={Oposetive} />
+						<Route
+							exact
+							path='/bgcard/:bg-group'
+							component={Anegetive}
+						/>
+						<Route
+							exact
+							path='/bgcard/:bg-group'
+							component={Aposetive}
+						/>
+						<Route
+							exact
+							path='/bgcard/:bg-group'
+							component={ABnegetive}
+						/>
+						<Route
+							exact
+							path='/bgcard/:bg-group'
+							component={ABposetive}
+						/>
+						<Route
+							exact
+							path='/bgcard/:bg-group'
+							component={Bnegetive}
+						/>
+						<Route
+							exact
+							path='/bgcard/:bg-group'
+							component={Bposetive}
+						/>
+						<Route
+							exact
+							path='/bgcard/:bg-group'
+							component={Onegetive}
+						/>
+						<Route
+							exact
+							path='/bgcard/:bg-group'
+							component={Oposetive}
+						/>
 					</Switch>
 					<ReqBGInfo />
 					<RecentDonors />

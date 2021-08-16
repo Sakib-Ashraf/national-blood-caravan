@@ -66,28 +66,28 @@ const Footer = () => {
 											</h4>
 											<ul className='social-share'>
 												<li>
-													<a href='www.facebook.com'>
+													<a href='https://www.facebook.com'>
 														<FontAwesomeIcon
 															icon={faFacebook}
 														/>
 													</a>
 												</li>
 												<li>
-													<a href='www.twitter.com'>
+													<a href='https://www.twitter.com'>
 														<FontAwesomeIcon
 															icon={faTwitter}
 														/>
 													</a>
 												</li>
 												<li>
-													<a href='www.instagram.com'>
+													<a href='https://www.instagram.com'>
 														<FontAwesomeIcon
 															icon={faInstagram}
 														/>
 													</a>
 												</li>
 												<li>
-													<a href='www.linkedin.com'>
+													<a href='https://www.linkedin.com'>
 														<FontAwesomeIcon
 															icon={faLinkedin}
 														/>
@@ -103,7 +103,7 @@ const Footer = () => {
 							<div className='col-lg-4 col-md-6'>
 								<div className='widget footer-widget about_widget'>
 									<div className='footer-logo'>
-										<NavLink to='/index'>
+										<NavLink to='/'>
 											<img
 												src={aboutLogo}
 												alt=' Footer Logo'
@@ -127,12 +127,14 @@ const Footer = () => {
 									</h2>
 									<ul className='pages-list'>
 										<li>
-											<a href='mailto:nationalbloodcaravn@gmail.com'>
+											<a href='mailto:nationalbloodcaravan@gmail.com'>
 												Email Address
 											</a>
 										</li>
 										<li>
-											<NavLink to='/donor'>Blood Group</NavLink>
+											<NavLink to='/bgcard' exact>
+												Blood Group
+											</NavLink>
 										</li>
 										<li>
 											<NavLink to='/contact'>
@@ -198,14 +200,18 @@ const Footer = () => {
 									</h2>
 									<ul className='pages-list'>
 										<li>
-											<NavLink to='/index'>Home Five</NavLink>
+											<NavLink to='/'>
+												Terms & Conditions
+											</NavLink>
 										</li>
 										<li>
-											<NavLink to='/index'>Important</NavLink>
+											<NavLink to='/'>
+												Privacy Policy
+											</NavLink>
 										</li>
 										<li>
-											<NavLink to='/index'>
-												Appside WordPress
+											<NavLink to='/'>
+												Author
 											</NavLink>
 										</li>
 									</ul>

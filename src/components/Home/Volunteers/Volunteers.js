@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import OwlCarousel from 'react-owl-carousel';
 import { faFacebook, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import VP from './volunteer.png';
-import options from '../../../containers/OwlCarouselOptions';
+import {options} from '../../../containers/OwlCarouselOptions';
 
 const Volunteers = () => {
     return (

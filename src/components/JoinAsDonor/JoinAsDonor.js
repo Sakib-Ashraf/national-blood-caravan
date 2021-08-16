@@ -13,9 +13,7 @@ const JoinAsDonor = () => {
 								<h2 className='page-title'> Join As Donor</h2>
 								<ul className='page-list'>
 									<li>
-										<NavLink to='/home'>
-											Home
-										</NavLink>
+										<NavLink to='/home'>Home</NavLink>
 									</li>
 									<li>
 										<NavLink to='/register-as-donor'>
@@ -37,9 +35,7 @@ const JoinAsDonor = () => {
 								<div className='contact-page-form-wrap'>
 									<div className='alert alert-danger'>
 										<ul>
-											<li>
-												The state field is required.
-											</li>
+											<li>Every field is required.</li>
 										</ul>
 									</div>
 									<form
@@ -58,10 +54,12 @@ const JoinAsDonor = () => {
 										<div className='row justify-content-center'>
 											<div className='col-lg-8'>
 												<div className='form-group'>
+													<label htmlFor='Your Name'>
+														Your Name:
+													</label>
 													<input
 														type='text'
 														name='name'
-														placeholder='Your Name'
 														value=''
 														className='form-control'
 														required
@@ -69,52 +67,79 @@ const JoinAsDonor = () => {
 													/>
 												</div>
 												<div className='form-group'>
+													<label htmlFor='email'>
+														Your Email:
+													</label>
 													<input
-														type='text'
+														type='email'
 														className='form-control'
-														id='mobile'
-														name='mobile'
-														placeholder='Mobile'
+														id='email'
+														name='email'
 													/>
 												</div>
 												<div className='form-group'>
+													<label htmlFor='mobile_number'>
+														Your Mobile Number:
+													</label>
+													<input
+														type='number'
+														className='form-control'
+														id='mobile'
+														name='mobile'
+														required
+														aria-required='true'
+													/>
+												</div>
+												<div className='form-group'>
+													<label htmlFor='birth_date'>
+														Your Birth-Date:
+													</label>
 													<input
 														type='date'
 														className='form-control'
 														id='birthday'
 														name='birthday'
-														placeholder='Birthday'
+														required
+														aria-required='true'
 													/>
 												</div>
 												<div className='form-group'>
+													<label htmlFor='password'>
+														Password:
+													</label>
 													<input
 														type='password'
 														name='password'
-														placeholder='Your Password'
 														className='form-control'
+														minLength='6'
 														required
 														aria-required='true'
 													/>
 												</div>
 												<div className='form-group'>
+													<label htmlFor='confirm_password'>
+														Confirm Password:
+													</label>
 													<input
 														type='password'
 														name='password_confirmation'
-														placeholder='Confirm Password'
 														className='form-control'
+														minLength='6'
 														required
 														aria-required='true'
 													/>
 												</div>
 												<div className='form-group'>
+													<label htmlFor='blood_group'>
+														Blood Group:
+													</label>
 													<select
 														name='blood_group'
 														id='blood_group'
 														className='form-control nice-select wide'
+														required
+														aria-required='true'
 													>
-														<option value=''>
-															Blood Group
-														</option>
 														<option value='o+'>
 															O+
 														</option>
@@ -142,14 +167,16 @@ const JoinAsDonor = () => {
 													</select>
 												</div>
 												<div className='form-group'>
+													<label htmlFor='gender'>
+														Gender:
+													</label>
 													<select
 														name='gender'
 														id='gender'
 														className='form-control nice-select wide'
+														required
+														aria-required='true'
 													>
-														<option value=''>
-															Gender
-														</option>
 														<option value='male'>
 															Male
 														</option>
@@ -162,10 +189,15 @@ const JoinAsDonor = () => {
 													</select>
 												</div>
 												<div className='form-group'>
+													<label htmlFor='your_area'>
+														Your Area:
+													</label>
 													<select
 														name='area_id'
 														className='form-control nice-select wide'
 														id='area-id'
+														required
+														aria-required='true'
 													>
 														<option value=''>
 															District
@@ -365,10 +397,12 @@ const JoinAsDonor = () => {
 													</select>
 												</div>
 												<div className='form-group'>
+													<label htmlFor='address'>
+														Your Address:
+													</label>
 													<input
 														type='text'
 														name='address'
-														placeholder='Your Address'
 														value=''
 														className='form-control'
 														required
@@ -376,12 +410,16 @@ const JoinAsDonor = () => {
 													/>
 												</div>
 												<div className='form-group'>
+													<label htmlFor='last_donate_date'>
+														Last Donate Date:
+													</label>
 													<input
 														type='date'
 														className='form-control'
 														id='last-donate-date'
 														name='last-donate-date'
-														placeholder='Last Donate Date'
+														required
+														aria-required='true'
 													/>
 												</div>
 											</div>
