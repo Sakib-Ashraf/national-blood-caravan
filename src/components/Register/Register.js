@@ -1,140 +1,137 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
 
 
-const Register = () => {
-    return (
-		<div>
-			<div className='breadcrumb-area'>
-				<div className='container'>
-					<div className='row'>
-						<div className='col-lg-12'>
-							<div className='breadcrumb-inner'>
-								<h2 className='page-title'>Register</h2>
-								<ul className='page-list'>
-									<li>
-										<NavLink to='/'>Home</NavLink>
-									</li>
-									<li>
-										<NavLink to='/register'>
-											Register
-										</NavLink>
-									</li>
-								</ul>
+class Register extends Component {
+	render() {
+		return (
+			<div>
+				<div className='breadcrumb-area'>
+					<div className='container'>
+						<div className='row'>
+							<div className='col-lg-12'>
+								<div className='breadcrumb-inner'>
+									<h2 className='page-title'>Register</h2>
+									<ul className='page-list'>
+										<li>
+											<NavLink to='/'>Home</NavLink>
+										</li>
+										<li>
+											<NavLink to='/register'>
+												Register
+											</NavLink>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div className='page-content contact-page-content-area padding-120'>
-				<div className='container'>
-					<div className='row'>
-						<div className='col-lg-12'>
-							<div className='righti-content-area'>
-								<div className='contact-page-form-wrap'>
-									<div className='alert alert-danger'>
-										<ul>
-											<li>Every field is required.</li>
-										</ul>
-									</div>
-									<form
-										action='/register'
-										method='post'
-										id='contact_page_form'
-										className='contact-page-form'
-										noValidate
-										encType='multipart/form-data'
-									>
-										<input
-											type='hidden'
-											name='_token'
-											value='OfPwLz0MpdRTmNY9ieQpPREP1CnEC1xHvU2a0HMH'
-										/>
-										<div className='row justify-content-center'>
-											<div className='col-lg-8'>
-												<div className='form-group'>
-													<input
-														type='text'
-														name='name'
-														placeholder='Your Name'
-														value=''
-														className='form-control'
-														required
-														aria-required='true'
-													/>
-												</div>
-												<div className='form-group'>
-													<input
-														type='text'
-														name='username'
-														placeholder='Your Username'
-														value=''
-														className='form-control'
-														required
-														aria-required='true'
-													/>
-												</div>
-												<div className='form-group'>
-													<input
-														type='number'
-														name='mobile number'
-														placeholder='Your Mobile Number'
-														value=''
-														className='form-control'
-														required
-														aria-required='true'
-													/>
-												</div>
-												<div className='form-group'>
-													<input
-														type='email'
-														name='email'
-														placeholder='Your Email'
-														value=''
-														className='form-control'
-														required
-														aria-required='true'
-													/>
-												</div>
-												<div className='form-group'>
-													<input
-														type='password'
-														name='password'
-														placeholder='Your Password'
-														className='form-control'
-														required
-														aria-required='true'
-													/>
-												</div>
-												<div className='form-group'>
-													<input
-														type='password'
-														name='password_confirmation'
-														placeholder='Confirm Password'
-														className='form-control'
-														required
-														aria-required='true'
-													/>
+				<div className='page-content contact-page-content-area padding-120'>
+					<div className='container'>
+						<div className='row'>
+							<div className='col-lg-12'>
+								<div className='righti-content-area'>
+									<div className='contact-page-form-wrap'>
+										<div className='alert alert-danger'>
+											<ul>
+												<li>Every field is required.</li>
+											</ul>
+										</div>
+										<form
+											action='/register'
+											method='post'
+											id='contact_page_form'
+											className='contact-page-form'
+											noValidate
+											encType='multipart/form-data'
+										>
+											<div className='row justify-content-center'>
+												<div className='col-lg-8'>
+													<div className='form-group'>
+														<input
+															type='text'
+															name='name'
+															placeholder='Your Name'
+															value=''
+															className='form-control'
+															required
+															aria-required='true'
+														/>
+													</div>
+													<div className='form-group'>
+														<input
+															type='text'
+															name='username'
+															placeholder='Your Username'
+															value=''
+															className='form-control'
+															required
+															aria-required='true'
+														/>
+													</div>
+													<div className='form-group'>
+														<input
+															type='number'
+															name='mobile number'
+															placeholder='Your Mobile Number'
+															value=''
+															className='form-control'
+															required
+															aria-required='true'
+														/>
+													</div>
+													<div className='form-group'>
+														<input
+															type='email'
+															name='email'
+															placeholder='Your Email'
+															value=''
+															className='form-control'
+															required
+															aria-required='true'
+														/>
+													</div>
+													<div className='form-group'>
+														<input
+															type='password'
+															name='password'
+															placeholder='Your Password'
+															className='form-control'
+															required
+															aria-required='true'
+														/>
+													</div>
+													<div className='form-group'>
+														<input
+															type='password'
+															name='password_confirmation'
+															placeholder='Confirm Password'
+															className='form-control'
+															required
+															aria-required='true'
+														/>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div className='form-group'>
-											<input
-												type='submit'
-												value='Register'
-												className='submit-btn register-as-donor'
-											/>
-										</div>
-									</form>
+											<div className='form-group'>
+												<input
+													type='submit'
+													value='Register'
+													className='submit-btn register-as-donor'
+												/>
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 };
 
 
