@@ -4,9 +4,7 @@ import OwlCarousel from 'react-owl-carousel';
 import DP from './Donor.png';
 import {options} from '../../../containers/OwlCarouselOptions';
 
-const RecentDonors = (props) => {
-    
-    console.log(props);
+const RecentDonors = () => {
 
 
     return (

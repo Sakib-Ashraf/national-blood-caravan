@@ -43,7 +43,6 @@ class Recovery extends Component {
 											method='post'
 											className='contact-page-form'
 											noValidate
-											encType='multipart/form-data'
 										>{' '}
 											<div className='form-group'>
 												<label htmlFor='username'>

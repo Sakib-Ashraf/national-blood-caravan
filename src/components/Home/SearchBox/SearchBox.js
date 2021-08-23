@@ -1,253 +1,316 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
-const SearchBox = () => {
-    return (
-		<div className='header-bottom-area'>
-			<div className='container'>
-				<div className='row justify-content-center'>
-					<div className='col-lg-10'>
-						<div className='blood-search-warpper'>
-							<form
-								action='/search'
-								className='blood-search-form'
-								method='get'
-							>
-								<ul className='fields-list'>
-									<li>
-										<div className='form-group'>
-											<select
-												className='form-control nice-select wide'
-												name='District'
-											>
-												<option value=''>
-													District
-												</option>
-												<option value='1'>
-													Bagerhat
-												</option>
-												<option value='2'>
-													Bandarban
-												</option>
-												<option value='3'>
-													Barguna
-												</option>
-												<option value='4'>
-													Barisal
-												</option>
-												<option value='5'>Bhola</option>
-												<option value='6'>
-													Bogura
-												</option>
-												<option value='7'>
-													Brahmanbaria
-												</option>
-												<option value='8'>
-													Chandpur
-												</option>
-												<option value='9'>
-													Chapainawabganj
-												</option>
-												<option value='10'>
-													Chattogram
-												</option>
-												<option value='11'>
-													Chuadanga
-												</option>
-												<option value='12'>
-													Comilla
-												</option>
-												<option value='13'>
-													Coxsbazar
-												</option>
-												<option value='14'>
-													Dhaka
-												</option>
-												<option value='15'>
-													Dinajpur
-												</option>
-												<option value='16'>
-													Faridpur
-												</option>
-												<option value='17'>Feni</option>
-												<option value='18'>
-													Gaibandha
-												</option>
-												<option value='19'>
-													Gazipur
-												</option>
-												<option value='20'>
-													Gopalganj
-												</option>
-												<option value='21'>
-													Habiganj
-												</option>
-												<option value='22'>
-													Jamalpur
-												</option>
-												<option value='23'>
-													Jashore
-												</option>
-												<option value='24'>
-													Jhalakathi
-												</option>
-												<option value='25'>
-													Jhenaidah
-												</option>
-												<option value='26'>
-													Joypurhat
-												</option>
-												<option value='27'>
-													Khagrachhari
-												</option>
-												<option value='28'>
-													Khulna
-												</option>
-												<option value='29'>
-													Kishoreganj
-												</option>
-												<option value='30'>
-													Kurigram
-												</option>
-												<option value='31'>
-													Kushtia
-												</option>
-												<option value='32'>
-													Lakshmipur
-												</option>
-												<option value='33'>
-													Lalmonirhat
-												</option>
-												<option value='34'>
-													Madaripur
-												</option>
-												<option value='35'>
-													Magura
-												</option>
-												<option value='36'>
-													Manikganj
-												</option>
-												<option value='37'>
-													Meherpur
-												</option>
-												<option value='38'>
-													Moulvibazar
-												</option>
-												<option value='39'>
-													Munshiganj
-												</option>
-												<option value='40'>
-													Mymensingh
-												</option>
-												<option value='41'>
-													Naogaon
-												</option>
-												<option value='42'>
-													Narail
-												</option>
-												<option value='43'>
-													Narayanganj
-												</option>
-												<option value='44'>
-													Narsingdi
-												</option>
-												<option value='45'>
-													Natore
-												</option>
-												<option value='46'>
-													Netrokona
-												</option>
-												<option value='47'>
-													Nilphamari
-												</option>
-												<option value='48'>
-													Noakhali
-												</option>
-												<option value='49'>
-													Pabna
-												</option>
-												<option value='50'>
-													Panchagarh
-												</option>
-												<option value='51'>
-													Patuakhali
-												</option>
-												<option value='52'>
-													Pirojpur
-												</option>
-												<option value='53'>
-													Rajbari
-												</option>
-												<option value='54'>
-													Rajshahi
-												</option>
-												<option value='55'>
-													Rangamati
-												</option>
-												<option value='56'>
-													Rangpur
-												</option>
-												<option value='57'>
-													Satkhira
-												</option>
-												<option value='58'>
-													Shariatpur
-												</option>
-												<option value='59'>
-													Sherpur
-												</option>
-												<option value='60'>
-													Sirajganj
-												</option>
-												<option value='61'>
-													Sunamganj
-												</option>
-												<option value='62'>
-													Sylhet
-												</option>
-												<option value='63'>
-													Tangail
-												</option>
-												<option value='64'>
-													Thakurgaon
-												</option>
-											</select>
-										</div>
-									</li>
-									<li>
-										<div className='form-group '>
-											<select
-												className='form-control nice-select wide'
-												name='blood_group'
-											>
-												<option value=''>
-													Blood Group
-												</option>
-												<option value='o+'>O+</option>
-												<option value='o-'>O-</option>
-												<option value='b+'>B+</option>
-												<option value='b-'>B-</option>
-												<option value='a+'>A+</option>
-												<option value='a-'>A-</option>
-												<option value='ab+'>AB+</option>
-												<option value='ab-'>AB-</option>
-											</select>
-										</div>
-									</li>
-									<li>
-										<input
-											type='submit'
-											value='Search Donor'
-											className='submit-btn'
-										/>
-									</li>
-								</ul>
-							</form>
+class SearchBox extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			area: '',
+			blood_group: '',
+		};
+	}
+
+	onAreaChange = (event) => {
+		this.setState({ area: event.target.value });
+	}
+	onBGChange = (event) => {
+		this.setState({ blood_group: event.target.value });
+	};
+
+
+	onSubmitSearch = () => {
+
+		fetch('http://localhost:3300/search', {
+			method: 'post',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				area: this.state.area,
+				blood_group: this.state.blood_group,
+			}),
+		})
+			.then((response) => response.json())
+			.then((donors) => {
+				if (donors[0].id) {
+					this.props.loadDonorData(donors);
+				}
+			});
+	};
+
+	render() {
+		return (
+			<div className='header-bottom-area'>
+				<div className='container'>
+					<div className='row justify-content-center'>
+						<div className='col-lg-10'>
+							<div className='blood-search-warpper'>
+								<div className='blood-search-form'>
+									<ul className='fields-list'>
+										<li>
+											<div className='form-group'>
+												<select
+													onChange={this.onAreaChange}
+													className='form-control nice-select wide'
+													name='area'
+												>
+													<option value=''>
+														District
+													</option>
+													<option value='Bagerhat'>
+														Bagerhat
+													</option>
+													<option value='Bandarban'>
+														Bandarban
+													</option>
+													<option value='Barguna'>
+														Barguna
+													</option>
+													<option value='Barisal'>
+														Barisal
+													</option>
+													<option value='Bhola'>
+														Bhola
+													</option>
+													<option value='Bogura'>
+														Bogura
+													</option>
+													<option value='Brahmanbaria'>
+														Brahmanbaria
+													</option>
+													<option value='Chandpur'>
+														Chandpur
+													</option>
+													<option value='Chapainawabganj'>
+														Chapainawabganj
+													</option>
+													<option value='Chattogram'>
+														Chattogram
+													</option>
+													<option value='Chuadanga1'>
+														Chuadanga
+													</option>
+													<option value='Comilla'>
+														Comilla
+													</option>
+													<option value='Coxsbazar'>
+														Coxsbazar
+													</option>
+													<option value='Dhaka'>
+														Dhaka
+													</option>
+													<option value='Dinajpur'>
+														Dinajpur
+													</option>
+													<option value='Faridpur'>
+														Faridpur
+													</option>
+													<option value='Feni'>
+														Feni
+													</option>
+													<option value='Gaibandha'>
+														Gaibandha
+													</option>
+													<option value='Gazipur'>
+														Gazipur
+													</option>
+													<option value='Gopalganj'>
+														Gopalganj
+													</option>
+													<option value='Habiganj'>
+														Habiganj
+													</option>
+													<option value='Jamalpur'>
+														Jamalpur
+													</option>
+													<option value='Jashore'>
+														Jashore
+													</option>
+													<option value='Jhalakathi'>
+														Jhalakathi
+													</option>
+													<option value='Jhenaidah'>
+														Jhenaidah
+													</option>
+													<option value='Joypurhat'>
+														Joypurhat
+													</option>
+													<option value='Khagrachhari'>
+														Khagrachhari
+													</option>
+													<option value='Khulna'>
+														Khulna
+													</option>
+													<option value='Kishoreganj'>
+														Kishoreganj
+													</option>
+													<option value='Kurigram'>
+														Kurigram
+													</option>
+													<option value='Kushtia'>
+														Kushtia
+													</option>
+													<option value='Lakshmipur'>
+														Lakshmipur
+													</option>
+													<option value='Lalmonirhat'>
+														Lalmonirhat
+													</option>
+													<option value='Madaripur'>
+														Madaripur
+													</option>
+													<option value='Magura'>
+														Magura
+													</option>
+													<option value='Manikganj'>
+														Manikganj
+													</option>
+													<option value='Meherpur'>
+														Meherpur
+													</option>
+													<option value='Moulvibazar'>
+														Moulvibazar
+													</option>
+													<option value='Munshiganj'>
+														Munshiganj
+													</option>
+													<option value='Mymensingh'>
+														Mymensingh
+													</option>
+													<option value='Naogaon'>
+														Naogaon
+													</option>
+													<option value='Narail'>
+														Narail
+													</option>
+													<option value='Narayanganj'>
+														Narayanganj
+													</option>
+													<option value='Narsingdi'>
+														Narsingdi
+													</option>
+													<option value='Natore'>
+														Natore
+													</option>
+													<option value='Netrokona'>
+														Netrokona
+													</option>
+													<option value='Nilphamari'>
+														Nilphamari
+													</option>
+													<option value='Noakhali'>
+														Noakhali
+													</option>
+													<option value='Pabna'>
+														Pabna
+													</option>
+													<option value='Panchagarh'>
+														Panchagarh
+													</option>
+													<option value='Patuakhali'>
+														Patuakhali
+													</option>
+													<option value='Pirojpur'>
+														Pirojpur
+													</option>
+													<option value='Rajbari'>
+														Rajbari
+													</option>
+													<option value='Rajshahi'>
+														Rajshahi
+													</option>
+													<option value='Rangamati'>
+														Rangamati
+													</option>
+													<option value='Rangpur'>
+														Rangpur
+													</option>
+													<option value='Satkhira'>
+														Satkhira
+													</option>
+													<option value='Shariatpur'>
+														Shariatpur
+													</option>
+													<option value='Sherpur'>
+														Sherpur
+													</option>
+													<option value='Sirajganj'>
+														Sirajganj
+													</option>
+													<option value='Sunamganj'>
+														Sunamganj
+													</option>
+													<option value='Sylhet'>
+														Sylhet
+													</option>
+													<option value='Tangail'>
+														Tangail
+													</option>
+													<option value='Thakurgaon'>
+														Thakurgaon
+													</option>
+												</select>
+											</div>
+										</li>
+										<li>
+											<div className='form-group '>
+												<select
+													onChange={this.onBGChange}
+													className='form-control nice-select wide'
+													name='blood_group'
+												>
+													<option value=''>
+														Blood Group
+													</option>
+													<option value='O+'>
+														O+
+													</option>
+													<option value='O-'>
+														O-
+													</option>
+													<option value='B+'>
+														B+
+													</option>
+													<option value='B-'>
+														B-
+													</option>
+													<option value='A+'>
+														A+
+													</option>
+													<option value='A-'>
+														A-
+													</option>
+													<option value='AB+'>
+														AB+
+													</option>
+													<option value='AB-'>
+														AB-
+													</option>
+												</select>
+											</div>
+										</li>
+										<li>
+											<NavLink to='/donors' >
+												<input
+													onClick={
+														this.onSubmitSearch
+													}
+													type='submit'
+													value='Search Donor'
+													className='submit-btn'
+												/>
+											</NavLink>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 };
 
 export default SearchBox;

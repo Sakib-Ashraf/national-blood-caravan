@@ -1,9 +1,70 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import '../../containers/App.css';
 
-
 class Register extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			name: '',
+			username: '',
+			mobile: '',
+			email: '',
+			password: '',
+			showPass: false,
+			icon: faEye,
+			color: '#009C55',
+		};
+	}
+
+	onChange = (event) => {
+		this.setState({ [event.target.name]: event.target.value });
+	}
+
+	passShowHide = () => {
+		if (this.state.showPass === false) {
+			this.setState({
+				showPass: true,
+				icon: faEyeSlash,
+				color: '#E83530',
+			});
+		} else if (this.state.showPass === true) {
+			this.setState({
+				showPass: false,
+				icon: faEye,
+				color: '#009C55',
+			});
+		}
+	};
+
+	onSubmitRegister = (event) => {
+		event.preventDefault();
+
+		fetch('http://localhost:3300/register', {
+			method: 'post',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				name: this.state.name,
+				username: this.state.username,
+				email: this.state.email,
+				mobile: this.state.mobile,
+				password: this.state.password,
+			}),
+		})
+			.then((response) => response.json())
+			.then((user) => {
+				if (user.id) {
+					this.props.loadData(user);
+					this.props.onRouteChange('home');
+				}
+			});
+	};
+
 	render() {
 		return (
 			<div>
@@ -34,27 +95,21 @@ class Register extends Component {
 							<div className='col-lg-12'>
 								<div className='righti-content-area'>
 									<div className='contact-page-form-wrap'>
-										<div className='alert alert-danger'>
-											<ul>
-												<li>Every field is required.</li>
-											</ul>
-										</div>
 										<form
-											action='/register'
-											method='post'
 											id='contact_page_form'
 											className='contact-page-form'
-											noValidate
-											encType='multipart/form-data'
 										>
 											<div className='row justify-content-center'>
 												<div className='col-lg-8'>
 													<div className='form-group'>
 														<input
+															onChange={
+																this
+																	.onChange
+															}
 															type='text'
 															name='name'
 															placeholder='Your Name'
-															value=''
 															className='form-control'
 															required
 															aria-required='true'
@@ -62,10 +117,13 @@ class Register extends Component {
 													</div>
 													<div className='form-group'>
 														<input
+															onChange={
+																this
+																	.onChange
+															}
 															type='text'
 															name='username'
 															placeholder='Your Username'
-															value=''
 															className='form-control'
 															required
 															aria-required='true'
@@ -73,10 +131,13 @@ class Register extends Component {
 													</div>
 													<div className='form-group'>
 														<input
-															type='number'
-															name='mobile number'
+															onChange={
+																this
+																	.onChange
+															}
+															type='tel'
+															name='mobile'
 															placeholder='Your Mobile Number'
-															value=''
 															className='form-control'
 															required
 															aria-required='true'
@@ -84,10 +145,13 @@ class Register extends Component {
 													</div>
 													<div className='form-group'>
 														<input
+															onChange={
+																this
+																	.onChange
+															}
 															type='email'
 															name='email'
 															placeholder='Your Email'
-															value=''
 															className='form-control'
 															required
 															aria-required='true'
@@ -95,6 +159,10 @@ class Register extends Component {
 													</div>
 													<div className='form-group'>
 														<input
+															onChange={
+																this
+																	.onChange
+															}
 															type='password'
 															name='password'
 															placeholder='Your Password'
@@ -102,21 +170,33 @@ class Register extends Component {
 															required
 															aria-required='true'
 														/>
-													</div>
-													<div className='form-group'>
-														<input
-															type='password'
-															name='password_confirmation'
-															placeholder='Confirm Password'
-															className='form-control'
-															required
-															aria-required='true'
-														/>
+														<p
+															style={{
+																color: this
+																	.state
+																	.color,
+																cursor: 'pointer',
+															}}
+															onClick={
+																this
+																	.passShowHide
+															}
+														>Show Password ? {' '}
+															<FontAwesomeIcon
+																icon={
+																	this.state
+																		.icon
+																}
+															/>
+														</p>
 													</div>
 												</div>
 											</div>
 											<div className='form-group'>
 												<input
+													onClick={
+														this.onSubmitRegister
+													}
 													type='submit'
 													value='Register'
 													className='submit-btn register-as-donor'
@@ -132,7 +212,6 @@ class Register extends Component {
 			</div>
 		);
 	}
-};
-
+}
 
 export default Register;

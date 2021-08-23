@@ -1,8 +1,82 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 class JoinAsDonor extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			name: '',
+			username: '',
+			mobile: '',
+			email: '',
+			password: '',
+			birth_date: '',
+			blood_group: '',
+			donated: '',
+			gender: '',
+			area: '',
+			address: '',
+			last_donate_date: '',
+			showPass: false,
+			icon: faEye,
+			color: '#009C55',
+		};
+	}
+
+	onChange = (event) => {
+		this.setState({ [event.target.name]: event.target.value });
+	};
+
+	passShowHide = () => {
+		if (this.state.showPass === false) {
+			this.setState({
+				showPass: true,
+				icon: faEyeSlash,
+				color: '#E83530',
+			});
+		} else if (this.state.showPass === true) {
+			this.setState({
+				showPass: false,
+				icon: faEye,
+				color: '#009C55',
+			});
+		}
+	};
+
+	onSubmitJoinDonor = (event) => {
+		fetch('http://localhost:3300/join-donor', {
+			method: 'post',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				name: this.state.name,
+				username: this.state.username,
+				email: this.state.email,
+				mobile: this.state.mobile,
+				password: this.state.password,
+				birth_date: this.state.birth_date,
+				blood_group: this.state.blood_group,
+				donated: this.state.donated,
+				gender: this.state.gender,
+				area: this.state.area,
+				address: this.state.address,
+				last_donate_date: this.state.last_donate_date,
+			}),
+		})
+			.then((response) => response.json())
+			.then((user) => {
+				if (user.id) {
+					this.props.loadData(user);
+					this.props.onRouteChange('home');
+				}
+			});
+	};
+
 	render() {
 		return (
 			<section>
@@ -11,7 +85,10 @@ class JoinAsDonor extends Component {
 						<div className='row'>
 							<div className='col-lg-12'>
 								<div className='breadcrumb-inner'>
-									<h2 className='page-title'> Join As Donor</h2>
+									<h2 className='page-title'>
+										{' '}
+										Join As Donor
+									</h2>
 									<ul className='page-list'>
 										<li>
 											<NavLink to='/home'>Home</NavLink>
@@ -34,19 +111,12 @@ class JoinAsDonor extends Component {
 							<div className='col-lg-12'>
 								<div className='righti-content-area'>
 									<div className='contact-page-form-wrap'>
-										<div className='alert alert-danger'>
-											<ul>
-												<li>Every field is required.</li>
-											</ul>
-										</div>
 										<form
-											action='/join-donor'
-											method='POST'
 											id='contact_page_form'
 											className='contact-page-form'
 											noValidate
-											encType='multipart/form-data'
-										>{' '}
+										>
+											{' '}
 											<div className='row justify-content-center'>
 												<div className='col-lg-8'>
 													<div className='form-group'>
@@ -54,9 +124,11 @@ class JoinAsDonor extends Component {
 															Your Name:
 														</label>
 														<input
+															onChange={
+																this.onChange
+															}
 															type='text'
 															name='name'
-															value=''
 															className='form-control'
 															required
 															aria-required='true'
@@ -67,9 +139,11 @@ class JoinAsDonor extends Component {
 															Your Username:
 														</label>
 														<input
+															onChange={
+																this.onChange
+															}
 															type='text'
 															name='username'
-															value=''
 															className='form-control'
 															required
 															aria-required='true'
@@ -80,6 +154,9 @@ class JoinAsDonor extends Component {
 															Your Email:
 														</label>
 														<input
+															onChange={
+																this.onChange
+															}
 															type='email'
 															className='form-control'
 															id='email'
@@ -91,6 +168,9 @@ class JoinAsDonor extends Component {
 															Your Mobile Number:
 														</label>
 														<input
+															onChange={
+																this.onChange
+															}
 															type='tel'
 															className='form-control'
 															id='mobile'
@@ -104,10 +184,13 @@ class JoinAsDonor extends Component {
 															Your Birth-Date:
 														</label>
 														<input
+															onChange={
+																this.onChange
+															}
 															type='date'
 															className='form-control'
 															id='birthday'
-															name='birthday'
+															name='birth_date'
 															required
 															aria-required='true'
 														/>
@@ -117,60 +200,79 @@ class JoinAsDonor extends Component {
 															Password:
 														</label>
 														<input
-															type='password'
+															onChange={
+																this.onChange
+															}
+															type={
+																this.state
+																	.showPass
+																	? 'text'
+																	: 'password'
+															}
 															name='password'
 															className='form-control'
-															minLength='6'
 															required
 															aria-required='true'
 														/>
-													</div>
-													<div className='form-group'>
-														<label htmlFor='confirm_password'>
-															Confirm Password:
-														</label>
-														<input
-															type='password'
-															name='password_confirmation'
-															className='form-control'
-															minLength='6'
-															required
-															aria-required='true'
-														/>
+														<p
+															style={{
+																color: this
+																	.state
+																	.color,
+																cursor: 'pointer'
+															}}
+															onClick={
+																this
+																	.passShowHide
+															}
+														> Show Password ? {' '}
+															<FontAwesomeIcon
+																icon={
+																	this.state
+																		.icon
+																}
+															/>
+														</p>
 													</div>
 													<div className='form-group'>
 														<label htmlFor='blood_group'>
 															Blood Group:
 														</label>
 														<select
+															onChange={
+																this.onChange
+															}
 															name='blood_group'
 															id='blood_group'
 															className='form-control nice-select wide'
 															required
 															aria-required='true'
 														>
-															<option value='o+'>
+															<option value=''>
+																Blood Group
+															</option>
+															<option value='O+'>
 																O+
 															</option>
-															<option value='o-'>
+															<option value='O-'>
 																O-
 															</option>
-															<option value='b+'>
+															<option value='B+'>
 																B+
 															</option>
-															<option value='b-'>
+															<option value='B-'>
 																B-
 															</option>
-															<option value='a+'>
+															<option value='A+'>
 																A+
 															</option>
-															<option value='a-'>
+															<option value='A-'>
 																A-
 															</option>
-															<option value='ab+'>
+															<option value='AB+'>
 																AB+
 															</option>
-															<option value='ab-'>
+															<option value='AB-'>
 																AB-
 															</option>
 														</select>
@@ -180,10 +282,13 @@ class JoinAsDonor extends Component {
 															Total Donated:
 														</label>
 														<input
+															onChange={
+																this.onChange
+															}
 															type='number'
-															name='total_donate_times'
+															name='donated'
 															className='form-control'
-															value='0'
+															placeholder='0 times'
 															required
 															aria-required='true'
 														/>
@@ -193,12 +298,19 @@ class JoinAsDonor extends Component {
 															Gender:
 														</label>
 														<select
+															onChange={
+																this.onChange
+															}
 															name='gender'
 															id='gender'
 															className='form-control nice-select wide'
 															required
 															aria-required='true'
 														>
+															<option value=''>
+																Select Your
+																Gender
+															</option>
 															<option value='male'>
 																Male
 															</option>
@@ -215,205 +327,208 @@ class JoinAsDonor extends Component {
 															Your Area:
 														</label>
 														<select
-															name='area_id'
+															onChange={
+																this.onChange
+															}
+															name='area'
 															className='form-control nice-select wide'
-															id='area-id'
+															id='area'
 															required
 															aria-required='true'
 														>
 															<option value=''>
 																District
 															</option>
-															<option value='1'>
+															<option value='Bagerhat'>
 																Bagerhat
 															</option>
-															<option value='2'>
+															<option value='Bandarban'>
 																Bandarban
 															</option>
-															<option value='3'>
+															<option value='Barguna'>
 																Barguna
 															</option>
-															<option value='4'>
+															<option value='Barisal'>
 																Barisal
 															</option>
-															<option value='5'>
+															<option value='Bhola'>
 																Bhola
 															</option>
-															<option value='6'>
+															<option value='Bogura'>
 																Bogura
 															</option>
-															<option value='7'>
+															<option value='Brahmanbaria'>
 																Brahmanbaria
 															</option>
-															<option value='8'>
+															<option value='Chandpur'>
 																Chandpur
 															</option>
-															<option value='9'>
+															<option value='Chapainawabganj'>
 																Chapainawabganj
 															</option>
-															<option value='10'>
+															<option value='Chattogram'>
 																Chattogram
 															</option>
-															<option value='11'>
+															<option value='Chuadanga1'>
 																Chuadanga
 															</option>
-															<option value='12'>
+															<option value='Comilla'>
 																Comilla
 															</option>
-															<option value='13'>
+															<option value='Coxsbazar'>
 																Coxsbazar
 															</option>
-															<option value='14'>
+															<option value='Dhaka'>
 																Dhaka
 															</option>
-															<option value='15'>
+															<option value='Dinajpur'>
 																Dinajpur
 															</option>
-															<option value='16'>
+															<option value='Faridpur'>
 																Faridpur
 															</option>
-															<option value='17'>
+															<option value='Feni'>
 																Feni
 															</option>
-															<option value='18'>
+															<option value='Gaibandha'>
 																Gaibandha
 															</option>
-															<option value='19'>
+															<option value='Gazipur'>
 																Gazipur
 															</option>
-															<option value='20'>
+															<option value='Gopalganj'>
 																Gopalganj
 															</option>
-															<option value='21'>
+															<option value='Habiganj'>
 																Habiganj
 															</option>
-															<option value='22'>
+															<option value='Jamalpur'>
 																Jamalpur
 															</option>
-															<option value='23'>
+															<option value='Jashore'>
 																Jashore
 															</option>
-															<option value='24'>
+															<option value='Jhalakathi'>
 																Jhalakathi
 															</option>
-															<option value='25'>
+															<option value='Jhenaidah'>
 																Jhenaidah
 															</option>
-															<option value='26'>
+															<option value='Joypurhat'>
 																Joypurhat
 															</option>
-															<option value='27'>
+															<option value='Khagrachhari'>
 																Khagrachhari
 															</option>
-															<option value='28'>
+															<option value='Khulna'>
 																Khulna
 															</option>
-															<option value='29'>
+															<option value='Kishoreganj'>
 																Kishoreganj
 															</option>
-															<option value='30'>
+															<option value='Kurigram'>
 																Kurigram
 															</option>
-															<option value='31'>
+															<option value='Kushtia'>
 																Kushtia
 															</option>
-															<option value='32'>
+															<option value='Lakshmipur'>
 																Lakshmipur
 															</option>
-															<option value='33'>
+															<option value='Lalmonirhat'>
 																Lalmonirhat
 															</option>
-															<option value='34'>
+															<option value='Madaripur'>
 																Madaripur
 															</option>
-															<option value='35'>
+															<option value='Magura'>
 																Magura
 															</option>
-															<option value='36'>
+															<option value='Manikganj'>
 																Manikganj
 															</option>
-															<option value='37'>
+															<option value='Meherpur'>
 																Meherpur
 															</option>
-															<option value='38'>
+															<option value='Moulvibazar'>
 																Moulvibazar
 															</option>
-															<option value='39'>
+															<option value='Munshiganj'>
 																Munshiganj
 															</option>
-															<option value='40'>
+															<option value='Mymensingh'>
 																Mymensingh
 															</option>
-															<option value='41'>
+															<option value='Naogaon'>
 																Naogaon
 															</option>
-															<option value='42'>
+															<option value='Narail'>
 																Narail
 															</option>
-															<option value='43'>
+															<option value='Narayanganj'>
 																Narayanganj
 															</option>
-															<option value='44'>
+															<option value='Narsingdi'>
 																Narsingdi
 															</option>
-															<option value='45'>
+															<option value='Natore'>
 																Natore
 															</option>
-															<option value='46'>
+															<option value='Netrokona'>
 																Netrokona
 															</option>
-															<option value='47'>
+															<option value='Nilphamari'>
 																Nilphamari
 															</option>
-															<option value='48'>
+															<option value='Noakhali'>
 																Noakhali
 															</option>
-															<option value='49'>
+															<option value='Pabna'>
 																Pabna
 															</option>
-															<option value='50'>
+															<option value='Panchagarh'>
 																Panchagarh
 															</option>
-															<option value='51'>
+															<option value='Patuakhali'>
 																Patuakhali
 															</option>
-															<option value='52'>
+															<option value='Pirojpur'>
 																Pirojpur
 															</option>
-															<option value='53'>
+															<option value='Rajbari'>
 																Rajbari
 															</option>
-															<option value='54'>
+															<option value='Rajshahi'>
 																Rajshahi
 															</option>
-															<option value='55'>
+															<option value='Rangamati'>
 																Rangamati
 															</option>
-															<option value='56'>
+															<option value='Rangpur'>
 																Rangpur
 															</option>
-															<option value='57'>
+															<option value='Satkhira'>
 																Satkhira
 															</option>
-															<option value='58'>
+															<option value='Shariatpur'>
 																Shariatpur
 															</option>
-															<option value='59'>
+															<option value='Sherpur'>
 																Sherpur
 															</option>
-															<option value='60'>
+															<option value='Sirajganj'>
 																Sirajganj
 															</option>
-															<option value='61'>
+															<option value='Sunamganj'>
 																Sunamganj
 															</option>
-															<option value='62'>
+															<option value='Sylhet'>
 																Sylhet
 															</option>
-															<option value='63'>
+															<option value='Tangail'>
 																Tangail
 															</option>
-															<option value='64'>
+															<option value='Thakurgaon'>
 																Thakurgaon
 															</option>
 														</select>
@@ -423,9 +538,11 @@ class JoinAsDonor extends Component {
 															Your Address:
 														</label>
 														<input
+															onChange={
+																this.onChange
+															}
 															type='text'
 															name='address'
-															value=''
 															className='form-control'
 															required
 															aria-required='true'
@@ -436,10 +553,13 @@ class JoinAsDonor extends Component {
 															Last Donate Date:
 														</label>
 														<input
+															onChange={
+																this.onChange
+															}
 															type='date'
 															className='form-control'
 															id='last-donate-date'
-															name='last-donate-date'
+															name='last_donate_date'
 															required
 															aria-required='true'
 														/>
@@ -448,6 +568,9 @@ class JoinAsDonor extends Component {
 											</div>
 											<div className='form-group'>
 												<input
+													onClick={
+														this.onSubmitJoinDonor
+													}
 													type='submit'
 													value='Register As Donor'
 													className='submit-btn register-as-donor'
@@ -463,6 +586,6 @@ class JoinAsDonor extends Component {
 			</section>
 		);
 	}
-};
+}
 
 export default JoinAsDonor;

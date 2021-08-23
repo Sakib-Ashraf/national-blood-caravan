@@ -21,7 +21,7 @@ const ErrorPage = () => {
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/errorpage'> 404</NavLink>
+										<NavLink to='*'> 404</NavLink>
 									</li>
 								</ul>
 							</div>

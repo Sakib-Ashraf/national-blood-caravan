@@ -47,7 +47,6 @@ class ReqForBlood extends Component {
 											method='post'
 											className='contact-page-form'
 											noValidate
-											encType='multipart/form-data'
 										>{' '}
 											<div className='row justify-content-center'>
 												<div className='col-lg-8'>
