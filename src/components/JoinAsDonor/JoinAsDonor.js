@@ -219,13 +219,15 @@ class JoinAsDonor extends Component {
 																color: this
 																	.state
 																	.color,
-																cursor: 'pointer'
+																cursor: 'pointer',
 															}}
 															onClick={
 																this
 																	.passShowHide
 															}
-														> Show Password ? {' '}
+														>
+															{' '}
+															Show Password ?{' '}
 															<FontAwesomeIcon
 																icon={
 																	this.state
@@ -567,14 +569,17 @@ class JoinAsDonor extends Component {
 												</div>
 											</div>
 											<div className='form-group'>
-												<input
-													onClick={
-														this.onSubmitJoinDonor
-													}
-													type='submit'
-													value='Register As Donor'
-													className='submit-btn register-as-donor'
-												/>
+												<NavLink to='/donors/profile/:id/:name'>
+													<input
+														onClick={
+															this
+																.onSubmitJoinDonor
+														}
+														type='submit'
+														value='Register As Donor'
+														className='submit-btn register-as-donor'
+													/>
+												</NavLink>
 											</div>
 										</form>
 									</div>

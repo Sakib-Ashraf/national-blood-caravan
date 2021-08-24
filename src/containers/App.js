@@ -34,17 +34,8 @@ import Testimonial from '../components/Home/Testimonial/Testimonial';
 import CTA from '../components/Home/CTA/CTA';
 import News from '../components/Home/News/News';
 
-import Anegetive from '../components/Home/BGCard/A-/A-';
-import Aposetive from '../components/Home/BGCard/A+/A+';
-import ABnegetive from '../components/Home/BGCard/AB-/AB-';
-import ABposetive from '../components/Home/BGCard/AB+/AB+';
-import Bnegetive from '../components/Home/BGCard/B-/B-';
-import Bposetive from '../components/Home/BGCard/B+/B+';
-import Onegetive from '../components/Home/BGCard/O-/O-';
-import Oposetive from '../components/Home/BGCard/O+/O+';
-import DonorList from '../components/Donors/DonorList';
-
-
+import BloodGroup from '../components/Home/BGCard/BloodGroup/BloodGroup';
+import UserDashboard from '../components/UserDashboard/UserDashboard';
 
 const initState = {
 	input: '',
@@ -53,7 +44,7 @@ const initState = {
 	route: 'signin',
 	isSignedIn: false,
 	donors: {},
-	donorProfile: [],
+	donorProfile: {},
 	user: {
 		id: '',
 		name: '',
@@ -63,37 +54,62 @@ const initState = {
 	},
 };
 
-
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = initState;
 	}
 
-
 	loadData = (data) => {
-    this.setState({
-      user: {
-        id: data.id,
-        name: data.name,
-        email: data.email,
-        entries: data.entries,
-        joined: data.joined
-      }
-    });
-  }
+		this.setState({
+			user: {
+				id: data.id,
+				name: data.name,
+				email: data.email,
+				entries: data.entries,
+				joined: data.joined,
+			},
+		});
+	};
 
+	componentDidMount() {
+		fetch(`http://localhost:3300/donors`)
+			.then((response) => response.json())
+			.then((donors) => {
+				if (donors[0]) {
+					this.setState({ donors: donors });
+				}
+			});
+	}
 
 	loadDonorData = (donors) => {
-		this.setState({donors: donors});
+		this.setState({ donors: donors });
 	};
 
 	loadAllDonor = (donors) => {
-		this.setState({AllDonors: donors});
+		this.setState({ AllDonors: donors });
 	};
 
-	loadDonorProfile = (donorProfile) => {
-		this.setState({donorProfile: donorProfile});
+	loadDonorProfile = (donor) => {
+		this.setState({ donorProfile: donor });
+		console.log(this.state.donorProfile);
+	};
+
+	dateConverter = (timestampData) => {
+		const date = new Date(timestampData);
+		const year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let dt = date.getDate();
+
+		if (dt < 10) {
+			dt = '0' + dt;
+		}
+		if (month < 10) {
+			month = '0' + month;
+		}
+
+		const finalDate = year + '-' + month + '-' + dt;
+		return finalDate;
 	};
 
 	onRouteChange = (route) => {
@@ -106,7 +122,6 @@ class App extends Component {
 	};
 
 	render() {
-		const { isSignedIn, route} = this.state;
 		return (
 			<Router>
 				<Topbar />
@@ -117,48 +132,7 @@ class App extends Component {
 						<SearchBox loadDonorData={this.loadDonorData} />
 						<DonationProcess />
 						<BGCard />
-						<Switch>
-							<Route
-								exact
-								path='/bgcard/:bg-group'
-								component={Anegetive}
-							/>
-							<Route
-								exact
-								path='/bgcard/:bg-group'
-								component={Aposetive}
-							/>
-							<Route
-								exact
-								path='/bgcard/:bg-group'
-								component={ABnegetive}
-							/>
-							<Route
-								exact
-								path='/bgcard/:bg-group'
-								component={ABposetive}
-							/>
-							<Route
-								exact
-								path='/bgcard/:bg-group'
-								component={Bnegetive}
-							/>
-							<Route
-								exact
-								path='/bgcard/:bg-group'
-								component={Bposetive}
-							/>
-							<Route
-								exact
-								path='/bgcard/:bg-group'
-								component={Onegetive}
-							/>
-							<Route
-								exact
-								path='/bgcard/:bg-group'
-								component={Oposetive}
-							/>
-						</Switch>
+
 						<ReqBGInfo />
 						<RecentDonors />
 						<Motivation />
@@ -173,11 +147,15 @@ class App extends Component {
 					<Route exact path='/donors'>
 						<Donors
 							loadDonorData={this.loadDonorData}
+							dateConverter={this.dateConverter}
 							loadDonorProfile={this.loadDonorProfile}
 							donors={this.state.donors}
 						/>
-						<Route exact path='/donors/donor-profile/:id/:name'>
-							<Profile donorProfile={this.state.donorProfile} />
+						<Route exact path='/donors/profile/:id/:name'>
+							<Profile
+								dateConverter={this.dateConverter}
+								donorProfile={this.state.donorProfile}
+							/>
 						</Route>
 					</Route>
 					<Route exact path='/blog' component={Blog} />
@@ -188,17 +166,24 @@ class App extends Component {
 							onRouteChange={this.onRouteChange}
 						/>
 					</Route>
+					<Route exact path='/donors/:bg' render={(routerProps) => {
+						return (<BloodGroup
+							dateConverter={this.dateConverter}
+							loadDonorProfile={this.loadDonorProfile}
+							routerProps={routerProps}
+						/>);
+					}}/>
 					<Route
 						exact
 						path='/recent-donors'
 						component={RecentDonors}
 					/>
-					<Route
-						exact
-						path='/recent-donors/donor-profile/:id/:name'
-						>
-							<Profile/>
-						</Route>
+					<Route exact path='/donors/profile/:id/:name'>
+						<Profile
+							dateConverter={this.dateConverter}
+							donorProfile={this.state.donorProfile}
+						/>
+					</Route>
 					<Route exact path='/login'>
 						<Login
 							loadData={this.loadData}
@@ -213,6 +198,11 @@ class App extends Component {
 								onRouteChange={this.onRouteChange}
 							/>
 						</Route>
+						<Route
+							exact
+							path='/users/profile/:id/:name'
+							component={UserDashboard}
+						/>
 					</Switch>
 					<Route path='*' component={ErrorPage} />
 				</Switch>

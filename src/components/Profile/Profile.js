@@ -7,52 +7,56 @@ class Profile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			id: this.props.id,
-			name: this.props.name,
+			id: this.props.donorProfile.id,
+			name: this.props.donorProfile.name,
 			time: {},
-			seconds: 7776000,
-			donated: this.props.donated,
-			last_donate_date: this.props.last_donate_date,
-			disablerValue: false,
+			seconds: this.props.donorProfile.seconds,
+			donated: this.props.donorProfile.donated,
+			last_donate_date: this.props.donorProfile.last_donate_date,
+			disablerValue: this.props.donorProfile.disablerValue,
 		};
+		console.log(this.props.donorProfile);
 		this.timer = 0;
 		this.startTimer = this.startTimer.bind(this);
+		this.IncrementDonateTimes = this.IncrementDonateTimes.bind(this);
 		this.countDown = this.countDown.bind(this);
+		this.executer = this.executer.bind(this);
+		this.last_donate_date = this.last_donate_date.bind(this);
 	}
 
 	secondsToTime(secs) {
 		let day = Math.floor(secs / 86400);
+
 		let hours = Math.floor(secs / 324000);
 
 		let divisor_for_minutes = secs % 3600;
 		let minutes = Math.floor(divisor_for_minutes / 60);
 
-		let divisor_for_seconds = divisor_for_minutes % 60;
-		let seconds = Math.ceil(divisor_for_seconds);
 
 		let obj = {
 			days: day,
 			hours: hours,
 			minutes: minutes,
-			seconds: seconds,
 		};
 		return obj;
 	}
 
 	componentDidMount() {
 		let timeLeftVar = this.secondsToTime(this.state.seconds);
-		this.setState({ time: timeLeftVar });
+		this.setState({
+			time: timeLeftVar,
+		});
 	}
 
 	startTimer() {
 		if (this.timer === 0 && this.state.seconds > 0) {
-			this.timer = setInterval(this.countDown, 1000);
+			this.timer = setInterval(this.countDown, 60000);
 		}
 	}
 
 	countDown() {
 		// Remove one second, set state so a re-render happens.
-		let seconds = this.state.seconds - 1;
+		let seconds = this.state.seconds - 60;
 		this.setState({
 			time: this.secondsToTime(seconds),
 			seconds: seconds,
@@ -69,60 +73,31 @@ class Profile extends Component {
 
 	IncrementDonateTimes() {
 		this.setState({
-			donated: this.state.donated + 1,
+			donated: (Number(this.props.donorProfile.donated) + 1),
 		});
 	}
 
-	Convert = () => {
+	last_donate_date () {
 		let date = new Date();
-		const days = [
-			'Sunday',
-			'Monday',
-			'Tuesday',
-			'Wednesday',
-			'Thursday',
-			'Friday',
-			'Saturday',
-		];
-		const months = [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December',
-		];
 		let formattedTime =
-			' at ' +
-			days[date.getDay()] +
-			', ' +
-			months[date.getMonth()] +
-			' ' +
-			date.getDate() +
-			', ' +
-			date.getFullYear();
+			date.getFullYear() + '-0' + (date.getMonth()+1) + '-' + date.getDate();
 		return formattedTime;
-	};
+	}
 
-	executer = () => {
+	executer () {
 		this.setState({
 			disablerValue: true,
-			last_donate_date: this.Convert(),
+			last_donate_date: this.last_donate_date(),
 		});
 		this.startTimer();
 		this.IncrementDonateTimes();
 		this.onUpdateProfile();
-	};
+	}
+
 
 	onUpdateProfile() {
 		fetch(
-			`http://localhost:3300/donors/donor-profile/update/${this.state.id}/${this.state.name}`,
+			`http://localhost:3300/donors/profile/update/${this.props.donorProfile.id}/${this.props.donorProfile.name}`,
 			{
 				method: 'put',
 				headers: {
@@ -130,8 +105,6 @@ class Profile extends Component {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					id: this.state.id,
-					name: this.state.name,
 					seconds: this.state.seconds,
 					donated: this.state.donated,
 					last_donate_date: this.state.last_donate_date,
@@ -150,8 +123,8 @@ class Profile extends Component {
 	}
 
 	render() {
-		const { name, blood_group, birth_date, mobile, gender, address, area } =
-			this.props;
+		const { name, email, joined, blood_group, birth_date, mobile, gender, address, area, donated, last_donate_date, disablerValue} =
+			this.props.donorProfile;
 		return (
 			<section>
 				<div className='breadcrumb-area'>
@@ -167,7 +140,7 @@ class Profile extends Component {
 											<NavLink to='/'>Home</NavLink>
 										</li>
 										<li>
-											<NavLink to='/profile'>
+											<NavLink to='/donors/profile/:id/:name'>
 												Donor Details
 											</NavLink>
 										</li>
@@ -208,7 +181,9 @@ class Profile extends Component {
 										<li>
 											<strong>Birth Date: </strong>{' '}
 											<span className='right'>
-												{birth_date}
+												{this.props.dateConverter(
+													birth_date
+												)}
 											</span>
 										</li>
 										<li>
@@ -222,13 +197,22 @@ class Profile extends Component {
 												Total Blood Donate:{' '}
 											</strong>{' '}
 											<span className='right'>
-												{this.state.donated} Times
+												{this.state.donated
+													? this.state.donated
+													: donated}{' '}
+												Times
 											</span>
 										</li>
 										<li>
 											<strong>Mobile: </strong>{' '}
 											<span className='right'>
 												{mobile}
+											</span>
+										</li>
+										<li>
+											<strong>Email: </strong>{' '}
+											<span className='right'>
+												{email}
 											</span>
 										</li>
 										<li>
@@ -252,7 +236,20 @@ class Profile extends Component {
 										<li>
 											<strong>Last Donate Date: </strong>{' '}
 											<span className='right'>
-												{this.state.last_donate_date}
+												{this.props.dateConverter(
+													this.state.last_donate_date
+														? this.state
+																.last_donate_date
+														: last_donate_date
+												)}
+											</span>
+										</li>
+										<li>
+											<strong>Joining Date: </strong>{' '}
+											<span className='right'>
+												{this.props.dateConverter(
+													joined
+												)}
 											</span>
 										</li>
 										<li className='btn-wrapper'>
@@ -265,6 +262,9 @@ class Profile extends Component {
 													className='boxed-btn btn'
 													disabled={
 														this.state.disablerValue
+															? this.state
+																	.disablerValue
+															: disablerValue
 													}
 												>
 													Donated Today
@@ -275,9 +275,7 @@ class Profile extends Component {
 												{this.state.time.hours + ' '}{' '}
 												Hour{' '}
 												{this.state.time.minutes + ' '}{' '}
-												Hinute{' '}
-												{this.state.time.seconds + ' '}{' '}
-												Second remaining!
+												Minute remaining!
 											</span>
 										</li>
 									</ul>

@@ -43,9 +43,9 @@ class Register extends Component {
 		event.preventDefault();
 
 		fetch('http://localhost:3300/register', {
-			method: 'post',
+			method: 'POST',
 			headers: {
-				Accept: 'application/json',
+				'Accept': 'application/json',
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
@@ -96,6 +96,7 @@ class Register extends Component {
 								<div className='righti-content-area'>
 									<div className='contact-page-form-wrap'>
 										<form
+											method='POST'
 											id='contact_page_form'
 											className='contact-page-form'
 										>
@@ -104,8 +105,7 @@ class Register extends Component {
 													<div className='form-group'>
 														<input
 															onChange={
-																this
-																	.onChange
+																this.onChange
 															}
 															type='text'
 															name='name'
@@ -118,8 +118,7 @@ class Register extends Component {
 													<div className='form-group'>
 														<input
 															onChange={
-																this
-																	.onChange
+																this.onChange
 															}
 															type='text'
 															name='username'
@@ -132,8 +131,7 @@ class Register extends Component {
 													<div className='form-group'>
 														<input
 															onChange={
-																this
-																	.onChange
+																this.onChange
 															}
 															type='tel'
 															name='mobile'
@@ -146,8 +144,7 @@ class Register extends Component {
 													<div className='form-group'>
 														<input
 															onChange={
-																this
-																	.onChange
+																this.onChange
 															}
 															type='email'
 															name='email'
@@ -160,8 +157,7 @@ class Register extends Component {
 													<div className='form-group'>
 														<input
 															onChange={
-																this
-																	.onChange
+																this.onChange
 															}
 															type='password'
 															name='password'
@@ -181,7 +177,8 @@ class Register extends Component {
 																this
 																	.passShowHide
 															}
-														>Show Password ? {' '}
+														>
+															Show Password ?{' '}
 															<FontAwesomeIcon
 																icon={
 																	this.state
@@ -193,14 +190,17 @@ class Register extends Component {
 												</div>
 											</div>
 											<div className='form-group'>
-												<input
-													onClick={
-														this.onSubmitRegister
-													}
-													type='submit'
-													value='Register'
-													className='submit-btn register-as-donor'
-												/>
+												<NavLink to='/users/profile/:id/:name'>
+													<input
+														onClick={
+															this
+																.onSubmitRegister
+														}
+														type='submit'
+														value='Register'
+														className='submit-btn register-as-donor'
+													/>
+												</NavLink>
 											</div>
 										</form>
 									</div>

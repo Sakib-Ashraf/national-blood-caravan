@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom'
 import './CTA.css';
 
 
@@ -14,7 +15,7 @@ const CTA = () => {
                             </div>
                             <div className="right-content-area">
                                 <div className="btn-wrapper">
-                                    <a href="join-donor.html" className="boxed-btn">Join with us</a>
+                                    <NavLink to="/join-donor" className="boxed-btn">Join with us</NavLink>
                                 </div>
                             </div>
                         </div>

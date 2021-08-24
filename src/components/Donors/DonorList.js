@@ -3,22 +3,7 @@ import { NavLink } from 'react-router-dom';
 import dp from './Donor.png';
 import Pagination from 'react-bootstrap/Pagination';
 
-const dateConverter = (timestampData) => {
-	const date = new Date(timestampData);
-	const year = date.getFullYear();
-	let month = date.getMonth() + 1;
-	let dt = date.getDate();
 
-	if (dt < 10) {
-		dt = '0' + dt;
-	}
-	if (month < 10) {
-		month = '0' + month;
-	}
-
-	const finalDate = year + '-' + month + '-' + dt;
-	return finalDate;
-};
 
 class DonorList extends Component {
 	constructor(props) {
@@ -32,7 +17,7 @@ class DonorList extends Component {
 
 	onSubmitProfile () {
 		fetch(
-			`http://localhost:3300/donors/donor-profile/${this.state.id}/${this.state.name}`,
+			`http://localhost:3300/donors/profile/${this.state.id}/${this.state.name}`,
 			{
 				method: 'post',
 				headers: {
@@ -65,6 +50,7 @@ class DonorList extends Component {
 			area,
 			donated,
 			last_donate_date,
+			dateConverter
 		} = this.props;
 
 		return (
@@ -74,7 +60,7 @@ class DonorList extends Component {
 						<img src={dp} alt='dp' />
 					</div>
 					<div className='content'>
-						<NavLink to={`/donors/donor-profile/${id}/${name}`}>
+						<NavLink to={`/donors/profile/${id}/${name}`}>
 							{' '}
 							<h4
 								onClick={this.onSubmitProfile}

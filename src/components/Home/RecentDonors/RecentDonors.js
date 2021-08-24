@@ -28,7 +28,7 @@ const RecentDonors = () => {
                                 <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
-                                <NavLink to="/recent-donors/donor-profile/15/john-schroyer">
+                                <NavLink to="/donors/profile/15/john-schroyer">
                                     <h4 className="title">John Schroyer</h4>
                                 </NavLink>
                                 <span className="blood-group">Blood Group: <strong>B+</strong></span>
@@ -40,7 +40,7 @@ const RecentDonors = () => {
                                 <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
-                                <NavLink to="/recent-donors/donor-profile/7/susan-shaw">
+                                <NavLink to="/donors/profile/7/susan-shaw">
                                     <h4 className="title">Susan Shaw</h4>
                                 </NavLink>
                                 <span className="blood-group">Blood Group: <strong>A+</strong></span>
@@ -52,7 +52,7 @@ const RecentDonors = () => {
                                 <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
-                                <NavLink to="/recent-donors/donor-profile/10/ardelia-rice">
+                                <NavLink to="/donors/profile/10/ardelia-rice">
                                     <h4 className="title">Ardelia Rice</h4>
                                 </NavLink>
                                 <span className="blood-group">Blood Group: <strong>B+</strong></span>
@@ -64,7 +64,7 @@ const RecentDonors = () => {
                                 <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
-                                <NavLink to="/recent-donors/donor-profile/9/charles-beckham">
+                                <NavLink to="/donors/profile/9/charles-beckham">
                                     <h4 className="title">Charles Beckham</h4>
                                 </NavLink>
                                 <span className="blood-group">Blood Group: <strong>A+</strong></span>
@@ -76,7 +76,7 @@ const RecentDonors = () => {
                                 <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
-                                <NavLink to="/recent-donors/donor-profile/5/james-long">
+                                <NavLink to="/donors/profile/5/james-long">
                                     <h4 className="title">James Long</h4>
                                 </NavLink>
                                 <span className="blood-group">Blood Group: <strong>O+</strong></span>
@@ -88,7 +88,7 @@ const RecentDonors = () => {
                                 <img style={{maxWidth: '300px'}} src={DP} alt="dp"/>
                             </div>
                             <div className="content">
-                                <NavLink to="/recent-donors/donor-profile/11/richard-donahue">
+                                <NavLink to="/donors/profile/11/richard-donahue">
                                     <h4 className="title">Richard Donahue</h4>
                                 </NavLink>
                                 <span className="blood-group">Blood Group: <strong>AB+</strong></span>

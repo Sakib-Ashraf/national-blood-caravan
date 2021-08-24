@@ -8,17 +8,21 @@ class SearchBox extends Component {
 			area: '',
 			blood_group: '',
 		};
+		this.onSubmitSearch = this.onSubmitSearch.bind(this);
+		this.onAreaChange = this.onAreaChange.bind(this);
+		this.onBGChange = this.onBGChange.bind(this);
 	}
 
-	onAreaChange = (event) => {
+	onAreaChange (event) {
 		this.setState({ area: event.target.value });
 	}
-	onBGChange = (event) => {
+
+	onBGChange (event) {
 		this.setState({ blood_group: event.target.value });
-	};
+	}
 
 
-	onSubmitSearch = () => {
+	onSubmitSearch () {
 
 		fetch('http://localhost:3300/search', {
 			method: 'post',
@@ -37,7 +41,7 @@ class SearchBox extends Component {
 					this.props.loadDonorData(donors);
 				}
 			});
-	};
+	}
 
 	render() {
 		return (

@@ -20,7 +20,7 @@ const BGCard = () => {
 								<span className='blood-group'>A+</span>
 							</div>
 							<div className='btn-wrapper'>
-								<NavLink to='/bgcard/a+' className='boxed-btn'>
+								<NavLink to='/donors/A+' className='boxed-btn'>
 									View All
 								</NavLink>
 							</div>
@@ -32,7 +32,7 @@ const BGCard = () => {
 								<span className='blood-group'>A-</span>
 							</div>
 							<div className='btn-wrapper'>
-								<NavLink to='/bgcard/a-' className='boxed-btn'>
+								<NavLink to='/donors/A-' className='boxed-btn'>
 									View All
 								</NavLink>
 							</div>
@@ -44,7 +44,7 @@ const BGCard = () => {
 								<span className='blood-group'>O+</span>
 							</div>
 							<div className='btn-wrapper'>
-								<NavLink to='/bgcard/o+' className='boxed-btn'>
+								<NavLink to='/donors/O+' className='boxed-btn'>
 									View All
 								</NavLink>
 							</div>
@@ -56,7 +56,7 @@ const BGCard = () => {
 								<span className='blood-group'>O-</span>
 							</div>
 							<div className='btn-wrapper'>
-								<NavLink to='/bgcard/o-' className='boxed-btn'>
+								<NavLink to='/donors/O-' className='boxed-btn'>
 									View All
 								</NavLink>
 							</div>
@@ -68,7 +68,7 @@ const BGCard = () => {
 								<span className='blood-group'>B+</span>
 							</div>
 							<div className='btn-wrapper'>
-								<NavLink to='/bgcard/b+' className='boxed-btn'>
+								<NavLink to='/donors/B+' className='boxed-btn'>
 									View All
 								</NavLink>
 							</div>
@@ -80,7 +80,7 @@ const BGCard = () => {
 								<span className='blood-group'>B-</span>
 							</div>
 							<div className='btn-wrapper'>
-								<NavLink to='/bgcard/b-' className='boxed-btn'>
+								<NavLink to='/donors/B-' className='boxed-btn'>
 									View All
 								</NavLink>
 							</div>
@@ -92,7 +92,7 @@ const BGCard = () => {
 								<span className='blood-group'>AB+</span>
 							</div>
 							<div className='btn-wrapper'>
-								<NavLink to='/bgcard/ab+' className='boxed-btn'>
+								<NavLink to='/donors/AB+' className='boxed-btn'>
 									View All
 								</NavLink>
 							</div>
@@ -104,7 +104,7 @@ const BGCard = () => {
 								<span className='blood-group'>AB-</span>
 							</div>
 							<div className='btn-wrapper'>
-								<NavLink to='/bgcard/ab-' className='boxed-btn'>
+								<NavLink to='/donors/AB-' className='boxed-btn'>
 									View All
 								</NavLink>
 							</div>

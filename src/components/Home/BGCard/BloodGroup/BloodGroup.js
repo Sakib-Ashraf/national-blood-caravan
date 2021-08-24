@@ -1,29 +1,50 @@
 import React, { Component } from 'react';
+import '../../../../containers/App.css';
+import DonorList from '../../../Donors/DonorList';
 import { NavLink } from 'react-router-dom';
-import '../../containers/App.css';
-import SearchBox from '../Home/SearchBox/SearchBox';
-import DonorList from './DonorList';
 
-class Donors extends Component {
+class BloodGroup extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			blood_group: this.props.routerProps.match.params.bg,
+			donors: []
+		};
+		console.log(this.state.blood_group);
+	}
 
+	componentDidMount() {
+		fetch(`http://localhost:3300/donors/${this.state.blood_group}`)
+			.then((response) => response.json())
+			.then((donors) => {
+				if (donors[0].id) {
+					this.setState({donors:donors});
+				}
+			});
+	}
 
 	render() {
-		const { loadDonorData, loadDonorProfile, donors, dateConverter} = this.props;
+		const { loadDonorProfile, dateConverter } = this.props;
+		const { donors } = this.state;
 		return (
-			<div>
+			<>
 				<div className='breadcrumb-area'>
 					<div className='container'>
 						<div className='row'>
 							<div className='col-lg-12'>
 								<div className='breadcrumb-inner'>
-									<h2 className='page-title'>Donors</h2>
+									<h2 className='page-title'>
+										{' '}
+										{`All Available Donors In ${this.state.blood_group}`}
+									</h2>
 									<ul className='page-list'>
 										<li>
 											<NavLink to='/'>Home</NavLink>
 										</li>
 										<li>
-											<NavLink to='/donor'>
-												Donors
+											<NavLink to='/donors/o+'>
+												{' '}
+												{`All Available Donors In ${this.state.blood_group}`}
 											</NavLink>
 										</li>
 									</ul>
@@ -32,12 +53,11 @@ class Donors extends Component {
 						</div>
 					</div>
 				</div>
-				<SearchBox loadDonorData={loadDonorData} />
 
-				{/* <!-- our dedicated team area start  --> */}
 				<section className='dedicated-team-area padding-120 '>
 					<div className='container'>
 						<div className='row'>
+							<div className='col-lg-12'></div>
 							{Object.keys(donors).map((donor, i) => {
 								return (
 									<DonorList
@@ -59,12 +79,18 @@ class Donors extends Component {
 									/>
 								);
 							})}
+							<div className='col-lg-12'>
+								<nav
+									className='pagination-wrapper'
+									aria-label='Page navigation '
+								></nav>
+							</div>
 						</div>
 					</div>
 				</section>
-			</div>
+			</>
 		);
 	}
-}
+};
 
-export default Donors;
+export default BloodGroup;
