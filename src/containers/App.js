@@ -92,7 +92,6 @@ class App extends Component {
 
 	loadDonorProfile = (donor) => {
 		this.setState({ donorProfile: donor });
-		console.log(this.state.donorProfile);
 	};
 
 	dateConverter = (timestampData) => {
@@ -151,18 +150,12 @@ class App extends Component {
 							loadDonorProfile={this.loadDonorProfile}
 							donors={this.state.donors}
 						/>
-						<Route exact path='/donors/profile/:id/:name'>
-							<Profile
-								dateConverter={this.dateConverter}
-								donorProfile={this.state.donorProfile}
-							/>
-						</Route>
 					</Route>
 					<Route exact path='/blog' component={Blog} />
 					<Route exact path='/contact' component={Contact} />
 					<Route exact path='/join-donor'>
 						<JoinAsDonor
-							loadData={this.loadData}
+							loadDonorProfile={this.loadDonorProfile}
 							onRouteChange={this.onRouteChange}
 						/>
 					</Route>

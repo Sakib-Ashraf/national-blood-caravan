@@ -8,9 +8,9 @@ class BloodGroup extends Component {
 		super(props);
 		this.state = {
 			blood_group: this.props.routerProps.match.params.bg,
-			donors: []
+			donors: [],
+			data: true,
 		};
-		console.log(this.state.blood_group);
 	}
 
 	componentDidMount() {
@@ -19,6 +19,8 @@ class BloodGroup extends Component {
 			.then((donors) => {
 				if (donors[0].id) {
 					this.setState({donors:donors});
+				} else {
+					this.setState({ data: false });
 				}
 			});
 	}
@@ -42,7 +44,9 @@ class BloodGroup extends Component {
 											<NavLink to='/'>Home</NavLink>
 										</li>
 										<li>
-											<NavLink to='/donors/o+'>
+											<NavLink
+												to={`/donors/${this.state.blood_group}`}
+											>
 												{' '}
 												{`All Available Donors In ${this.state.blood_group}`}
 											</NavLink>
@@ -58,27 +62,32 @@ class BloodGroup extends Component {
 					<div className='container'>
 						<div className='row'>
 							<div className='col-lg-12'></div>
-							{Object.keys(donors).map((donor, i) => {
-								return (
-									<DonorList
-										dateConverter={dateConverter}
-										loadDonorProfile={loadDonorProfile}
-										key={i}
-										id={donors[i].id}
-										name={donors[i].name}
-										email={donors[i].email}
-										blood_group={donors[i].blood_group}
-										mobile={donors[i].mobile}
-										gender={donors[i].gender}
-										area={donors[i].area}
-										donated={donors[i].donated}
-										last_donate_date={
-											donors[i].last_donate_date
-										}
-										joined={donors[i].joined}
-									/>
-								);
-							})}
+							{!this.state.data?<div className='col-lg-12'>
+								<h1 className='alert-danger' style={{textAlign: 'center', lineHeight:'6rem'}}>Attention! No Donor Data Found!</h1>
+							</div>
+							:<>
+								{Object.keys(donors).map((donor, i) => {
+									return (
+										<DonorList
+											dateConverter={dateConverter}
+											loadDonorProfile={loadDonorProfile}
+											key={i}
+											id={donors[i].id}
+											name={donors[i].name}
+											email={donors[i].email}
+											blood_group={donors[i].blood_group}
+											mobile={donors[i].mobile}
+											gender={donors[i].gender}
+											area={donors[i].area}
+											donated={donors[i].donated}
+											last_donate_date={
+												donors[i].last_donate_date
+											}
+											joined={donors[i].joined}
+										/>
+									);
+								})}
+							</>}
 							<div className='col-lg-12'>
 								<nav
 									className='pagination-wrapper'

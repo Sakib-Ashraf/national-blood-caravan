@@ -7,19 +7,21 @@ class SearchBox extends Component {
 		this.state = {
 			area: '',
 			blood_group: '',
+			gender: ''
 		};
 		this.onSubmitSearch = this.onSubmitSearch.bind(this);
-		this.onAreaChange = this.onAreaChange.bind(this);
-		this.onBGChange = this.onBGChange.bind(this);
 	}
 
-	onAreaChange (event) {
+	onAreaChange = (event) => {
 		this.setState({ area: event.target.value });
 	}
-
-	onBGChange (event) {
+	onBGChange = (event) => {
 		this.setState({ blood_group: event.target.value });
-	}
+	};
+	onGenderChange = (event) => {
+		this.setState({ gender: event.target.value });
+	};
+
 
 
 	onSubmitSearch () {
@@ -33,6 +35,7 @@ class SearchBox extends Component {
 			body: JSON.stringify({
 				area: this.state.area,
 				blood_group: this.state.blood_group,
+				gender: this.state.gender
 			}),
 		})
 			.then((response) => response.json())
@@ -295,6 +298,28 @@ class SearchBox extends Component {
 											</div>
 										</li>
 										<li>
+											<div className='form-group '>
+												<select
+													onChange={this.onGenderChange}
+													className='form-control nice-select wide'
+													name='gender'
+												>
+													<option value=''>
+														Gender
+													</option>
+													<option value='Male'>
+														Male
+													</option>
+													<option value='Female'>
+														Female
+													</option>
+													<option value='Other'>
+														Other
+													</option>
+												</select>
+											</div>
+										</li>
+										<li style={{marginLeft: '0px'}}>
 											<NavLink to='/donors' >
 												<input
 													onClick={

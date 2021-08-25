@@ -123,7 +123,7 @@ class Profile extends Component {
 	}
 
 	render() {
-		const { name, email, joined, blood_group, birth_date, mobile, gender, address, area, donated, last_donate_date, disablerValue} =
+		const { name, email, joined, blood_group, age, mobile, gender, address, area, donated, last_donate_date, disablerValue} =
 			this.props.donorProfile;
 		return (
 			<section>
@@ -179,11 +179,9 @@ class Profile extends Component {
 									<h2 className='title'>Donor Profile</h2>
 									<ul>
 										<li>
-											<strong>Birth Date: </strong>{' '}
+											<strong>Age: </strong>{' '}
 											<span className='right'>
-												{this.props.dateConverter(
-													birth_date
-												)}
+													{age}
 											</span>
 										</li>
 										<li>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import dp from './Donor.png';
-import Pagination from 'react-bootstrap/Pagination';
+// import Pagination from 'react-bootstrap/Pagination';
 
 
 

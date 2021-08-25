@@ -8,12 +8,13 @@ class JoinAsDonor extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			id: '',
 			name: '',
 			username: '',
 			mobile: '',
 			email: '',
 			password: '',
-			birth_date: '',
+			age: '',
 			blood_group: '',
 			donated: '',
 			gender: '',
@@ -46,7 +47,7 @@ class JoinAsDonor extends Component {
 		}
 	};
 
-	onSubmitJoinDonor = (event) => {
+	onSubmitJoinDonor = () => {
 		fetch('http://localhost:3300/join-donor', {
 			method: 'post',
 			headers: {
@@ -59,7 +60,7 @@ class JoinAsDonor extends Component {
 				email: this.state.email,
 				mobile: this.state.mobile,
 				password: this.state.password,
-				birth_date: this.state.birth_date,
+				age: this.state.age,
 				blood_group: this.state.blood_group,
 				donated: this.state.donated,
 				gender: this.state.gender,
@@ -69,9 +70,11 @@ class JoinAsDonor extends Component {
 			}),
 		})
 			.then((response) => response.json())
-			.then((user) => {
-				if (user.id) {
-					this.props.loadData(user);
+			.then((donor) => {
+				console.log(donor);
+				if (donor.id) {
+					this.setState({ id: donor.id});
+					this.props.loadDonorProfile(donor);
 					this.props.onRouteChange('home');
 				}
 			});
@@ -180,17 +183,17 @@ class JoinAsDonor extends Component {
 														/>
 													</div>
 													<div className='form-group'>
-														<label htmlFor='birth_date'>
-															Your Birth-Date:
+														<label htmlFor='age'>
+															Your Age:
 														</label>
 														<input
 															onChange={
 																this.onChange
 															}
-															type='date'
+															type='number'
 															className='form-control'
 															id='birthday'
-															name='birth_date'
+															name='age'
 															required
 															aria-required='true'
 														/>
@@ -313,13 +316,13 @@ class JoinAsDonor extends Component {
 																Select Your
 																Gender
 															</option>
-															<option value='male'>
+															<option value='Male'>
 																Male
 															</option>
-															<option value='female'>
+															<option value='Female'>
 																Female
 															</option>
-															<option value='other'>
+															<option value='Other'>
 																Other
 															</option>
 														</select>
@@ -569,7 +572,7 @@ class JoinAsDonor extends Component {
 												</div>
 											</div>
 											<div className='form-group'>
-												<NavLink to='/donors/profile/:id/:name'>
+												<NavLink to={`/donors/profile/:id/${this.state.name}`}>
 													<input
 														onClick={
 															this
