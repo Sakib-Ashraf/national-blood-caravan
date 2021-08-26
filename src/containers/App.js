@@ -85,6 +85,7 @@ class App extends Component {
 
 	loadDonorData = (donors) => {
 		this.setState({ donors: donors });
+		console.log(this.state.donors);
 	};
 
 
@@ -94,6 +95,7 @@ class App extends Component {
 
 	loadDonorProfile = (donor) => {
 		this.setState({ donorProfile: donor });
+		console.log('loaddonorprophile',this.state.donorProfile);
 	};
 
 	dateConverter = (timestampData) => {
@@ -182,16 +184,12 @@ class App extends Component {
 					<Route
 						exact
 						path='/donors/profile/:id/:name'
-						render={(routerProps) => {
-							return (
-								<Profile
+					>
+						<Profile
 									dateConverter={this.dateConverter}
 									donorProfile={this.state.donorProfile}
-									routerProps={routerProps}
 								/>
-							);
-						}}
-					/>
+					</Route>
 					<Route exact path='/login'>
 						<Login
 							loadData={this.loadData}

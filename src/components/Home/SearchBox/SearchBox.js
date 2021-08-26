@@ -9,36 +9,35 @@ class SearchBox extends Component {
 			blood_group: '',
 			gender: '',
 		};
-		this.onSubmitSearch = this.onSubmitSearch.bind(this);
 	}
 
-	onAreaChange = (event) => {
-		this.setState({ area: event.target.value });
-	}
-	onBGChange = (event) => {
-		this.setState({ blood_group: event.target.value });
-	};
-	onGenderChange = (event) => {
-		this.setState({ gender: event.target.value });
-	};
-
-
-
-	onSubmitSearch () {
-
+	onSubmitSearch = () => {
 		fetch(
 			`http://localhost:3300/search/${this.state.area}/${this.state.blood_group}/${this.state.gender}`
 		)
 			.then((response) => response.json())
 			.then((donors) => {
-				if (donors) {
+				if (donors[0].id) {
+					console.log(donors);
 					this.props.loadDonorData(donors);
 				} else {
 					console.log('no data found');
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => console.log(err, 'problem loading data'));
 	}
+
+	onAreaChange = (event) => {
+		return this.setState({ area: event.target.value });
+	};
+
+	onBGChange = (event) => {
+		return this.setState({ blood_group: event.target.value });
+	};
+
+	onGenderChange = (event) => {
+		return this.setState({ gender: event.target.value });
+	};
 
 	render() {
 		return (
@@ -52,9 +51,9 @@ class SearchBox extends Component {
 										<li>
 											<div className='form-group'>
 												<select
-													onChange={this.onAreaChange}
 													className='form-control nice-select wide'
 													name='area'
+													onChange={this.onAreaChange}
 												>
 													<option value=''>
 														District
@@ -257,9 +256,9 @@ class SearchBox extends Component {
 										<li>
 											<div className='form-group '>
 												<select
-													onChange={this.onBGChange}
 													className='form-control nice-select wide'
 													name='blood_group'
+													onChange={this.onBGChange}
 												>
 													<option value=''>
 														Blood Group
@@ -294,9 +293,11 @@ class SearchBox extends Component {
 										<li>
 											<div className='form-group '>
 												<select
-													onChange={this.onGenderChange}
 													className='form-control nice-select wide'
 													name='gender'
+													onChange={
+														this.onGenderChange
+													}
 												>
 													<option value=''>
 														Gender
@@ -313,8 +314,8 @@ class SearchBox extends Component {
 												</select>
 											</div>
 										</li>
-										<li style={{marginLeft: '0px'}}>
-											<NavLink to='/donors' >
+										<li style={{ marginLeft: '0px' }}>
+											<NavLink to='/donors'>
 												<input
 													onClick={
 														this.onSubmitSearch
@@ -334,6 +335,6 @@ class SearchBox extends Component {
 			</div>
 		);
 	}
-};
+}
 
 export default SearchBox;

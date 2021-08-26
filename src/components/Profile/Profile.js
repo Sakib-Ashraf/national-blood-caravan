@@ -39,6 +39,7 @@ class Profile extends Component {
 			hours: hours,
 			minutes: minutes,
 		};
+		console.log(obj);
 		return obj;
 	};
 
@@ -84,17 +85,17 @@ class Profile extends Component {
 	};
 
 	executer = async () => {
-		await this.setState({
+		this.setState({
 			disablerValue: true,
 			last_donate_date: this.last_donate_date(),
-		});
-		await this.startTimer();
-		await this.onUpdateProfile();
+	});
+		this.startTimer();
+		this.onUpdateProfile();
 	};
 
 	onUpdateProfile = () => {
 		fetch(
-			`http://localhost:3300/donors/profile/update/${this.props.routerProps.match.params.id}/${this.props.routerProps.match.params.name}`,
+			`http://localhost:3300/donors/profile/update/${this.props.donorProfile.id}`,
 			{
 				method: 'put',
 				headers: {
@@ -131,7 +132,7 @@ class Profile extends Component {
 			donated,
 			last_donate_date,
 			disablerValue,
-		} = this.state;
+		} = this.props.donorProfile;
 		return (
 			<section>
 				<div className='breadcrumb-area'>

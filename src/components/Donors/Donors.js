@@ -5,15 +5,6 @@ import SearchBox from '../Home/SearchBox/SearchBox';
 import DonorList from './DonorList';
 
 class Donors extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			loadDonorData: this.props.loadDonorData,
-			loadDonorProfile: this.props.loadDonorProfile,
-			dateConverter: this.props.dateConverter,
-			donors: this.props.donors,
-		};
-	}
 
 
 	// componentDidMount() {
@@ -21,7 +12,7 @@ class Donors extends Component {
 	// 		.then((response) => response.json())
 	// 		.then((donors) => {
 	// 			if (donors[0].id) {
-	// 				this.setState({ donors: donors });
+	// 				this.props.loadDonorData(donors);
 	// 			}
 	// 		})
 	// 		.catch((err) => console.log(err));
@@ -29,7 +20,7 @@ class Donors extends Component {
 
 	render() {
 		const { loadDonorData, loadDonorProfile, donors, dateConverter } =
-			this.state;
+			this.props;
 		return (
 			<div>
 				<div className='breadcrumb-area'>
@@ -58,11 +49,12 @@ class Donors extends Component {
 				{/* <!-- our dedicated team area start  --> */}
 				<section className='dedicated-team-area padding-120 '>
 					<div className='container'>
-						<h1>Loading Data...</h1>
+						{!donors.length ?
+							<h1>Loading Data...</h1>
+							:
 						<div className='row'>
-							{console.log(donors)}
-							{!donors ? (
-								<div className='col-lg-12'>
+							{donors[0].id === undefined ?
+							(<div className='col-lg-12'>
 									<h1
 										className='alert-danger'
 										style={{
@@ -102,7 +94,7 @@ class Donors extends Component {
 									})}
 								</>
 							)}
-						</div>
+						</div>}
 					</div>
 				</section>
 			</div>
