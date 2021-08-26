@@ -79,12 +79,14 @@ class App extends Component {
 				if (donors[0]) {
 					this.setState({ donors: donors });
 				}
-			});
+			})
+			.catch((err) => console.log(err));
 	}
 
 	loadDonorData = (donors) => {
 		this.setState({ donors: donors });
 	};
+
 
 	loadAllDonor = (donors) => {
 		this.setState({ AllDonors: donors });
@@ -128,7 +130,7 @@ class App extends Component {
 				<Switch>
 					<Route exact path='/'>
 						<Header />
-						<SearchBox loadDonorData={this.loadDonorData} />
+						<SearchBox loadDonorData={this.loadDonorData}/>
 						<DonationProcess />
 						<BGCard />
 
@@ -159,24 +161,37 @@ class App extends Component {
 							onRouteChange={this.onRouteChange}
 						/>
 					</Route>
-					<Route exact path='/donors/:bg' render={(routerProps) => {
-						return (<BloodGroup
-							dateConverter={this.dateConverter}
-							loadDonorProfile={this.loadDonorProfile}
-							routerProps={routerProps}
-						/>);
-					}}/>
+					<Route
+						exact
+						path='/donors/:bg'
+						render={(routerProps) => {
+							return (
+								<BloodGroup
+									dateConverter={this.dateConverter}
+									loadDonorProfile={this.loadDonorProfile}
+									routerProps={routerProps}
+								/>
+							);
+						}}
+					/>
 					<Route
 						exact
 						path='/recent-donors'
 						component={RecentDonors}
 					/>
-					<Route exact path='/donors/profile/:id/:name'>
-						<Profile
-							dateConverter={this.dateConverter}
-							donorProfile={this.state.donorProfile}
-						/>
-					</Route>
+					<Route
+						exact
+						path='/donors/profile/:id/:name'
+						render={(routerProps) => {
+							return (
+								<Profile
+									dateConverter={this.dateConverter}
+									donorProfile={this.state.donorProfile}
+									routerProps={routerProps}
+								/>
+							);
+						}}
+					/>
 					<Route exact path='/login'>
 						<Login
 							loadData={this.loadData}

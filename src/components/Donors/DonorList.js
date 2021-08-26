@@ -3,42 +3,35 @@ import { NavLink } from 'react-router-dom';
 import dp from './Donor.png';
 // import Pagination from 'react-bootstrap/Pagination';
 
-
-
 class DonorList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			id: this.props.id,
 			name: this.props.name,
+			blood_group: this.props.blood_group,
+			mobile: this.props.mobile,
+			gender: this.props.gender,
+			area: this.props.area,
+			donated: this.props.donated,
+			last_donate_date: this.props.last_donate_date,
+			dateConverter: this.props.dateConverter,
 		};
-         this.onSubmitProfile = this.onSubmitProfile.bind(this);
 	}
 
-	onSubmitProfile () {
+
+	onSubmitProfile = () => {
 		fetch(
-			`http://localhost:3300/donors/profile/${this.state.id}/${this.state.name}`,
-			{
-				method: 'post',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					id: this.state.id,
-					name: this.state.name,
-				}),
-			}
+			`http://localhost:3300/donors/profile/${this.props.id}/${this.props.name}`
 		)
 			.then((response) => response.json())
 			.then((donors) => {
-                console.log(donors);
-                
 				if (donors.id) {
 					this.props.loadDonorProfile(donors);
 				}
-			});
-	}
+			})
+			.catch((err) => console.log(err));
+	};
 
 	render() {
 		const {
@@ -50,8 +43,8 @@ class DonorList extends Component {
 			area,
 			donated,
 			last_donate_date,
-			dateConverter
-		} = this.props;
+			dateConverter,
+		} = this.state;
 
 		return (
 			<div className='col-lg-3 col-md-6'>

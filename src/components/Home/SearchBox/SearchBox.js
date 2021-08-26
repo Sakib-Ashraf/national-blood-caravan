@@ -7,7 +7,7 @@ class SearchBox extends Component {
 		this.state = {
 			area: '',
 			blood_group: '',
-			gender: ''
+			gender: '',
 		};
 		this.onSubmitSearch = this.onSubmitSearch.bind(this);
 	}
@@ -26,24 +26,18 @@ class SearchBox extends Component {
 
 	onSubmitSearch () {
 
-		fetch('http://localhost:3300/search', {
-			method: 'post',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				area: this.state.area,
-				blood_group: this.state.blood_group,
-				gender: this.state.gender
-			}),
-		})
+		fetch(
+			`http://localhost:3300/search/${this.state.area}/${this.state.blood_group}/${this.state.gender}`
+		)
 			.then((response) => response.json())
 			.then((donors) => {
-				if (donors[0].id) {
+				if (donors) {
 					this.props.loadDonorData(donors);
+				} else {
+					console.log('no data found');
 				}
-			});
+			})
+			.catch((err) => console.log(err));
 	}
 
 	render() {

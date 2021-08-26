@@ -9,22 +9,24 @@ class Profile extends Component {
 		this.state = {
 			id: this.props.donorProfile.id,
 			name: this.props.donorProfile.name,
+			email: this.props.donorProfile.email,
+			joined: this.props.donorProfile.joined,
+			blood_group: this.props.donorProfile.blood_group,
+			age: this.props.donorProfile.age,
+			mobile: this.props.donorProfile.mobile,
+			gender: this.props.donorProfile.gender,
+			address: this.props.donorProfile.address,
+			area: this.props.donorProfile.area,
 			time: {},
 			seconds: this.props.donorProfile.seconds,
 			donated: this.props.donorProfile.donated,
 			last_donate_date: this.props.donorProfile.last_donate_date,
 			disablerValue: this.props.donorProfile.disablerValue,
 		};
-		console.log(this.props.donorProfile);
 		this.timer = 0;
-		this.startTimer = this.startTimer.bind(this);
-		this.IncrementDonateTimes = this.IncrementDonateTimes.bind(this);
-		this.countDown = this.countDown.bind(this);
-		this.executer = this.executer.bind(this);
-		this.last_donate_date = this.last_donate_date.bind(this);
 	}
 
-	secondsToTime(secs) {
+	secondsToTime = (secs) => {
 		let day = Math.floor(secs / 86400);
 
 		let hours = Math.floor(secs / 324000);
@@ -32,14 +34,13 @@ class Profile extends Component {
 		let divisor_for_minutes = secs % 3600;
 		let minutes = Math.floor(divisor_for_minutes / 60);
 
-
 		let obj = {
 			days: day,
 			hours: hours,
 			minutes: minutes,
 		};
 		return obj;
-	}
+	};
 
 	componentDidMount() {
 		let timeLeftVar = this.secondsToTime(this.state.seconds);
@@ -48,13 +49,13 @@ class Profile extends Component {
 		});
 	}
 
-	startTimer() {
+	startTimer = () => {
 		if (this.timer === 0 && this.state.seconds > 0) {
 			this.timer = setInterval(this.countDown, 60000);
 		}
-	}
+	};
 
-	countDown() {
+	countDown = () => {
 		// Remove one second, set state so a re-render happens.
 		let seconds = this.state.seconds - 60;
 		this.setState({
@@ -69,35 +70,31 @@ class Profile extends Component {
 				disablerValue: false,
 			});
 		}
-	}
+	};
 
-	IncrementDonateTimes() {
-		this.setState({
-			donated: (Number(this.props.donorProfile.donated) + 1),
-		});
-	}
-
-	last_donate_date () {
+	last_donate_date = () => {
 		let date = new Date();
 		let formattedTime =
-			date.getFullYear() + '-0' + (date.getMonth()+1) + '-' + date.getDate();
+			date.getFullYear() +
+			'-0' +
+			(date.getMonth() + 1) +
+			'-' +
+			date.getDate();
 		return formattedTime;
-	}
+	};
 
-	executer () {
-		this.setState({
+	executer = async () => {
+		await this.setState({
 			disablerValue: true,
 			last_donate_date: this.last_donate_date(),
 		});
-		this.startTimer();
-		this.IncrementDonateTimes();
-		this.onUpdateProfile();
-	}
+		await this.startTimer();
+		await this.onUpdateProfile();
+	};
 
-
-	onUpdateProfile() {
+	onUpdateProfile = () => {
 		fetch(
-			`http://localhost:3300/donors/profile/update/${this.props.donorProfile.id}/${this.props.donorProfile.name}`,
+			`http://localhost:3300/donors/profile/update/${this.props.routerProps.match.params.id}/${this.props.routerProps.match.params.name}`,
 			{
 				method: 'put',
 				headers: {
@@ -106,7 +103,6 @@ class Profile extends Component {
 				},
 				body: JSON.stringify({
 					seconds: this.state.seconds,
-					donated: this.state.donated,
 					last_donate_date: this.state.last_donate_date,
 					disablerValue: this.state.disablerValue,
 				}),
@@ -114,17 +110,28 @@ class Profile extends Component {
 		)
 			.then((response) => response.json())
 			.then((profileData) => {
-				console.log(profileData);
-
 				if (profileData.id) {
 					this.props.loadDonorProfile(profileData);
 				}
-			});
-	}
+			})
+			.catch((err) => console.log(err));
+	};
 
 	render() {
-		const { name, email, joined, blood_group, age, mobile, gender, address, area, donated, last_donate_date, disablerValue} =
-			this.props.donorProfile;
+		const {
+			name,
+			email,
+			joined,
+			blood_group,
+			age,
+			mobile,
+			gender,
+			address,
+			area,
+			donated,
+			last_donate_date,
+			disablerValue,
+		} = this.state;
 		return (
 			<section>
 				<div className='breadcrumb-area'>
@@ -180,9 +187,7 @@ class Profile extends Component {
 									<ul>
 										<li>
 											<strong>Age: </strong>{' '}
-											<span className='right'>
-													{age}
-											</span>
+											<span className='right'>{age}</span>
 										</li>
 										<li>
 											<strong>Blood Group: </strong>{' '}

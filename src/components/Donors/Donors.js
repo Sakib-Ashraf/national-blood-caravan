@@ -5,10 +5,31 @@ import SearchBox from '../Home/SearchBox/SearchBox';
 import DonorList from './DonorList';
 
 class Donors extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			loadDonorData: this.props.loadDonorData,
+			loadDonorProfile: this.props.loadDonorProfile,
+			dateConverter: this.props.dateConverter,
+			donors: this.props.donors,
+		};
+	}
 
+
+	// componentDidMount() {
+	// 	fetch(`http://localhost:3300/donors`)
+	// 		.then((response) => response.json())
+	// 		.then((donors) => {
+	// 			if (donors[0].id) {
+	// 				this.setState({ donors: donors });
+	// 			}
+	// 		})
+	// 		.catch((err) => console.log(err));
+	// }
 
 	render() {
-		const { loadDonorData, loadDonorProfile, donors, dateConverter} = this.props;
+		const { loadDonorData, loadDonorProfile, donors, dateConverter } =
+			this.state;
 		return (
 			<div>
 				<div className='breadcrumb-area'>
@@ -37,28 +58,50 @@ class Donors extends Component {
 				{/* <!-- our dedicated team area start  --> */}
 				<section className='dedicated-team-area padding-120 '>
 					<div className='container'>
+						<h1>Loading Data...</h1>
 						<div className='row'>
-							{Object.keys(donors).map((donor, i) => {
-								return (
-									<DonorList
-										dateConverter={dateConverter}
-										loadDonorProfile={loadDonorProfile}
-										key={i}
-										id={donors[i].id}
-										name={donors[i].name}
-										email={donors[i].email}
-										blood_group={donors[i].blood_group}
-										mobile={donors[i].mobile}
-										gender={donors[i].gender}
-										area={donors[i].area}
-										donated={donors[i].donated}
-										last_donate_date={
-											donors[i].last_donate_date
-										}
-										joined={donors[i].joined}
-									/>
-								);
-							})}
+							{console.log(donors)}
+							{!donors ? (
+								<div className='col-lg-12'>
+									<h1
+										className='alert-danger'
+										style={{
+											textAlign: 'center',
+											lineHeight: '6rem',
+										}}
+									>
+										Sorry! No Donor Data Found!
+									</h1>
+								</div>
+							) : (
+								<>
+									{Object.keys(donors).map((donor, i) => {
+										return (
+											<DonorList
+												dateConverter={dateConverter}
+												loadDonorProfile={
+													loadDonorProfile
+												}
+												key={i}
+												id={donors[i].id}
+												name={donors[i].name}
+												email={donors[i].email}
+												blood_group={
+													donors[i].blood_group
+												}
+												mobile={donors[i].mobile}
+												gender={donors[i].gender}
+												area={donors[i].area}
+												donated={donors[i].donated}
+												last_donate_date={
+													donors[i].last_donate_date
+												}
+												joined={donors[i].joined}
+											/>
+										);
+									})}
+								</>
+							)}
 						</div>
 					</div>
 				</section>
