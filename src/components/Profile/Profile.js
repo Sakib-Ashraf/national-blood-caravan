@@ -3,10 +3,35 @@ import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
 import dp from './Donor.png';
 
+const initialState = {
+	id: '',
+	name: '',
+	email: '',
+	joined: '',
+	blood_group: '',
+	age: '',
+	mobile: '',
+	gender: '',
+	address: '',
+	area: '',
+	activation_date: '',
+	donated: '',
+	last_donate_date: '',
+	disablerValue: '',
+};
+
 class Profile extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
+		this.state = initialState;
+		
+	}
+	componentWillUnmount() {
+		this.setState(initialState);
+	}
+
+	componentDidMount() {
+		this.setState({
 			id: this.props.donorProfile.id,
 			name: this.props.donorProfile.name,
 			email: this.props.donorProfile.email,
@@ -17,33 +42,13 @@ class Profile extends Component {
 			gender: this.props.donorProfile.gender,
 			address: this.props.donorProfile.address,
 			area: this.props.donorProfile.area,
-			time: {},
-			activation_date: this.props.donorProfile.joined,
+			activation_date: this.props.donorProfile.activation_date,
 			donated: this.props.donorProfile.donated,
 			last_donate_date: this.props.donorProfile.last_donate_date,
 			disablerValue: this.props.donorProfile.disablerValue,
-		};
-		console.log(this.dateConverter(this.state.activation_date));
+		});
+		console.log(this.props.dateConverter(this.state.activation_date));
 	}
-
-	componentDidMount() {}
-
-	dateConverter = (timestampData) => {
-		const date = new Date(timestampData);
-		const year = date.getFullYear();
-		let month = date.getMonth() + 1;
-		let dt = date.getDate();
-
-		if (dt < 10) {
-			dt = '0' + dt;
-		}
-		if (month < 10) {
-			month = '0' + month;
-		}
-
-		const finalDate = year + '-' + month + '-' + dt;
-		return finalDate;
-	};
 
 	AdderFunc = () => {
 		let addDays = function (days) {
@@ -81,7 +86,7 @@ class Profile extends Component {
 
 	executer = () => {
 		this.setState({
-			activation_date: this.dateConverter(this.AdderFunc()),
+			activation_date: this.props.dateConverter(this.AdderFunc()),
 			disablerValue: true,
 			last_donate_date: this.last_donate_date(),
 		});
@@ -237,7 +242,7 @@ class Profile extends Component {
 										<li>
 											<strong>Last Donate Date: </strong>{' '}
 											<span className='right'>
-												{this.dateConverter(
+												{this.props.dateConverter(
 													this.state.last_donate_date
 														? this.state
 																.last_donate_date
@@ -248,7 +253,7 @@ class Profile extends Component {
 										<li>
 											<strong>Joining Date: </strong>{' '}
 											<span className='right'>
-												{this.dateConverter(
+												{this.props.dateConverter(
 													joined
 												)}
 											</span>
@@ -272,7 +277,7 @@ class Profile extends Component {
 												</button>{' '}
 											</strong>
 											<span className='right'>
-												{this.difference_calc()
+												{this.difference_calc() >= 0
 													? this.difference_calc()
 													: '00 '}{' '}
 												Day remaining!

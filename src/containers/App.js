@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import ProtectedRoute from '../components/protected.route';
 
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -36,6 +37,8 @@ import News from '../components/Home/News/News';
 
 import BloodGroup from '../components/Home/BGCard/BloodGroup/BloodGroup';
 import UserDashboard from '../components/UserDashboard/UserDashboard';
+import EditProfile from '../components/EditProfile/EditProfile';
+import ChangePassword from '../components/ChangePassword/ChangePassword';
 
 const initState = {
 	input: '',
@@ -88,7 +91,6 @@ class App extends Component {
 		console.log(this.state.donors);
 	};
 
-
 	loadAllDonor = (donors) => {
 		this.setState({ AllDonors: donors });
 	};
@@ -127,12 +129,21 @@ class App extends Component {
 	render() {
 		return (
 			<Router>
-				<Topbar />
-				<Navbar />
+				<Route
+					render={(routerProps) => {
+						return (
+							<>
+								<Topbar />
+								<Navbar routerProps={routerProps} />
+							</>
+						);
+					}}
+				/>
+
 				<Switch>
 					<Route exact path='/'>
 						<Header />
-						<SearchBox loadDonorData={this.loadDonorData}/>
+						<SearchBox loadDonorData={this.loadDonorData} />
 						<DonationProcess />
 						<BGCard />
 
@@ -147,22 +158,36 @@ class App extends Component {
 					</Route>
 					<Route exact path='/about' component={About} />
 					<Route exact path='/volunteer' component={Volunteer} />
-					<Route exact path='/donors'>
-						<Donors
-							loadDonorData={this.loadDonorData}
-							dateConverter={this.dateConverter}
-							loadDonorProfile={this.loadDonorProfile}
-							donors={this.state.donors}
-						/>
-					</Route>
+					<Route
+						exact
+						path='/donors'
+						render={() => {
+							return (
+								<Donors
+									loadDonorData={this.loadDonorData}
+									dateConverter={this.dateConverter}
+									loadDonorProfile={this.loadDonorProfile}
+									donors={this.state.donors}
+								/>
+							);
+						}}
+					/>
+
 					<Route exact path='/blog' component={Blog} />
 					<Route exact path='/contact' component={Contact} />
-					<Route exact path='/join-donor'>
-						<JoinAsDonor
-							loadDonorProfile={this.loadDonorProfile}
-							onRouteChange={this.onRouteChange}
-						/>
-					</Route>
+					<Route
+						exact
+						path='/join-donor'
+						render={() => {
+							return (
+								<JoinAsDonor
+									loadDonorProfile={this.loadDonorProfile}
+									onRouteChange={this.onRouteChange}
+								/>
+							);
+						}}
+					/>
+
 					<Route
 						exact
 						path='/donors/:bg'
@@ -181,21 +206,34 @@ class App extends Component {
 						path='/recent-donors'
 						component={RecentDonors}
 					/>
-					<Route
+					<ProtectedRoute
 						exact
 						path='/donors/profile/:id/:name'
-					>
-						<Profile
+						component={undefined}
+						render={() => {
+							return (
+								<Profile
 									dateConverter={this.dateConverter}
 									donorProfile={this.state.donorProfile}
 								/>
-					</Route>
-					<Route exact path='/login'>
-						<Login
-							loadData={this.loadData}
-							onRouteChange={this.onRouteChange}
-						/>
-					</Route>
+							);
+						}}
+					></ProtectedRoute>
+					<Route
+						exact
+						path='/login'
+						render={(routerProps) => {
+							return (
+								<Login
+									loadDonorProfile={this.loadDonorProfile}
+									donorProfile={this.state.donorProfile}
+									onRouteChange={this.onRouteChange}
+									routerProps={routerProps}
+								/>
+							);
+						}}
+					/>
+
 					<Switch>
 						<Route exact path='/recovery' component={Recovery} />
 						<Route exact path='/register'>
@@ -206,8 +244,18 @@ class App extends Component {
 						</Route>
 						<Route
 							exact
-							path='/users/profile/:id/:name'
+							path='/user-dashboard'
 							component={UserDashboard}
+						/>
+						<Route
+							exact
+							path='/user-edit-profile'
+							component={EditProfile}
+						/>
+						<Route
+							exact
+							path='/user-change-password'
+							component={ChangePassword}
 						/>
 					</Switch>
 					<Route path='*' component={ErrorPage} />

@@ -166,26 +166,44 @@ class Register extends Component {
 															required
 															aria-required='true'
 														/>
-														<p
-															style={{
-																color: this
-																	.state
-																	.color,
-																cursor: 'pointer',
-															}}
-															onClick={
-																this
-																	.passShowHide
-															}
-														>
-															Show Password ?{' '}
-															<FontAwesomeIcon
-																icon={
-																	this.state
-																		.icon
+														<div style={{ display: 'flex', justifyContent: 'space-between'}}>
+															<p
+																style={{
+																	color: this
+																		.state
+																		.color,
+																	cursor: 'pointer',
+																}}
+																onClick={
+																	this
+																		.passShowHide
 																}
-															/>
-														</p>
+															>
+																Show Password ?{' '}
+																<FontAwesomeIcon
+																	icon={
+																		this
+																			.state
+																			.icon
+																	}
+																/>
+															</p>
+
+															<label>
+																Already a User?{' '}
+																<NavLink to='/login'>
+																	{' '}
+																	<strong
+																		style={{
+																			color: '#E83530',
+																		}}
+																	>
+																		Login
+																	</strong>{' '}
+																</NavLink>{' '}
+																Instead
+															</label>
+														</div>
 													</div>
 												</div>
 											</div>

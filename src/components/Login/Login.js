@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
+import auth from '.././auth';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +14,10 @@ class Login extends Component {
 			password: '',
 			icon: faEye,
 			color: '#009C55',
+			showPass: false,
+			data: true,
 		};
+		console.log(this.props.routerProps);
 	}
 
 	onChange = (event) => {
@@ -32,12 +36,12 @@ class Login extends Component {
 				showPass: false,
 				icon: faEye,
 				color: '#009C55',
+				
 			});
 		}
 	};
 
-	onSubmitLogIn = (event) => {
-		event.preventDefault();
+	onSubmitLogIn = () => {
 
 		fetch('http://localhost:3300/login', {
 			method: 'post',
@@ -51,12 +55,16 @@ class Login extends Component {
 			}),
 		})
 			.then((response) => response.json())
-			.then((user) => {
-				if (user.id) {
-					this.props.loadData(user);
+			.then((donor) => {
+				console.log(donor);
+				if (donor.id) {
+					this.props.loadDonorProfile(donor);
 					this.props.onRouteChange('home');
+				} else {
+					this.setState({ data: false });
 				}
-			});
+			})
+			.catch((err) => console.log(err));
 	};
 
 	render() {
@@ -92,9 +100,7 @@ class Login extends Component {
 											{' '}
 											<div className='form-group'>
 												<input
-													onChange={
-														this.onChange
-													}
+													onChange={this.onChange}
 													type='text'
 													name='email_or_mobile'
 													placeholder='Your Email or Mobile no'
@@ -105,10 +111,12 @@ class Login extends Component {
 											</div>
 											<div className='form-group'>
 												<input
-													onChange={
-														this.onChange
+													onChange={this.onChange}
+													type={
+														this.state.showPass
+															? 'text'
+															: 'password'
 													}
-													type='password'
 													name='password'
 													placeholder='Your Password'
 													className='form-control'
@@ -121,19 +129,31 @@ class Login extends Component {
 														cursor: 'pointer',
 													}}
 													onClick={this.passShowHide}
-												>Show Password ? {' '}
+												>
+													Show Password ?{' '}
 													<FontAwesomeIcon
 														icon={this.state.icon}
 													/>
 												</p>
 											</div>
 											<div className='form-group'>
-												<input
-													onClick={this.onSubmitLogIn}
-													type='submit'
-													value='Login'
-													className='submit-btn register-as-donor'
-												/>
+												{/* <NavLink
+													to={`/donors/profile/${this.props.donorProfile.id}/${this.props.donorProfile.name}`}
+												> */}
+													<input
+														onClick={() => {
+															auth.login(() => {
+																this.props.routerProps.history.push("/user-dashboard");
+															});
+															this.onSubmitLogIn();
+														}
+															
+														}
+														type='submit'
+														value='Login'
+														className='submit-btn register-as-donor'
+													/>
+												{/* </NavLink> */}
 											</div>
 											<div className='extra-links form-group'>
 												<NavLink to='/recovery'>
