@@ -108,9 +108,9 @@
 
         $('.count-num').rCounter ();
 
-        if($('.nice-select').length > 0){
-            $('.nice-select').niceSelect();
-        }
+        // if($('.nice-select').length > 0){
+        //     $('.nice-select').niceSelect();
+        // }
     });
 
 

@@ -24,6 +24,7 @@ class JoinAsDonor extends Component {
 			showPass: false,
 			icon: faEye,
 			color: '#009C55',
+			data: true,
 		};
 	}
 
@@ -73,11 +74,13 @@ class JoinAsDonor extends Component {
 			.then((donor) => {
 				console.log(donor);
 				if (donor.id) {
-					this.setState({ id: donor.id});
 					this.props.loadDonorProfile(donor);
 					this.props.onRouteChange('home');
+				} else {
+					this.setState({ data: false });
 				}
-			});
+			})
+			.catch((err) => console.log(err));
 	};
 
 	render() {
@@ -121,7 +124,10 @@ class JoinAsDonor extends Component {
 										>
 											{' '}
 											<div className='row justify-content-center'>
-												<div className='col-lg-8'>
+												{<div className='col-lg-8'>
+													{this.state.data?
+														(<h1 style={{marginBottom: '4rem'}}>Donor Information:</h1>):(<h3 className='alert-danger' style={{marginBottom: '4rem'}}>Form submission error. try again.</h3>)
+													}
 													<div className='form-group'>
 														<label htmlFor='Your Name'>
 															Your Name:
@@ -569,7 +575,7 @@ class JoinAsDonor extends Component {
 															aria-required='true'
 														/>
 													</div>
-												</div>
+												</div>}
 											</div>
 											<div className='form-group'>
 												<NavLink to={`/donors/profile/:id/${this.state.name}`}>

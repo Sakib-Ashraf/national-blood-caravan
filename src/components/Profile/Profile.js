@@ -18,59 +18,54 @@ class Profile extends Component {
 			address: this.props.donorProfile.address,
 			area: this.props.donorProfile.area,
 			time: {},
-			seconds: this.props.donorProfile.seconds,
+			activation_date: this.props.donorProfile.joined,
 			donated: this.props.donorProfile.donated,
 			last_donate_date: this.props.donorProfile.last_donate_date,
 			disablerValue: this.props.donorProfile.disablerValue,
 		};
-		this.timer = 0;
+		console.log(this.dateConverter(this.state.activation_date));
 	}
 
-	secondsToTime = (secs) => {
-		let day = Math.floor(secs / 86400);
+	componentDidMount() {}
 
-		let hours = Math.floor(secs / 324000);
+	dateConverter = (timestampData) => {
+		const date = new Date(timestampData);
+		const year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let dt = date.getDate();
 
-		let divisor_for_minutes = secs % 3600;
-		let minutes = Math.floor(divisor_for_minutes / 60);
+		if (dt < 10) {
+			dt = '0' + dt;
+		}
+		if (month < 10) {
+			month = '0' + month;
+		}
 
-		let obj = {
-			days: day,
-			hours: hours,
-			minutes: minutes,
+		const finalDate = year + '-' + month + '-' + dt;
+		return finalDate;
+	};
+
+	AdderFunc = () => {
+		let addDays = function (days) {
+			const date = new Date();
+			date.setDate(date.getDate() + days);
+			return date;
 		};
-		console.log(obj);
-		return obj;
+		return addDays(90);
 	};
 
-	componentDidMount() {
-		let timeLeftVar = this.secondsToTime(this.state.seconds);
-		this.setState({
-			time: timeLeftVar,
-		});
-	}
+	difference_calc = () => {
+		let date1 = new Date();
+		let date2 = new Date(this.state.activation_date);
 
-	startTimer = () => {
-		if (this.timer === 0 && this.state.seconds > 0) {
-			this.timer = setInterval(this.countDown, 60000);
-		}
-	};
+		// To calculate the time difference of two dates
+		let Difference_In_Time = date2.getTime() - date1.getTime();
 
-	countDown = () => {
-		// Remove one second, set state so a re-render happens.
-		let seconds = this.state.seconds - 60;
-		this.setState({
-			time: this.secondsToTime(seconds),
-			seconds: seconds,
-		});
+		// To calculate the no. of days between two dates
+		let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 
-		// Check if we're at zero.
-		if (seconds === 0) {
-			clearInterval(this.timer);
-			this.setState({
-				disablerValue: false,
-			});
-		}
+		let final = Math.ceil(Difference_In_Days);
+		return final;
 	};
 
 	last_donate_date = () => {
@@ -84,12 +79,13 @@ class Profile extends Component {
 		return formattedTime;
 	};
 
-	executer = async () => {
+	executer = () => {
 		this.setState({
+			activation_date: this.dateConverter(this.AdderFunc()),
 			disablerValue: true,
 			last_donate_date: this.last_donate_date(),
-	});
-		this.startTimer();
+		});
+		console.log(this.state.activation_date);
 		this.onUpdateProfile();
 	};
 
@@ -103,7 +99,7 @@ class Profile extends Component {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					seconds: this.state.seconds,
+					activation_date: this.state.activation_date,
 					last_donate_date: this.state.last_donate_date,
 					disablerValue: this.state.disablerValue,
 				}),
@@ -112,6 +108,7 @@ class Profile extends Component {
 			.then((response) => response.json())
 			.then((profileData) => {
 				if (profileData.id) {
+					console.log(profileData);
 					this.props.loadDonorProfile(profileData);
 				}
 			})
@@ -240,7 +237,7 @@ class Profile extends Component {
 										<li>
 											<strong>Last Donate Date: </strong>{' '}
 											<span className='right'>
-												{this.props.dateConverter(
+												{this.dateConverter(
 													this.state.last_donate_date
 														? this.state
 																.last_donate_date
@@ -251,7 +248,7 @@ class Profile extends Component {
 										<li>
 											<strong>Joining Date: </strong>{' '}
 											<span className='right'>
-												{this.props.dateConverter(
+												{this.dateConverter(
 													joined
 												)}
 											</span>
@@ -275,11 +272,10 @@ class Profile extends Component {
 												</button>{' '}
 											</strong>
 											<span className='right'>
-												{this.state.time.days + ' '} Day{' '}
-												{this.state.time.hours + ' '}{' '}
-												Hour{' '}
-												{this.state.time.minutes + ' '}{' '}
-												Minute remaining!
+												{this.difference_calc()
+													? this.difference_calc()
+													: '00 '}{' '}
+												Day remaining!
 											</span>
 										</li>
 									</ul>

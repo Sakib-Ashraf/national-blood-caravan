@@ -95,7 +95,7 @@ class App extends Component {
 
 	loadDonorProfile = (donor) => {
 		this.setState({ donorProfile: donor });
-		console.log('loaddonorprophile',this.state.donorProfile);
+		console.log(this.state.donorProfile);
 	};
 
 	dateConverter = (timestampData) => {
