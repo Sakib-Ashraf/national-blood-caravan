@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
-import auth from '.././auth';
+import auth from '../Auth/auth';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,7 @@ class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			email_or_mobile: '',
+			mobile: '',
 			password: '',
 			icon: faEye,
 			color: '#009C55',
@@ -50,13 +50,16 @@ class Login extends Component {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				email_or_mobile: this.state.email_or_mobile,
+				mobile: this.state.mobile,
 				password: this.state.password,
 			}),
 		})
 			.then((response) => response.json())
 			.then((donor) => {
 				console.log(donor);
+				if (donor.accessToken) {
+					localStorage.setItem('user', JSON.stringify(donor));
+				}
 				if (donor.id) {
 					this.props.loadDonorProfile(donor);
 					this.props.onRouteChange('home');
@@ -102,8 +105,8 @@ class Login extends Component {
 												<input
 													onChange={this.onChange}
 													type='text'
-													name='email_or_mobile'
-													placeholder='Your Email or Mobile no'
+													name='mobile'
+													placeholder='Your Mobile no'
 													className='form-control'
 													required
 													aria-required='true'
