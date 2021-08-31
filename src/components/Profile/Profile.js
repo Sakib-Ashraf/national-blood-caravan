@@ -134,7 +134,7 @@ class Profile extends Component {
 			donated,
 			last_donate_date,
 			disablerValue,
-		} = this.props.donorProfile;
+		} = this.props.loginProfile;
 		return (
 			<section>
 				<div className='breadcrumb-area'>

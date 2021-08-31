@@ -5,6 +5,7 @@ import auth from '../Auth/auth';
 
 class Navbar extends Component {
 	render() {
+		const { id, name } = this.props.loginProfile;
 		return (
 			<nav className='navbar navbar-area navbar-expand-lg'>
 				<div className='container nav-container'>
@@ -82,64 +83,57 @@ class Navbar extends Component {
 								</NavLink>
 							</li>
 
-							{auth.isAuthenticated()?(<li className='menu-item-has-children'>
-								<NavLink to=''>
-									Sakib_Ashraf
-								</NavLink>
-								<ul className='sub-menu'>
-									<li>
-										<NavLink to='/user-dashboard'>
-											Dashboard
-										</NavLink>
-									</li>
-									<li>
-										<NavLink to='/user-edit-profile'>
-											Edit Profile
-										</NavLink>
-									</li>
-									<li>
-										<NavLink to='/user-change-password'>
-											Change Password
-										</NavLink>
-									</li>
-									<li>
-										<NavLink to='/join-donor'>
-											Join As Donor
-										</NavLink>
-									</li>
-									<li>
-										<NavLink
-											to='/'
-											onClick={() => {
-												auth.logout(() => {
-													this.props.routerProps.history.push(
-														'/'
-													);
-												});
-											}}
-										>
-											Logout
-										</NavLink>
-									</li>
-									<form
-										id='logout-form'
-										action='/logout'
-										method='POST'
-										style={{ display: 'none' }}
+							{auth.isAuthenticated() ? (
+								<li className='menu-item-has-children'>
+									<NavLink
+										to={`/donors/profile/${id}/${name}`}
 									>
-										<input
-											type='hidden'
-											name='_token'
-											value='sQwPxV15RmeuaCrE21fHEtoX47NZffqzxq3LXrsZ'
-										/>{' '}
-									</form>
-								</ul>
-							</li>)
-							:(<li className='menu-btn'>
-								<NavLink to='/join-donor'>
-									Join as Donor
-								</NavLink>
-							</li>)}
+										{name}
+									</NavLink>
+									<ul className='sub-menu'>
+										<li>
+											<NavLink to='/user-dashboard'>
+												Dashboard
+											</NavLink>
+										</li>
+										<li>
+											<NavLink to='/user-edit-profile'>
+												Edit Profile
+											</NavLink>
+										</li>
+										<li>
+											<NavLink to='/user-change-password'>
+												Change Password
+											</NavLink>
+										</li>
+										<li>
+											<NavLink to='/join-donor'>
+												Join As Donor
+											</NavLink>
+										</li>
+										<li>
+											<NavLink
+												to='/'
+												onClick={() => {
+													auth.logout(() => {
+														this.props.routerProps.history.push(
+															'/'
+														);
+													});
+												}}
+											>
+												Logout
+											</NavLink>
+										</li>
+									</ul>
+								</li>
+							) : (
+								<li className='menu-btn'>
+									<NavLink to='/join-donor'>
+										Join as Donor
+									</NavLink>
+								</li>
+							)}
 						</ul>
 					</div>
 				</div>

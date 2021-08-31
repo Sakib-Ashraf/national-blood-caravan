@@ -39,15 +39,12 @@ import BloodGroup from '../components/Home/BGCard/BloodGroup/BloodGroup';
 import UserDashboard from '../components/UserDashboard/UserDashboard';
 import EditProfile from '../components/EditProfile/EditProfile';
 import ChangePassword from '../components/ChangePassword/ChangePassword';
+import ReqForBlood from '../components/ReqForBlood/ReqForBlood';
 
 const initState = {
-	input: '',
-	imageUrl: '',
-	box: {},
-	route: 'signin',
-	isSignedIn: false,
 	donors: {},
 	donorProfile: {},
+	loginProfile: {},
 	user: {
 		id: '',
 		name: '',
@@ -84,6 +81,8 @@ class App extends Component {
 				}
 			})
 			.catch((err) => console.log(err));
+
+			
 	}
 
 	loadDonorData = (donors) => {
@@ -98,6 +97,10 @@ class App extends Component {
 	loadDonorProfile = (donor) => {
 		this.setState({ donorProfile: donor });
 		console.log(this.state.donorProfile);
+	};
+	loadLoginProfile = (donor) => {
+		this.setState({ loginProfile: donor });
+		console.log(this.state.loginProfile);
 	};
 
 	dateConverter = (timestampData) => {
@@ -117,15 +120,7 @@ class App extends Component {
 		return finalDate;
 	};
 
-	onRouteChange = (route) => {
-		if (route === 'signout') {
-			this.setState(initState);
-		} else if (route === 'home') {
-			this.setState({ isSignedIn: true });
-		}
-		this.setState({ route: route });
-	};
-
+	
 	render() {
 		return (
 			<Router>
@@ -134,7 +129,10 @@ class App extends Component {
 						return (
 							<>
 								<Topbar />
-								<Navbar routerProps={routerProps} />
+								<Navbar
+									routerProps={routerProps}
+									loginProfile={this.state.loginProfile}
+								/>
 							</>
 						);
 					}}
@@ -182,7 +180,6 @@ class App extends Component {
 							return (
 								<JoinAsDonor
 									loadDonorProfile={this.loadDonorProfile}
-									onRouteChange={this.onRouteChange}
 								/>
 							);
 						}}
@@ -209,12 +206,22 @@ class App extends Component {
 					<ProtectedRoute
 						exact
 						path='/donors/profile/:id/:name'
-						component={undefined}
-						render={() => {
+						component={() => {
 							return (
 								<Profile
 									dateConverter={this.dateConverter}
 									donorProfile={this.state.donorProfile}
+									loginProfile={this.state.loginProfile}
+								/>
+							);
+						}}
+					></ProtectedRoute>
+					<ProtectedRoute
+						exact
+						path='/blood-request'
+						component={() => {
+							return (
+								<ReqForBlood
 								/>
 							);
 						}}
@@ -225,9 +232,8 @@ class App extends Component {
 						render={(routerProps) => {
 							return (
 								<Login
-									loadDonorProfile={this.loadDonorProfile}
-									donorProfile={this.state.donorProfile}
-									onRouteChange={this.onRouteChange}
+									loadLoginProfile={this.loadLoginProfile}
+									loginProfile={this.state.loginProfile}
 									routerProps={routerProps}
 								/>
 							);
@@ -237,22 +243,25 @@ class App extends Component {
 					<Switch>
 						<Route exact path='/recovery' component={Recovery} />
 						<Route exact path='/register'>
-							<Register
-								loadData={this.loadData}
-								onRouteChange={this.onRouteChange}
-							/>
+							<Register loadData={this.loadData} />
 						</Route>
-						<Route
+						<ProtectedRoute
 							exact
 							path='/user-dashboard'
-							component={UserDashboard}
+							component={() => {
+								return (
+									<UserDashboard
+										loginProfile={this.state.loginProfile}
+									/>
+								);
+							}}
 						/>
-						<Route
+						<ProtectedRoute
 							exact
 							path='/user-edit-profile'
 							component={EditProfile}
 						/>
-						<Route
+						<ProtectedRoute
 							exact
 							path='/user-change-password'
 							component={ChangePassword}

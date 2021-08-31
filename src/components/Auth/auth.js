@@ -7,9 +7,21 @@ class auth {
 		this.authenticated = false;
 	}
 
-	login(cb) {
+	login(mobile, password) {
 		this.authenticated = true;
-		cb();
+		return axios
+			.post(API_URL + 'login', {
+				mobile,
+				password,
+			})
+			.then((response) => {
+				if (response.data.accessToken) {
+					localStorage.setItem('user', JSON.stringify(response.data));
+				}
+
+				return response.data;
+			});
+		// cb();
 	}
 
 	logout(cb) {
@@ -18,12 +30,17 @@ class auth {
 		cb();
 	}
 
-	register(username, email, password) {
-		return axios.post(API_URL + 'signup', {
-			username,
-			email,
-			password,
-		});
+	register(
+		donor
+	) {
+		return axios
+			.post(API_URL + 'join-donor', {
+				donor
+			})
+			.then((response) => {
+				console.log(response);
+				return response.data;
+			});
 	}
 
 	getCurrentUser() {

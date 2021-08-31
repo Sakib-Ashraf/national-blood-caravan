@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
+
 class JoinAsDonor extends Component {
 	constructor(props) {
 		super(props);
@@ -15,6 +16,7 @@ class JoinAsDonor extends Component {
 			email: '',
 			password: '',
 			age: '',
+			birth_date: '',
 			blood_group: '',
 			donated: '',
 			gender: '',
@@ -30,7 +32,7 @@ class JoinAsDonor extends Component {
 
 	onChange = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
-	};
+	}
 
 	passShowHide = () => {
 		if (this.state.showPass === false) {
@@ -62,6 +64,7 @@ class JoinAsDonor extends Component {
 				mobile: this.state.mobile,
 				password: this.state.password,
 				age: this.state.age,
+				birth_date: this.state.birth_date,
 				blood_group: this.state.blood_group,
 				donated: this.state.donated,
 				gender: this.state.gender,
@@ -75,7 +78,6 @@ class JoinAsDonor extends Component {
 				console.log(donor);
 				if (donor.id) {
 					this.props.loadDonorProfile(donor);
-					this.props.onRouteChange('home');
 				} else {
 					this.setState({ data: false });
 				}
@@ -225,8 +227,25 @@ class JoinAsDonor extends Component {
 																}
 																type='number'
 																className='form-control'
-																id='birthday'
+																id='age'
 																name='age'
+																required
+																aria-required='true'
+															/>
+														</div>
+														<div className='form-group'>
+															<label htmlFor='birthday'>
+																Your Date of Birth:
+															</label>
+															<input
+																onChange={
+																	this
+																		.onChange
+																}
+																type='date'
+																className='form-control'
+																id='birthday'
+																name='birth_date'
 																required
 																aria-required='true'
 															/>

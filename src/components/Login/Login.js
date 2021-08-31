@@ -3,8 +3,23 @@ import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
 import auth from '../Auth/auth';
 
+import Form from 'react-validation/build/form';
+import input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
+const required = (value) => {
+	if (!value) {
+		return (
+			<div className='alert alert-danger' role='alert'>
+				This field is required!
+			</div>
+		);
+	}
+};
 
 class Login extends Component {
 	constructor(props) {
@@ -15,14 +30,14 @@ class Login extends Component {
 			icon: faEye,
 			color: '#009C55',
 			showPass: false,
-			data: true,
+			loading: false,
+			message: '',
 		};
-		console.log(this.props.routerProps);
 	}
 
 	onChange = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
-	}
+	};
 
 	passShowHide = () => {
 		if (this.state.showPass === false) {
@@ -36,40 +51,52 @@ class Login extends Component {
 				showPass: false,
 				icon: faEye,
 				color: '#009C55',
-				
 			});
 		}
 	};
 
-	onSubmitLogIn = () => {
+	onSubmitLogIn = (e) => {
+		
+		e.preventDefault();
 
-		fetch('http://localhost:3300/login', {
-			method: 'post',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				mobile: this.state.mobile,
-				password: this.state.password,
-			}),
-		})
-			.then((response) => response.json())
-			.then((donor) => {
-				console.log(donor);
-				if (donor.accessToken) {
-					localStorage.setItem('user', JSON.stringify(donor));
+		this.setState({
+			message: '',
+			loading: true,
+		});
+
+		this.form.validateAll();
+
+		if (this.checkBtn.context._errors.length === 0) {
+			auth.login(this.state.mobile, this.state.password).then(
+				(val) => {
+					console.log(val);
+					this.props.loadLoginProfile(val.user);
+					const { id, name } = val.user;
+					this.props.routerProps.history.push(`/donors/profile/${id}/${name}`);
+					// window.location.reload();
+				},
+				(error) => {
+					const resMessage =
+						(error.response &&
+							error.response.data &&
+							error.response.data.message) ||
+						error.message ||
+						error.toString();
+
+					this.setState({
+						loading: false,
+						message: resMessage,
+					});
 				}
-				if (donor.id) {
-					this.props.loadDonorProfile(donor);
-					this.props.onRouteChange('home');
-				} else {
-					this.setState({ data: false });
-				}
-			})
-			.catch((err) => console.log(err));
+			);
+		} else {
+			this.setState({
+				loading: false,
+			});
+		}
 	};
 
+	
 	render() {
 		return (
 			<section>
@@ -99,7 +126,13 @@ class Login extends Component {
 								<div className='right-content-area'>
 									<div className='contact-page-form-wrap login-page'>
 										<h2 className='title'>Login</h2>
-										<div className='contact-page-form'>
+										<Form
+											onSubmit={this.onSubmitLogIn}
+											ref={(c) => {
+												this.form = c;
+											}}
+											className='contact-page-form'
+										>
 											{' '}
 											<div className='form-group'>
 												<input
@@ -110,7 +143,9 @@ class Login extends Component {
 													className='form-control'
 													required
 													aria-required='true'
-												/>
+													validations={[required]}
+													value={this.state.mobile}
+												></input>
 											</div>
 											<div className='form-group'>
 												<input
@@ -121,11 +156,13 @@ class Login extends Component {
 															: 'password'
 													}
 													name='password'
+													value={this.state.password}
 													placeholder='Your Password'
 													className='form-control'
 													required
+													validations={[required]}
 													aria-required='true'
-												/>
+												></input>
 												<p
 													style={{
 														color: this.state.color,
@@ -143,19 +180,26 @@ class Login extends Component {
 												{/* <NavLink
 													to={`/donors/profile/${this.props.donorProfile.id}/${this.props.donorProfile.name}`}
 												> */}
-													<input
-														onClick={() => {
-															auth.login(() => {
-																this.props.routerProps.history.push("/user-dashboard");
-															});
-															this.onSubmitLogIn();
-														}
-															
-														}
-														type='submit'
-														value='Login'
-														className='submit-btn register-as-donor'
-													/>
+												<button
+													// onClick={() => {
+													// 	auth.login(() => {
+													// 		this.props.routerProps.history.push(
+													// 			`{/donors/profile/${id}/${name}}`
+													// 		);
+													// 	});
+													// }}
+													type='submit'
+													value='Login'
+													disabled={
+														this.state.loading
+													}
+													className='submit-btn register-as-donor'
+												>
+													{this.state.loading && (
+														<span className='spinner-border spinner-border-sm'></span>
+													)}
+													<span>Login</span>
+												</button>
 												{/* </NavLink> */}
 											</div>
 											<div className='extra-links form-group'>
@@ -166,7 +210,23 @@ class Login extends Component {
 													Don't Have Account ?
 												</NavLink>
 											</div>
-										</div>
+											{this.state.message && (
+												<div className='form-group'>
+													<div
+														className='alert alert-danger'
+														role='alert'
+													>
+														{this.state.message}
+													</div>
+												</div>
+											)}
+											<CheckButton
+												style={{ display: 'none' }}
+												ref={(c) => {
+													this.checkBtn = c;
+												}}
+											/>
+										</Form>
 									</div>
 								</div>
 							</div>
@@ -176,6 +236,6 @@ class Login extends Component {
 			</section>
 		);
 	}
-};
+}
 
 export default Login;
