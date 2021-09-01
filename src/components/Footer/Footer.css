@@ -1,0 +1,110 @@
+/*-------------------------
+    Footer Area
+-------------------------*/
+.footer-area {
+    background-color: #153236;
+}
+
+.footer-top-area-inner {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding-bottom: 60px;
+}
+
+.footer-top-area-inner .left-content-area .contact-info {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer-top-area-inner .left-content-area .contact-info li {
+    display: inline-block;
+}
+
+.footer-top-area-inner .left-content-area .contact-info li .single-contact-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-item-align: start;
+    align-self: flex-start;
+}
+
+.footer-top-area-inner .left-content-area .contact-info li .single-contact-info .icon {
+    font-size: 40px;
+    line-height: 50px;
+    color: var(--main-color-one);
+    margin-right: 20px;
+}
+
+.footer-top-area-inner .left-content-area .contact-info li .single-contact-info .content {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.footer-top-area-inner .left-content-area .contact-info li .single-contact-info .content .title {
+    font-size: 20px;
+    line-height: 32px;
+    color: #fff;
+    font-family: var(--body-font);
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+
+.footer-top-area-inner .left-content-area .contact-info li .single-contact-info .content .detials {
+    font-size: 16px;
+    line-height: 26px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-top-area-inner .left-content-area .contact-info li + li {
+    margin-left: 40px;
+}
+
+.footer-top-area-inner .right-content-area .title {
+    font-size: 20px;
+    line-height: 32px;
+    color: #fff;
+    font-family: var(--body-font);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.footer-top-area-inner .right-content-area .social-share {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer-top-area-inner .right-content-area .social-share li {
+    display: inline-block;
+}
+
+.footer-top-area-inner .right-content-area .social-share li a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    -webkit-transition: all 500ms;
+    -o-transition: all 500ms;
+    transition: all 500ms;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-top-area-inner .right-content-area .social-share li a:hover {
+    background-color: var(--main-color-one);
+    border-color: var(--main-color-one);
+    color: #fff;
+    border-radius: 3px;
+}
+
+.copyright-area {
+    background-color: #0d1f22;
+}

@@ -76,20 +76,20 @@ class ReqBGInfo extends Component {
 													return (
 														<ReqBGTable
 															key={i}
-															name={data.name}
-															email={data.email}
+															name={this.state.requestedBlood[i].name}
+															email={this.state.requestedBlood[i].email}
 															blood_group={
-																data.blood_group
+																this.state.requestedBlood[i].blood_group
 															}
-															mobile={data.mobile}
+															mobile={this.state.requestedBlood[i].mobile}
 															number_of_units={
-																data.number_of_units
+																this.state.requestedBlood[i].number_of_units
 															}
 															Illness={
-																data.illness
+																this.state.requestedBlood[i].illness
 															}
 															hospital_address={
-																data.hospital_address
+																this.state.requestedBlood[i].hospital_address
 															}
 														/>
 													);

@@ -17,48 +17,57 @@ const initialState = {
 	activation_date: '',
 	donated: '',
 	last_donate_date: '',
-	disablerValue: '',
+	disablerValue: false,
 };
+
+const addDays = (days) => {
+	var result = new Date();
+	result.setDate(result.getDate() + days);
+	return result;
+};
+let addDaysAns = addDays(90);
+
+const last_donate_date = () => {
+		let date = new Date();
+		let formattedTime =
+			date.getFullYear() +
+			'-0' +
+			(date.getMonth() + 1) +
+			'-' +
+			date.getDate();
+		return formattedTime;
+};
+let lastDonateDate = last_donate_date();
 
 class Profile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = initialState;
-		
+		console.log(this.state.activation_date);
 	}
 	componentWillUnmount() {
 		this.setState(initialState);
 	}
 
-	componentDidMount() {
-		this.setState({
-			id: this.props.donorProfile.id,
-			name: this.props.donorProfile.name,
-			email: this.props.donorProfile.email,
-			joined: this.props.donorProfile.joined,
-			blood_group: this.props.donorProfile.blood_group,
-			age: this.props.donorProfile.age,
-			mobile: this.props.donorProfile.mobile,
-			gender: this.props.donorProfile.gender,
-			address: this.props.donorProfile.address,
-			area: this.props.donorProfile.area,
-			activation_date: this.props.donorProfile.activation_date,
-			donated: this.props.donorProfile.donated,
-			last_donate_date: this.props.donorProfile.last_donate_date,
-			disablerValue: this.props.donorProfile.disablerValue,
-		});
-		console.log(this.props.dateConverter(this.state.activation_date));
-	}
+	// componentDidMount() {
+	// 	this.setState({
+	// 		id: this.props.donorProfile.id,
+	// 		name: this.props.donorProfile.name,
+	// 		email: this.props.donorProfile.email,
+	// 		joined: this.props.donorProfile.joined,
+	// 		blood_group: this.props.donorProfile.blood_group,
+	// 		age: this.props.donorProfile.age,
+	// 		mobile: this.props.donorProfile.mobile,
+	// 		gender: this.props.donorProfile.gender,
+	// 		address: this.props.donorProfile.address,
+	// 		area: this.props.donorProfile.area,
+	// 		activation_date: this.props.donorProfile.activation_date,
+	// 		donated: this.props.donorProfile.donated,
+	// 		last_donate_date: this.props.donorProfile.last_donate_date,
+	// 		disablerValue: this.props.donorProfile.disablerValue,
+	// 	});
 
-	AdderFunc = () => {
-		let addDays = function (days) {
-			const date = new Date();
-			date.setDate(date.getDate() + days);
-			return date;
-		};
-		return addDays(90);
-	};
-
+	// }
 	difference_calc = () => {
 		let date1 = new Date();
 		let date2 = new Date(this.state.activation_date);
@@ -73,22 +82,11 @@ class Profile extends Component {
 		return final;
 	};
 
-	last_donate_date = () => {
-		let date = new Date();
-		let formattedTime =
-			date.getFullYear() +
-			'-0' +
-			(date.getMonth() + 1) +
-			'-' +
-			date.getDate();
-		return formattedTime;
-	};
-
 	executer = () => {
 		this.setState({
-			activation_date: this.props.dateConverter(this.AdderFunc()),
+			activation_date: this.props.dateConverter(addDaysAns),
 			disablerValue: true,
-			last_donate_date: this.last_donate_date(),
+			last_donate_date: lastDonateDate,
 		});
 		console.log(this.state.activation_date);
 		this.onUpdateProfile();
@@ -96,7 +94,7 @@ class Profile extends Component {
 
 	onUpdateProfile = () => {
 		fetch(
-			`http://localhost:3300/donors/profile/update/${this.props.donorProfile.id}`,
+			`http://localhost:3300/donors/profile/update/${this.props.loginProfile.id}`,
 			{
 				method: 'put',
 				headers: {
@@ -112,10 +110,11 @@ class Profile extends Component {
 		)
 			.then((response) => response.json())
 			.then((profileData) => {
-				if (profileData.id) {
-					console.log(profileData);
-					this.props.loadDonorProfile(profileData);
-				}
+				console.log(profileData);
+				// if (profileData.id) {
+				// 	console.log(profileData);
+				// 	this.props.loadDonorProfile(profileData);
+				// }
 			})
 			.catch((err) => console.log(err));
 	};
@@ -316,16 +315,6 @@ class Profile extends Component {
 							</div>
 							<form action='/donor-contact' method='post'>
 								<div className='modal-body'>
-									<input
-										type='hidden'
-										name='_token'
-										value='0FuC0bAIo7Kb9co0XcJC5BNiYMnAMR8bvWIKq1k4'
-									/>{' '}
-									<input
-										type='hidden'
-										name='user_id'
-										value='5'
-									/>
 									<div className='form-group'>
 										<label htmlFor='subject'>Subject</label>
 										<input

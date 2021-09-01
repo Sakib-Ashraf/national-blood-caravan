@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
 
-const UserDashboard = ({ loginProfile }) => {
+const UserDashboard = ({ loginProfile , dateConverter}) => {
 	const {
 		id,
 		name,
@@ -104,18 +104,18 @@ const UserDashboard = ({ loginProfile }) => {
 									</li>
 									<li>
 										<strong>Joined: </strong>{' '}
-										<span className='right'>{joined}</span>
+										<span className='right'>{dateConverter(joined)}</span>
 									</li>
 									<li>
 										<strong>Last Donate Date: </strong>{' '}
 										<span className='right'>
-											{last_donate_date}
+											{dateConverter(last_donate_date)}
 										</span>
 									</li>
 									<li>
 										<strong>Next Activation Date: </strong>{' '}
 										<span className='right'>
-											{activation_date}
+											{dateConverter(activation_date)}
 										</span>
 									</li>
 									<li>

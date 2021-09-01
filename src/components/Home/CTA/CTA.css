@@ -1,3 +1,43 @@
-.call-to-action-area{
+
+/*------------------------
+    Call TO Action
+------------------------*/
+.call-to-action-area {
     background-image: url('call-to-action-bg-78923.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+}
+
+.call-to-action-area:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    content: '';
+    z-index: -1;
+}
+
+.call-to-action-area .cta-inner {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.call-to-action-area .cta-inner .left-content-area .title {
+    font-size: 50px;
+    line-height: 60px;
+    color: #fff;
+    font-weight: 600;
+    font-family: var(--body-font);
+}
+
+.call-to-action-area .cta-inner .right-content-area .btn-wrapper {
+    margin-top: 35px;
 }

@@ -69,13 +69,12 @@ class Login extends Component {
 		if (this.checkBtn.context._errors.length === 0) {
 			auth.login(this.state.mobile, this.state.password).then(
 				(val) => {
-					console.log(val);
 					this.props.loadLoginProfile(val.user);
 					const { id, name } = val.user;
 					this.props.routerProps.history.push(`/donors/profile/${id}/${name}`);
-					// window.location.reload();
 				},
 				(error) => {
+					console.log(error);
 					const resMessage =
 						(error.response &&
 							error.response.data &&
@@ -177,17 +176,8 @@ class Login extends Component {
 												</p>
 											</div>
 											<div className='form-group'>
-												{/* <NavLink
-													to={`/donors/profile/${this.props.donorProfile.id}/${this.props.donorProfile.name}`}
-												> */}
+												
 												<button
-													// onClick={() => {
-													// 	auth.login(() => {
-													// 		this.props.routerProps.history.push(
-													// 			`{/donors/profile/${id}/${name}}`
-													// 		);
-													// 	});
-													// }}
 													type='submit'
 													value='Login'
 													disabled={
@@ -197,7 +187,7 @@ class Login extends Component {
 												>
 													{this.state.loading && (
 														<span className='spinner-border spinner-border-sm'></span>
-													)}
+													)}{' '}
 													<span>Login</span>
 												</button>
 												{/* </NavLink> */}

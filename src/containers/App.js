@@ -116,7 +116,7 @@ class App extends Component {
 			month = '0' + month;
 		}
 
-		const finalDate = year + '-' + month + '-' + dt;
+		const finalDate = dt + '-' + month + '-' + year;
 		return finalDate;
 	};
 
@@ -146,7 +146,10 @@ class App extends Component {
 						<BGCard />
 
 						<ReqBGInfo />
-						<RecentDonors />
+						<RecentDonors
+							donors={this.state.donors}
+							dateConverter={this.dateConverter}
+						/>
 						<Motivation />
 						<Volunteers />
 						<Counter />
@@ -206,12 +209,13 @@ class App extends Component {
 					<ProtectedRoute
 						exact
 						path='/donors/profile/:id/:name'
-						component={() => {
+						component={(routerProps) => {
 							return (
 								<Profile
 									dateConverter={this.dateConverter}
 									donorProfile={this.state.donorProfile}
 									loginProfile={this.state.loginProfile}
+									routerProps={routerProps}
 								/>
 							);
 						}}
@@ -220,10 +224,7 @@ class App extends Component {
 						exact
 						path='/blood-request'
 						component={() => {
-							return (
-								<ReqForBlood
-								/>
-							);
+							return <ReqForBlood />;
 						}}
 					></ProtectedRoute>
 					<Route
@@ -251,6 +252,7 @@ class App extends Component {
 							component={() => {
 								return (
 									<UserDashboard
+										dateConverter={this.dateConverter}
 										loginProfile={this.state.loginProfile}
 									/>
 								);
@@ -259,12 +261,26 @@ class App extends Component {
 						<ProtectedRoute
 							exact
 							path='/user-edit-profile'
-							component={EditProfile}
+							component={() => {
+								return (
+									<EditProfile
+										loadLoginProfile={this.loadLoginProfile}
+										loginProfile={this.state.loginProfile}
+									/>
+								);
+							}}
 						/>
 						<ProtectedRoute
 							exact
 							path='/user-change-password'
-							component={ChangePassword}
+							component={() => {
+								return (
+									<ChangePassword
+										loadLoginProfile={this.loadLoginProfile}
+										loginProfile={this.state.loginProfile}
+									/>
+								);
+							}}
 						/>
 					</Switch>
 					<Route path='*' component={ErrorPage} />
