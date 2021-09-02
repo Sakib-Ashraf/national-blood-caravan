@@ -13,7 +13,7 @@ class RecentDonors extends Component {
 	}
 
 	componentDidMount() {
-		fetch(`http://localhost:3300/donors`)
+		fetch(`http://localhost:3300/api/donors`)
 			.then((response) => response.json())
 			.then((donors) => {
 				if (donors[0]) {

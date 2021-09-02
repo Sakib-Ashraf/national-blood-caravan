@@ -51,7 +51,7 @@ class JoinAsDonor extends Component {
 	};
 
 	onSubmitJoinDonor = () => {
-		fetch('http://localhost:3300/join-donor', {
+		fetch('http://localhost:3300/api/join-donor', {
 			method: 'post',
 			headers: {
 				Accept: 'application/json',

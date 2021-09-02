@@ -94,7 +94,7 @@ class Profile extends Component {
 
 	onUpdateProfile = () => {
 		fetch(
-			`http://localhost:3300/donors/profile/update/${this.props.loginProfile.id}`,
+			`http://localhost:3300/api/api/donors/profile/update/${this.props.loginProfile.id}`,
 			{
 				method: 'put',
 				headers: {

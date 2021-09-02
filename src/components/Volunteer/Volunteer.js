@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import Volunteers from '../Home/Volunteers/Volunteers';
 import '../../containers/App.css';
 
@@ -13,15 +14,15 @@ const Volunteer = () => {
 								<h2 className='page-title'> Our Volunteer</h2>
 								<ul className='page-list'>
 									<li>
-										<a href='https://xgenious.com/laravel/weforyou'>
+										<NavLink to='/'>
 											Home
-										</a>
+										</NavLink>
 									</li>
 									<li>
-										<a href='volunteer.html'>
+										<NavLink to='/volunteer'>
 											{' '}
 											Our Volunteer
-										</a>
+										</NavLink>
 									</li>
 								</ul>
 							</div>

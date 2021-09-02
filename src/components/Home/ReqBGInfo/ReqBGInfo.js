@@ -10,7 +10,7 @@ class ReqBGInfo extends Component {
 	}
 
 	componentDidMount() {
-		fetch('http://localhost:3300/reqbginfo')
+		fetch('http://localhost:3300/api/reqbginfo')
 			.then((response) => response.json())
 			.then((response) => {
 				if (response) {
