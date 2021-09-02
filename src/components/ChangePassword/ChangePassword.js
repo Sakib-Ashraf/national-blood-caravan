@@ -17,7 +17,7 @@ class ChangePassword extends Component {
 
 	onChangePassword = () => {
 		fetch(
-			`http://localhost:3300/donors/profile/change-password/${this.props.loginProfile.id}`,
+			`http://63.250.35.238/donors/profile/change-password/${this.props.loginProfile.id}`,
 			{
 				method: 'put',
 				headers: {

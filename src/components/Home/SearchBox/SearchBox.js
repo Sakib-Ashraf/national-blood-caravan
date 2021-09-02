@@ -13,7 +13,7 @@ class SearchBox extends Component {
 
 	onSubmitSearch = () => {
 		fetch(
-			`http://localhost:3300/api/search/${this.state.area}/${this.state.blood_group}/${this.state.gender}`
+			`http://63.250.35.238/api/search/${this.state.area}/${this.state.blood_group}/${this.state.gender}`
 		)
 			.then((response) => response.json())
 			.then((donors) => {

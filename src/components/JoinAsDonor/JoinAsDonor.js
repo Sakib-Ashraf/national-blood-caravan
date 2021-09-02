@@ -51,7 +51,7 @@ class JoinAsDonor extends Component {
 	};
 
 	onSubmitJoinDonor = () => {
-		fetch('http://localhost:3300/api/join-donor', {
+		fetch('http://63.250.35.238/api/join-donor', {
 			method: 'post',
 			headers: {
 				Accept: 'application/json',
@@ -651,7 +651,7 @@ class JoinAsDonor extends Component {
 											</div>
 											<div className='form-group'>
 												<NavLink
-													to={`/donors/profile/:id/${this.state.name}`}
+													to={`/login`}
 												>
 													<input
 														onClick={

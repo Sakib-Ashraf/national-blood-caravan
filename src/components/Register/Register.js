@@ -42,7 +42,7 @@ class Register extends Component {
 	onSubmitRegister = (event) => {
 		event.preventDefault();
 
-		fetch('http://localhost:3300/register', {
+		fetch('http://63.250.35.238/register', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
