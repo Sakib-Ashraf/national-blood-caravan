@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://63.250.35.238/api/';
+const API_URL = 'http://www.nationalbloodcaravan.com/api/';
 
 class UserService {
 	getDonorProfile() {

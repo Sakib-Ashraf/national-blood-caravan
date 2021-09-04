@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
-import './News.css';
+// import './News.css';
 import BGrid2 from './blog-grid-2.jpg';
 import BGrid3 from './blog-grid-3.jpg';
 import BGrid4 from './blog-grid-4.jpg';

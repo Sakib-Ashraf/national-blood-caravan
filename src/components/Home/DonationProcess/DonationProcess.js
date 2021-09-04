@@ -1,5 +1,5 @@
 import React from 'react';
-import './DonationProcess.css';
+// import './DonationProcess.css';
 
 const DonationProcess = () => {
     return (

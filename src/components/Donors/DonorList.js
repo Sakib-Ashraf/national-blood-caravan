@@ -22,7 +22,7 @@ class DonorList extends Component {
 
 	onClickProfile = () => {
 		fetch(
-			`http://63.250.35.238/api/donors/profile/${this.props.id}`
+			`http://www.nationalbloodcaravan.com/api/donors/profile/${this.props.id}`
 		)
 			.then((response) => response.json())
 			.then((donors) => {

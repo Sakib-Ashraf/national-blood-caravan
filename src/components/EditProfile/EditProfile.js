@@ -21,7 +21,7 @@ class EditProfile extends Component {
 
 	onUpdateProfile = () => {
 		fetch(
-			`http://63.250.35.238/api/donors/profile/edit/${this.props.loginProfile.id}`,
+			`http://www.nationalbloodcaravan.com/api/donors/profile/edit/${this.props.loginProfile.id}`,
 			{
 				method: 'put',
 				headers: {

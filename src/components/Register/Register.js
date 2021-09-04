@@ -42,7 +42,7 @@ class Register extends Component {
 	onSubmitRegister = (event) => {
 		event.preventDefault();
 
-		fetch('http://63.250.35.238/register', {
+		fetch('http://www.nationalbloodcaravan.com/register', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',

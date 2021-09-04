@@ -73,7 +73,7 @@ class App extends Component {
 	};
 
 	componentDidMount() {
-		fetch(`http://63.250.35.238/api/donors`)
+		fetch(`http://www.nationalbloodcaravan.com/api/donors`)
 			.then((response) => response.json())
 			.then((donors) => {
 				if (donors[0]) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import aboutLogo from './logo3.png';
-import './Footer.css';
+// import './Footer.css';
 import bGrid3 from './blog-grid-3.jpg';
 import bGrid4 from './blog-grid-4.jpg';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
