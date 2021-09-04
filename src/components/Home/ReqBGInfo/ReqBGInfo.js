@@ -10,7 +10,7 @@ class ReqBGInfo extends Component {
 	}
 
 	componentDidMount() {
-		fetch('http://www.nationalbloodcaravan.com/api/reqbginfo')
+		fetch('https://www.nationalbloodcaravan.com/api/reqbginfo')
 			.then((response) => response.json())
 			.then((response) => {
 				if (response) {

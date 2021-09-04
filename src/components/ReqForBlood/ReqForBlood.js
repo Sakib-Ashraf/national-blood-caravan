@@ -28,7 +28,7 @@ class ReqForBlood extends Component {
 	};
 
 	onSubmitBloodRequest = () => {
-		fetch('http://www.nationalbloodcaravan.com/api/blood-request', {
+		fetch('https://www.nationalbloodcaravan.com/api/blood-request', {
 			method: 'post',
 			headers: {
 				Accept: 'application/json',

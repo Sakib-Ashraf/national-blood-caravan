@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://www.nationalbloodcaravan.com/api/';
+const API_URL = 'https://www.nationalbloodcaravan.com/api/';
 
 class auth {
 	constructor() {

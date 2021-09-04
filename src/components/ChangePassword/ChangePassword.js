@@ -17,7 +17,7 @@ class ChangePassword extends Component {
 
 	onChangePassword = () => {
 		fetch(
-			`http://www.nationalbloodcaravan.com/donors/profile/change-password/${this.props.loginProfile.id}`,
+			`https://www.nationalbloodcaravan.com/donors/profile/change-password/${this.props.loginProfile.id}`,
 			{
 				method: 'put',
 				headers: {

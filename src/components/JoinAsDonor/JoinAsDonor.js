@@ -51,7 +51,7 @@ class JoinAsDonor extends Component {
 	};
 
 	onSubmitJoinDonor = () => {
-		fetch('http://www.nationalbloodcaravan.com/api/join-donor', {
+		fetch('https://www.nationalbloodcaravan.com/api/join-donor', {
 			method: 'post',
 			headers: {
 				Accept: 'application/json',

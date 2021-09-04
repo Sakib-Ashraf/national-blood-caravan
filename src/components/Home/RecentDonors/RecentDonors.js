@@ -13,7 +13,7 @@ class RecentDonors extends Component {
 	}
 
 	componentDidMount() {
-		fetch(`http://www.nationalbloodcaravan.com/api/donors`)
+		fetch(`https://www.nationalbloodcaravan.com/api/donors`)
 			.then((response) => response.json())
 			.then((donors) => {
 				if (donors[0]) {

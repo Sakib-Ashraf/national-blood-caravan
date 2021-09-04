@@ -14,7 +14,7 @@ class BloodGroup extends Component {
 	}
 
 	componentDidMount() {
-		fetch(`http://www.nationalbloodcaravan.com/api/donors/${this.state.blood_group}`)
+		fetch(`https://www.nationalbloodcaravan.com/api/donors/${this.state.blood_group}`)
 			.then((response) => response.json())
 			.then((donors) => {
 				if (donors[0].id) {
