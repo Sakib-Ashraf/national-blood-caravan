@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
 import {options} from '../../../containers/OwlCarouselOptions';
 import SingleCard from './SingleCard';
+import baseURL from '../../Auth/baseURL';
 
 class RecentDonors extends Component {
 	constructor(props) {
@@ -13,11 +14,10 @@ class RecentDonors extends Component {
 	}
 
 	componentDidMount() {
-		fetch(`https://www.nationalbloodcaravan.com/api/donors`)
-			.then((response) => response.json())
+		baseURL.get(`donors`)
 			.then((donors) => {
-				if (donors[0]) {
-					this.setState({ donors: donors });
+				if (donors.data[0]) {
+					this.setState({ donors: donors.data });
 				}
 			})
 			.catch((err) => console.log(err));

@@ -230,6 +230,12 @@
       margin-left: 0 !important;
   }
 
+.register-as-donor {
+    margin: 0 auto;
+    height: 60px !important;
+    width: 180px !important;
+}
+
 }
 
 /* mobile tablet layout 414px */

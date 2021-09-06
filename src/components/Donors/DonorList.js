@@ -1,39 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import dp from './Donor.png';
+import baseURL from '../Auth/baseURL';
 // import Pagination from 'react-bootstrap/Pagination';
 
-class DonorList extends Component {
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {
-	// 		id: this.props.id,
-	// 		name: this.props.name,
-	// 		blood_group: this.props.blood_group,
-	// 		mobile: this.props.mobile,
-	// 		gender: this.props.gender,
-	// 		area: this.props.area,
-	// 		donated: this.props.donated,
-	// 		last_donate_date: this.props.last_donate_date,
-	// 		dateConverter: this.props.dateConverter,
-	// 	};
-	// }
+const DonorList = (props) => {
 
 
-	onClickProfile = () => {
-		fetch(
-			`https://www.nationalbloodcaravan.com/api/donors/profile/${this.props.id}`
+	const onClickProfile = () => {
+		baseURL.get(
+			`donors/profile/${props.id}`
 		)
-			.then((response) => response.json())
 			.then((donors) => {
-				if (donors.id) {
-					this.props.loadDonorProfile(donors);
+				if (donors.data.id) {
+					props.loadDonorProfile(donors.data);
 				}
 			})
 			.catch((err) => console.log(err));
 	};
 
-	render() {
+
 		const {
 			id,
 			name,
@@ -44,7 +30,7 @@ class DonorList extends Component {
 			donated,
 			last_donate_date,
 			dateConverter,
-		} = this.props;
+		} = props;
 
 		return (
 			<div className='col-lg-3 col-md-6'>
@@ -56,7 +42,7 @@ class DonorList extends Component {
 						<NavLink to={`/donors/profile/${id}/${name}`}>
 							{' '}
 							<h4
-								onClick={this.onClickProfile}
+								onClick={onClickProfile}
 								className='title'
 							>
 								{name}
@@ -118,6 +104,6 @@ class DonorList extends Component {
 			</div>
 		);
 	}
-}
+
 
 export default DonorList;

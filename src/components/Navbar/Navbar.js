@@ -6,7 +6,7 @@ import auth from '../Auth/auth';
 
 class Navbar extends Component {
 	render() {
-		const { id, name } = this.props.loginProfile;
+		const { id, name, blood_group } = this.props.loginProfile;
 		return (
 			<nav className='navbar navbar-area navbar-expand-lg'>
 				<div className='container nav-container'>
@@ -87,16 +87,15 @@ class Navbar extends Component {
 							{auth.isAuthenticated() ? (
 								<li className='menu-item-has-children'>
 									<NavLink
-										to={`/donors/profile/${id}/${name}`}
+										to={
+											blood_group
+												? `/donor-dashboard/${id}/${name}`
+												: `/user-dashboard/${id}/${name}`
+										}
 									>
 										{name}
 									</NavLink>
 									<ul className='sub-menu'>
-										<li>
-											<NavLink to='/user-dashboard'>
-												Dashboard
-											</NavLink>
-										</li>
 										<li>
 											<NavLink to='/user-edit-profile'>
 												Edit Profile
@@ -107,11 +106,19 @@ class Navbar extends Component {
 												Change Password
 											</NavLink>
 										</li>
-										<li>
-											<NavLink to='/join-donor'>
-												Join As Donor
-											</NavLink>
-										</li>
+										{blood_group ? (
+											<li>
+												<NavLink to='/register'>
+													Join As User
+												</NavLink>
+											</li>
+										) : (
+											<li>
+												<NavLink to='/join-donor'>
+													Join As Donor
+												</NavLink>
+											</li>
+										)}
 										<li>
 											<NavLink
 												to='/'

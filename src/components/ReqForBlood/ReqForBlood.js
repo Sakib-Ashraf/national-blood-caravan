@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
+import Form from 'react-validation/build/form';
+import CheckButton from 'react-validation/build/button';
+import baseURL from '../Auth/baseURL';
+
+
+const required = (value) => {
+	if (!value) {
+		return (
+			<div className='alert alert-danger' role='alert'>
+				This field is required!
+			</div>
+		);
+	}
+};
+
 
 class ReqForBlood extends Component {
 	constructor(props) {
@@ -20,6 +35,7 @@ class ReqForBlood extends Component {
 			message: '',
 			response: {},
 			data: true,
+			resmessage: '',
 		};
 	}
 
@@ -27,38 +43,56 @@ class ReqForBlood extends Component {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
-	onSubmitBloodRequest = () => {
-		fetch('https://www.nationalbloodcaravan.com/api/blood-request', {
-			method: 'post',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				name: this.state.name,
-				email: this.state.email,
-				mobile: this.state.mobile,
-				age: this.state.age,
-				blood_group: this.state.blood_group,
-				gender: this.state.gender,
-				area: this.state.area,
-				address: this.state.address,
-				number_of_units: this.state.number_of_units,
-				illness: this.state.illness,
-				hospital_address: this.state.hospital_address,
-				message: this.state.message,
-			}),
-		})
-			.then((response) => response.json())
-			.then((response) => {
-				console.log(response);
-				if (response) {
-					this.setState({ response: response });
-				} else {
-					this.setState({ data: false });
-				}
-			})
-			.catch((err) => console.log(err));
+	onSubmitBloodRequest = (event) => {
+		event.preventDefault();
+
+		this.setState({
+			resmessage: '',
+		});
+
+		this.form.validateAll();
+
+		if (this.checkBtn.context._errors.length === 0) {
+			baseURL
+				.post('blood-request', {
+					name: this.state.name,
+					email: this.state.email,
+					mobile: this.state.mobile,
+					age: this.state.age,
+					blood_group: this.state.blood_group,
+					gender: this.state.gender,
+					area: this.state.area,
+					address: this.state.address,
+					number_of_units: this.state.number_of_units,
+					illness: this.state.illness,
+					hospital_address: this.state.hospital_address,
+					message: this.state.message,
+				})
+				.then(
+					(response) => {
+						this.props.routerProps.history.push(`/blood-request`);
+						console.log(response);
+						response.data ?
+							(this.setState({ data: true }))
+							:
+							(this.setState({ data: false }));
+					},
+					(error) => {
+						console.log(error);
+						const resMessage =
+							(error.response &&
+								error.response.data &&
+								error.response.data.message) ||
+							error.message ||
+							error.toString();
+
+						this.setState({
+							resmessage: resMessage,
+						});
+					}
+				)
+				.catch((err) => console.log(err));
+		}
 	};
 
 	render() {
@@ -95,7 +129,11 @@ class ReqForBlood extends Component {
 							<div className='col-lg-12'>
 								<div className='right-content-area'>
 									<div className='contact-page-form-wrap'>
-										<form
+										<Form
+											ref={(c) => {
+												this.form = c;
+											}}
+											onSubmit={this.onSubmitBloodRequest}
 											className='contact-page-form'
 											noValidate
 										>
@@ -134,6 +172,9 @@ class ReqForBlood extends Component {
 															placeholder='Your Name'
 															className='form-control'
 															required
+															validations={[
+																required,
+															]}
 															aria-required='true'
 														/>
 													</div>
@@ -147,6 +188,9 @@ class ReqForBlood extends Component {
 															}
 															className='form-control'
 															required
+															validations={[
+																required,
+															]}
 															aria-required='true'
 														/>
 													</div>
@@ -159,7 +203,10 @@ class ReqForBlood extends Component {
 																this.onChange
 															}
 															name='mobile'
-															placeholder='Mobile'
+															validations={[
+																required,
+															]}
+															placeholder='Your Mobile'
 														/>
 													</div>
 													<div className='form-group'>
@@ -171,7 +218,10 @@ class ReqForBlood extends Component {
 																this.onChange
 															}
 															name='age'
-															placeholder='Your Age'
+															validations={[
+																required,
+															]}
+															placeholder='Patient Age'
 														/>
 													</div>
 													<div className='form-group'>
@@ -184,6 +234,9 @@ class ReqForBlood extends Component {
 															placeholder='Blood Group'
 															className='form-control nice-select wide'
 															required
+															validations={[
+																required,
+															]}
 															aria-required='true'
 														>
 															<option value=''>
@@ -225,10 +278,13 @@ class ReqForBlood extends Component {
 															placeholder='Gender'
 															className='form-control nice-select wide'
 															required
+															validations={[
+																required,
+															]}
 															aria-required='true'
 														>
 															<option value=''>
-																Select Your
+																Select Patient's
 																Gender
 															</option>
 															<option value='Male'>
@@ -252,6 +308,9 @@ class ReqForBlood extends Component {
 															id='area'
 															placeholder='Your Area'
 															required
+															validations={[
+																required,
+															]}
 															aria-required='true'
 														>
 															<option value=''>
@@ -461,6 +520,9 @@ class ReqForBlood extends Component {
 															placeholder='Enter your address'
 															className='form-control'
 															required
+															validations={[
+																required,
+															]}
 															aria-required='true'
 														/>
 													</div>
@@ -473,6 +535,9 @@ class ReqForBlood extends Component {
 															className='form-control'
 															id='number_of_units'
 															name='number_of_units'
+															validations={[
+																required,
+															]}
 															placeholder='Number Of Units'
 														/>
 													</div>
@@ -485,6 +550,9 @@ class ReqForBlood extends Component {
 															className='form-control'
 															id='illness'
 															name='illness'
+															validations={[
+																required,
+															]}
 															placeholder='Illness'
 														/>
 													</div>
@@ -498,6 +566,9 @@ class ReqForBlood extends Component {
 															className='form-control'
 															cols='30'
 															rows='10'
+															validations={[
+																required,
+															]}
 															placeholder='Hospital Address'
 														></textarea>
 													</div>
@@ -518,14 +589,29 @@ class ReqForBlood extends Component {
 											</div>
 											<div className='form-group'>
 												<button
-													onClick={this.onSubmitBloodRequest}
 													value='Submit Request'
 													className='submit-btn register-as-donor'
 												>
 													Submit Request
 												</button>
 											</div>
-										</form>
+											{this.state.resmessage && (
+												<div className='form-group'>
+													<div
+														className='alert alert-danger'
+														role='alert'
+													>
+														{this.state.resmessage}
+													</div>
+												</div>
+											)}
+											<CheckButton
+												style={{ display: 'none' }}
+												ref={(c) => {
+													this.checkBtn = c;
+												}}
+											/>
+										</Form>
 									</div>
 								</div>
 							</div>

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
 import dp from './Donor.png';
 
+
 const initialState = {
 	id: '',
 	name: '',
@@ -17,107 +18,20 @@ const initialState = {
 	activation_date: '',
 	donated: '',
 	last_donate_date: '',
-	disablerValue: false,
 };
 
-const addDays = (days) => {
-	var result = new Date();
-	result.setDate(result.getDate() + days);
-	return result;
-};
-let addDaysAns = addDays(90);
-
-const last_donate_date = () => {
-		let date = new Date();
-		let formattedTime =
-			date.getFullYear() +
-			'-0' +
-			(date.getMonth() + 1) +
-			'-' +
-			date.getDate();
-		return formattedTime;
-};
-let lastDonateDate = last_donate_date();
 
 class Profile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = initialState;
-		console.log(this.state.activation_date);
 	}
+
 	componentWillUnmount() {
 		this.setState(initialState);
 	}
 
-	// componentDidMount() {
-	// 	this.setState({
-	// 		id: this.props.donorProfile.id,
-	// 		name: this.props.donorProfile.name,
-	// 		email: this.props.donorProfile.email,
-	// 		joined: this.props.donorProfile.joined,
-	// 		blood_group: this.props.donorProfile.blood_group,
-	// 		age: this.props.donorProfile.age,
-	// 		mobile: this.props.donorProfile.mobile,
-	// 		gender: this.props.donorProfile.gender,
-	// 		address: this.props.donorProfile.address,
-	// 		area: this.props.donorProfile.area,
-	// 		activation_date: this.props.donorProfile.activation_date,
-	// 		donated: this.props.donorProfile.donated,
-	// 		last_donate_date: this.props.donorProfile.last_donate_date,
-	// 		disablerValue: this.props.donorProfile.disablerValue,
-	// 	});
-
-	// }
-	difference_calc = () => {
-		let date1 = new Date();
-		let date2 = new Date(this.state.activation_date);
-
-		// To calculate the time difference of two dates
-		let Difference_In_Time = date2.getTime() - date1.getTime();
-
-		// To calculate the no. of days between two dates
-		let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-
-		let final = Math.ceil(Difference_In_Days);
-		return final;
-	};
-
-	executer = () => {
-		this.setState({
-			activation_date: this.props.dateConverter(addDaysAns),
-			disablerValue: true,
-			last_donate_date: lastDonateDate,
-		});
-		console.log(this.state.activation_date);
-		this.onUpdateProfile();
-	};
-
-	onUpdateProfile = () => {
-		fetch(
-			`https://www.nationalbloodcaravan.com/api/api/donors/profile/update/${this.props.loginProfile.id}`,
-			{
-				method: 'put',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					activation_date: this.state.activation_date,
-					last_donate_date: this.state.last_donate_date,
-					disablerValue: this.state.disablerValue,
-				}),
-			}
-		)
-			.then((response) => response.json())
-			.then((profileData) => {
-				console.log(profileData);
-				// if (profileData.id) {
-				// 	console.log(profileData);
-				// 	this.props.loadDonorProfile(profileData);
-				// }
-			})
-			.catch((err) => console.log(err));
-	};
+	
 
 	render() {
 		const {
@@ -131,9 +45,8 @@ class Profile extends Component {
 			address,
 			area,
 			donated,
-			last_donate_date,
-			disablerValue,
-		} = this.props.loginProfile;
+			last_donate_date
+		} = this.props.donorProfile;
 		return (
 			<section>
 				<div className='breadcrumb-area'>
@@ -257,31 +170,7 @@ class Profile extends Component {
 												)}
 											</span>
 										</li>
-										<li className='btn-wrapper'>
-											<strong>
-												<button
-													style={{
-														padding: '0.5rem 1rem',
-													}}
-													onClick={this.executer}
-													className='boxed-btn btn'
-													disabled={
-														this.state.disablerValue
-															? this.state
-																	.disablerValue
-															: disablerValue
-													}
-												>
-													Donated Today
-												</button>{' '}
-											</strong>
-											<span className='right'>
-												{this.difference_calc() >= 0
-													? this.difference_calc()
-													: '00 '}{' '}
-												Day remaining!
-											</span>
-										</li>
+										
 									</ul>
 								</div>
 							</div>

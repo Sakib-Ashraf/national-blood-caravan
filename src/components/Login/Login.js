@@ -30,8 +30,10 @@ class Login extends Component {
 			icon: faEye,
 			color: '#009C55',
 			showPass: false,
-			loading: false,
+			userloading: false,
+			donorloading: false,
 			message: '',
+			role: '',
 		};
 	}
 
@@ -59,42 +61,73 @@ class Login extends Component {
 		
 		e.preventDefault();
 
-		this.setState({
-			message: '',
-			loading: true,
-		});
+		this.state.role === 'user'
+			? this.setState({
+					message: '',
+					userloading: true,
+			  })
+			: this.setState({
+					message: '',
+					donorloading: true,
+			  })
 
 		this.form.validateAll();
 
 		if (this.checkBtn.context._errors.length === 0) {
-			auth.login(this.state.mobile, this.state.password).then(
-				(val) => {
-					this.props.loadLoginProfile(val.user);
-					const { id, name } = val.user;
-					this.props.routerProps.history.push(`/donors/profile/${id}/${name}`);
-				},
-				(error) => {
-					console.log(error);
-					const resMessage =
-						(error.response &&
-							error.response.data &&
-							error.response.data.message) ||
-						error.message ||
-						error.toString();
+			if (this.state.role === 'donor') {
+				auth.Donorlogin(this.state.mobile, this.state.password)
+					.then(val => {
+						this.props.loadLoginProfile(val.user);
+						const { id, name } = val.user;
+						this.props.routerProps.history.push(`/donor-dashboard/${id}/${name}`);
+					},
+						(error) => {
+							console.log(error);
+							const resMessage =
+								(error.response &&
+									error.response.data &&
+									error.response.data.message) ||
+								error.message ||
+								error.toString();
 
-					this.setState({
-						loading: false,
-						message: resMessage,
-					});
-				}
-			);
+							this.setState({
+								donorloading: false,
+								message: resMessage,
+							});
+						}
+					);
+			} else if (this.state.role === 'user') {
+				auth.Userlogin(this.state.mobile, this.state.password).then(
+					(val) => {
+						this.props.loadLoginProfile(val.user);
+						const { id, name } = val.user;
+						this.props.routerProps.history.push(
+							`/user-dashboard/${id}/${name}`
+						);
+					},
+					(error) => {
+						console.log(error);
+						const resMessage =
+							(error.response &&
+								error.response.data &&
+								error.response.data.message) ||
+							error.message ||
+							error.toString();
+
+						this.setState({
+							userloading: false,
+							message: resMessage,
+						});
+					}
+				);
+			}
 		} else {
 			this.setState({
-				loading: false,
+				userloading: false,
+				donorloading: false,
 			});
 		}
 	};
-
 	
 	render() {
 		return (
@@ -144,7 +177,7 @@ class Login extends Component {
 													aria-required='true'
 													validations={[required]}
 													value={this.state.mobile}
-												></input>
+												/>
 											</div>
 											<div className='form-group'>
 												<input
@@ -161,7 +194,7 @@ class Login extends Component {
 													required
 													validations={[required]}
 													aria-required='true'
-												></input>
+												/>
 												<p
 													style={{
 														color: this.state.color,
@@ -176,21 +209,47 @@ class Login extends Component {
 												</p>
 											</div>
 											<div className='form-group'>
-												
 												<button
+													onClick={() =>
+														this.setState({
+															role: 'user',
+														})
+													}
 													type='submit'
 													value='Login'
 													disabled={
-														this.state.loading
+														this.state.userloading
 													}
 													className='submit-btn register-as-donor'
 												>
-													{this.state.loading && (
+													{this.state.userloading && (
 														<span className='spinner-border spinner-border-sm'></span>
 													)}{' '}
-													<span>Login</span>
+													<span>Login as User</span>
 												</button>
-												{/* </NavLink> */}
+											</div>
+											<p style={{ textAlign: 'center' }}>
+												Or
+											</p>
+											<div className='form-group'>
+												<button
+													onClick={() =>
+														this.setState({
+															role: 'donor',
+														})
+													}
+													type='submit'
+													value='Login'
+													disabled={
+														this.state.donorloading
+													}
+													className='submit-btn register-as-donor'
+												>
+													{this.state.donorloading && (
+														<span className='spinner-border spinner-border-sm'></span>
+													)}{' '}
+													<span>Login as Donor</span>
+												</button>
 											</div>
 											<div className='extra-links form-group'>
 												<NavLink to='/recovery'>

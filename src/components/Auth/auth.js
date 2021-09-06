@@ -1,16 +1,30 @@
-import axios from 'axios';
-
-const API_URL = 'https://www.nationalbloodcaravan.com/api/';
+import baseURL from './baseURL';
 
 class auth {
 	constructor() {
 		this.authenticated = false;
 	}
 
-	login(mobile, password) {
+	Donorlogin(mobile, password) {
 		this.authenticated = true;
-		return axios
-			.post(API_URL + 'login', {
+		return baseURL
+			.post('donor-login', {
+				mobile,
+				password,
+			})
+			.then((response) => {
+				if (response.data.accessToken) {
+					localStorage.setItem('user', JSON.stringify(response.data));
+				}
+
+				return response.data;
+			});
+		// cb();
+	}
+	Userlogin(mobile, password) {
+		this.authenticated = true;
+		return baseURL
+			.post('user-login', {
 				mobile,
 				password,
 			})
@@ -30,15 +44,27 @@ class auth {
 		cb();
 	}
 
-	register(
+	DonorRegister(
 		donor
 	) {
-		return axios
-			.post(API_URL + 'join-donor', {
-				donor
+		return baseURL
+			.post('join-donor', {
+				donor,
 			})
 			.then((response) => {
 				console.log(response);
+				return response.data;
+			});
+	}
+
+	UserRegister(
+		user
+	) {
+		return baseURL
+			.post('register', {
+				user,
+			})
+			.then((response) => {
 				return response.data;
 			});
 	}

@@ -3927,6 +3927,7 @@ dl, ol, ul {
     width: 200px;
     display: inline-block;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .donor-dashboard-page-content .donor-content-area ul li+li {

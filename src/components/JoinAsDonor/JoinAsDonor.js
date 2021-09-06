@@ -2,8 +2,22 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
+import auth from '../Auth/auth';
+import Form from 'react-validation/build/form';
+import input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
+
+const required = (value) => {
+	if (!value) {
+		return (
+			<div className='alert alert-danger' role='alert'>
+				This field is required!
+			</div>
+		);
+	}
+};
 
 class JoinAsDonor extends Component {
 	constructor(props) {
@@ -27,6 +41,8 @@ class JoinAsDonor extends Component {
 			icon: faEye,
 			color: '#009C55',
 			data: true,
+			loading: false,
+			message: '',
 		};
 	}
 
@@ -50,39 +66,48 @@ class JoinAsDonor extends Component {
 		}
 	};
 
-	onSubmitJoinDonor = () => {
-		fetch('https://www.nationalbloodcaravan.com/api/join-donor', {
-			method: 'post',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				name: this.state.name,
-				username: this.state.username,
-				email: this.state.email,
-				mobile: this.state.mobile,
-				password: this.state.password,
-				age: this.state.age,
-				birth_date: this.state.birth_date,
-				blood_group: this.state.blood_group,
-				donated: this.state.donated,
-				gender: this.state.gender,
-				area: this.state.area,
-				address: this.state.address,
-				last_donate_date: this.state.last_donate_date,
-			}),
-		})
-			.then((response) => response.json())
-			.then((donor) => {
-				console.log(donor);
-				if (donor.id) {
-					this.props.loadDonorProfile(donor);
-				} else {
-					this.setState({ data: false });
-				}
-			})
-			.catch((err) => console.log(err));
+	onSubmitJoinDonor = (e) => {
+
+
+		e.preventDefault();
+
+		this.setState({
+			message: '',
+			loading: true,
+		});
+
+		this.form.validateAll();
+
+		if (this.checkBtn.context._errors.length === 0) {
+			auth.DonorRegister(this.state).then(
+					(val) => {
+						console.log(val);
+						this.props.routerProps.history.push(
+							`/login`
+						);
+					},
+					(error) => {
+						console.log(error);
+						const resMessage =
+							(error.response &&
+								error.response.data &&
+								error.response.data.message) ||
+							error.message ||
+							error.toString();
+
+						this.setState({
+							loading: false,
+							message: resMessage,
+						});
+					}
+				);
+			
+		} else {
+			this.setState({
+				loading: false,
+				data: false,
+			});
+		}
 	};
 
 	render() {
@@ -119,7 +144,11 @@ class JoinAsDonor extends Component {
 							<div className='col-lg-12'>
 								<div className='righti-content-area'>
 									<div className='contact-page-form-wrap'>
-										<form
+										<Form
+											onSubmit={this.onSubmitJoinDonor}
+											ref={(c) => {
+												this.form = c;
+											}}
 											id='contact_page_form'
 											className='contact-page-form'
 											noValidate
@@ -165,6 +194,9 @@ class JoinAsDonor extends Component {
 																className='form-control'
 																required
 																aria-required='true'
+																validations={[
+																	required,
+																]}
 															/>
 														</div>
 														<div className='form-group'>
@@ -181,6 +213,9 @@ class JoinAsDonor extends Component {
 																className='form-control'
 																required
 																aria-required='true'
+																validations={[
+																	required,
+																]}
 															/>
 														</div>
 														<div className='form-group'>
@@ -196,6 +231,9 @@ class JoinAsDonor extends Component {
 																className='form-control'
 																id='email'
 																name='email'
+																validations={[
+																	required,
+																]}
 															/>
 														</div>
 														<div className='form-group'>
@@ -214,6 +252,9 @@ class JoinAsDonor extends Component {
 																name='mobile'
 																required
 																aria-required='true'
+																validations={[
+																	required,
+																]}
 															/>
 														</div>
 														<div className='form-group'>
@@ -231,11 +272,15 @@ class JoinAsDonor extends Component {
 																name='age'
 																required
 																aria-required='true'
+																validations={[
+																	required,
+																]}
 															/>
 														</div>
 														<div className='form-group'>
 															<label htmlFor='birthday'>
-																Your Date of Birth:
+																Your Date of
+																Birth:
 															</label>
 															<input
 																onChange={
@@ -248,6 +293,9 @@ class JoinAsDonor extends Component {
 																name='birth_date'
 																required
 																aria-required='true'
+																validations={[
+																	required,
+																]}
 															/>
 														</div>
 														<div className='form-group'>
@@ -269,6 +317,9 @@ class JoinAsDonor extends Component {
 																className='form-control'
 																required
 																aria-required='true'
+																validations={[
+																	required,
+																]}
 															/>
 															<p
 																style={{
@@ -307,6 +358,9 @@ class JoinAsDonor extends Component {
 																className='form-control nice-select wide'
 																required
 																aria-required='true'
+																validations={[
+																	required,
+																]}
 															>
 																<option value=''>
 																	Blood Group
@@ -352,6 +406,9 @@ class JoinAsDonor extends Component {
 																placeholder='0 times'
 																required
 																aria-required='true'
+																validations={[
+																	required,
+																]}
 															/>
 														</div>
 														<div className='form-group'>
@@ -398,6 +455,9 @@ class JoinAsDonor extends Component {
 																id='area'
 																required
 																aria-required='true'
+																validations={[
+																	required,
+																]}
 															>
 																<option value=''>
 																	District
@@ -610,6 +670,9 @@ class JoinAsDonor extends Component {
 																className='form-control'
 																required
 																aria-required='true'
+																validations={[
+																	required,
+																]}
 															/>
 														</div>
 														<div className='form-group'>
@@ -628,6 +691,9 @@ class JoinAsDonor extends Component {
 																name='last_donate_date'
 																required
 																aria-required='true'
+																validations={[
+																	required,
+																]}
 															/>
 														</div>
 														<div className='form-group'>
@@ -650,9 +716,6 @@ class JoinAsDonor extends Component {
 												}
 											</div>
 											<div className='form-group'>
-												<NavLink
-													to={`/login`}
-												>
 													<input
 														onClick={
 															this
@@ -662,9 +725,24 @@ class JoinAsDonor extends Component {
 														value='Register As Donor'
 														className='submit-btn register-as-donor'
 													/>
-												</NavLink>
 											</div>
-										</form>
+											{this.state.message && (
+												<div className='form-group'>
+													<div
+														className='alert alert-danger'
+														role='alert'
+													>
+														{this.state.message}
+													</div>
+												</div>
+											)}
+											<CheckButton
+												style={{ display: 'none' }}
+												ref={(c) => {
+													this.checkBtn = c;
+												}}
+											/>
+										</Form>
 									</div>
 								</div>
 							</div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReqBGTable from './ReqBGTable';
+import baseURL from '../../Auth/baseURL';
 
 class ReqBGInfo extends Component {
 	constructor(props) {
@@ -10,11 +11,10 @@ class ReqBGInfo extends Component {
 	}
 
 	componentDidMount() {
-		fetch('https://www.nationalbloodcaravan.com/api/reqbginfo')
-			.then((response) => response.json())
+		baseURL.get('reqbginfo')
 			.then((response) => {
-				if (response) {
-					this.setState({ requestedBlood: response });
+				if (response.data) {
+					this.setState({ requestedBlood: response.data });
 				}
 			})
 			.catch((err) => console.log(err));
@@ -76,20 +76,59 @@ class ReqBGInfo extends Component {
 													return (
 														<ReqBGTable
 															key={i}
-															name={this.state.requestedBlood[i].name}
-															email={this.state.requestedBlood[i].email}
-															blood_group={
-																this.state.requestedBlood[i].blood_group
+															id={
+																this.state
+																	.requestedBlood[
+																	i
+																].id
 															}
-															mobile={this.state.requestedBlood[i].mobile}
+															name={
+																this.state
+																	.requestedBlood[
+																	i
+																].name
+															}
+															email={
+																this.state
+																	.requestedBlood[
+																	i
+																].email
+															}
+															blood_group={
+																this.state
+																	.requestedBlood[
+																	i
+																].blood_group
+															}
+															mobile={
+																this.state
+																	.requestedBlood[
+																	i
+																].mobile
+															}
 															number_of_units={
-																this.state.requestedBlood[i].number_of_units
+																this.state
+																	.requestedBlood[
+																	i
+																]
+																	.number_of_units
 															}
 															Illness={
-																this.state.requestedBlood[i].illness
+																this.state
+																	.requestedBlood[
+																	i
+																].illness
 															}
 															hospital_address={
-																this.state.requestedBlood[i].hospital_address
+																this.state
+																	.requestedBlood[
+																	i
+																]
+																	.hospital_address
+															}
+															loadReqData={
+																this.props
+																	.loadReqData
 															}
 														/>
 													);

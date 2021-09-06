@@ -2,8 +2,22 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import auth from '../Auth/auth';
+import Form from 'react-validation/build/form';
+import input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
 import '../../containers/App.css';
 
+
+const required = (value) => {
+	if (!value) {
+		return (
+			<div className='alert alert-danger' role='alert'>
+				This field is required!
+			</div>
+		);
+	}
+};
 class Register extends Component {
 	constructor(props) {
 		super(props);
@@ -14,6 +28,7 @@ class Register extends Component {
 			email: '',
 			password: '',
 			showPass: false,
+			message: '',
 			icon: faEye,
 			color: '#009C55',
 		};
@@ -42,28 +57,41 @@ class Register extends Component {
 	onSubmitRegister = (event) => {
 		event.preventDefault();
 
-		fetch('https://www.nationalbloodcaravan.com/register', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				name: this.state.name,
-				username: this.state.username,
-				email: this.state.email,
-				mobile: this.state.mobile,
-				password: this.state.password,
-			}),
-		})
-			.then((response) => response.json())
-			.then((user) => {
-				if (user.id) {
-					this.props.loadData(user);
-					this.props.onRouteChange('home');
+		this.setState({
+			message: '',
+		});
+
+		this.form.validateAll();
+
+		if (this.checkBtn.context._errors.length === 0) {
+			auth.UserRegister(this.state).then(
+				() => {
+					this.props.routerProps.history.push(
+						`/login`
+					);
+				},
+				(error) => {
+					console.log(error);
+					const resMessage =
+						(error.response &&
+							error.response.data &&
+							error.response.data.message) ||
+						error.message ||
+						error.toString();
+
+					this.setState({
+						message: resMessage,
+					});
 				}
+			);
+			
+		} else {
+			this.setState({
+				data: false,
 			});
-	};
+
+		};
+	}
 
 	render() {
 		return (
@@ -95,8 +123,11 @@ class Register extends Component {
 							<div className='col-lg-12'>
 								<div className='righti-content-area'>
 									<div className='contact-page-form-wrap'>
-										<form
-											method='POST'
+										<Form
+											onSubmit={this.onSubmitRegister}
+											ref={(c) => {
+												this.form = c;
+											}}
 											id='contact_page_form'
 											className='contact-page-form'
 										>
@@ -104,6 +135,9 @@ class Register extends Component {
 												<div className='col-lg-8'>
 													<div className='form-group'>
 														<input
+															validations={[
+																required,
+															]}
 															onChange={
 																this.onChange
 															}
@@ -117,6 +151,9 @@ class Register extends Component {
 													</div>
 													<div className='form-group'>
 														<input
+															validations={[
+																required,
+															]}
 															onChange={
 																this.onChange
 															}
@@ -130,6 +167,9 @@ class Register extends Component {
 													</div>
 													<div className='form-group'>
 														<input
+															validations={[
+																required,
+															]}
 															onChange={
 																this.onChange
 															}
@@ -143,6 +183,9 @@ class Register extends Component {
 													</div>
 													<div className='form-group'>
 														<input
+															validations={[
+																required,
+															]}
 															onChange={
 																this.onChange
 															}
@@ -156,6 +199,9 @@ class Register extends Component {
 													</div>
 													<div className='form-group'>
 														<input
+															validations={[
+																required,
+															]}
 															onChange={
 																this.onChange
 															}
@@ -166,7 +212,13 @@ class Register extends Component {
 															required
 															aria-required='true'
 														/>
-														<div style={{ display: 'flex', justifyContent: 'space-between'}}>
+														<div
+															style={{
+																display: 'flex',
+																justifyContent:
+																	'space-between',
+															}}
+														>
 															<p
 																style={{
 																	color: this
@@ -208,19 +260,31 @@ class Register extends Component {
 												</div>
 											</div>
 											<div className='form-group'>
-												<NavLink to='/users/profile/:id/:name'>
-													<input
-														onClick={
-															this
-																.onSubmitRegister
-														}
-														type='submit'
-														value='Register'
-														className='submit-btn register-as-donor'
-													/>
-												</NavLink>
+												<button
+													type='submit'
+													value='Register'
+													className='submit-btn register-as-donor'
+												>
+													Register
+												</button>
 											</div>
-										</form>
+											{this.state.message && (
+												<div className='form-group'>
+													<div
+														className='alert alert-danger'
+														role='alert'
+													>
+														{this.state.message}
+													</div>
+												</div>
+											)}
+											<CheckButton
+												style={{ display: 'none' }}
+												ref={(c) => {
+													this.checkBtn = c;
+												}}
+											/>
+										</Form>
 									</div>
 								</div>
 							</div>

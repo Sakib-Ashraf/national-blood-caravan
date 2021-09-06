@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import baseURL from '../../Auth/baseURL';
 
 class SearchBox extends Component {
 	constructor(props) {
@@ -12,14 +13,13 @@ class SearchBox extends Component {
 	}
 
 	onSubmitSearch = () => {
-		fetch(
-			`https://www.nationalbloodcaravan.com/api/search/${this.state.area}/${this.state.blood_group}/${this.state.gender}`
+		baseURL.get(
+			`search/${this.state.area}/${this.state.blood_group}/${this.state.gender}`
 		)
-			.then((response) => response.json())
 			.then((donors) => {
-				if (donors[0].id) {
-					console.log(donors);
-					this.props.loadDonorData(donors);
+				if (donors.data[0].id) {
+					console.log(donors.data);
+					this.props.loadDonorData(donors.data);
 				} else {
 					console.log('no data found');
 				}

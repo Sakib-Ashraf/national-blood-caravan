@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
+import baseURL from '../Auth/baseURL';
 
 class EditProfile extends Component {
 	constructor(props) {
@@ -20,29 +21,20 @@ class EditProfile extends Component {
 	};
 
 	onUpdateProfile = () => {
-		fetch(
-			`https://www.nationalbloodcaravan.com/api/donors/profile/edit/${this.props.loginProfile.id}`,
+		baseURL.put(
+			`donors/profile/edit/${this.props.loginProfile.id}`,
 			{
-				method: 'put',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
 					name: this.state.name,
 					email: this.state.email,
 					mobile: this.state.mobile,
 					birth_date: this.state.birth_date,
 					area: this.state.area,
 					address: this.state.address,
-				}),
 			}
 		)
-			.then((response) => response.json())
 			.then((profileData) => {
-				if (profileData.id) {
-					console.log(profileData);
-					this.props.loadLoginProfile(profileData);
+				if (profileData.data.id) {
+					this.props.loadLoginProfile(profileData.data);
 				}
 			})
 			.catch((err) => console.log(err));

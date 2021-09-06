@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from '../components/Auth/protected.route';
+import baseURL from '../components/Auth/baseURL';
 
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -36,22 +37,18 @@ import CTA from '../components/Home/CTA/CTA';
 import News from '../components/Home/News/News';
 
 import BloodGroup from '../components/Home/BGCard/BloodGroup/BloodGroup';
-import UserDashboard from '../components/UserDashboard/UserDashboard';
+import UserDashboard from '../components/Dashboard/UserDashboard';
+import DonorDashboard from '../components/Dashboard/DonorDashboard';
 import EditProfile from '../components/EditProfile/EditProfile';
 import ChangePassword from '../components/ChangePassword/ChangePassword';
 import ReqForBlood from '../components/ReqForBlood/ReqForBlood';
+import ReqForBloodDashboard from '../components/ReqForBlood/ReqForBloodDashboard';
 
 const initState = {
 	donors: {},
 	donorProfile: {},
 	loginProfile: {},
-	user: {
-		id: '',
-		name: '',
-		email: '',
-		entries: 0,
-		joined: '',
-	},
+	ReqData: {},
 };
 
 class App extends Component {
@@ -60,24 +57,11 @@ class App extends Component {
 		this.state = initState;
 	}
 
-	loadData = (data) => {
-		this.setState({
-			user: {
-				id: data.id,
-				name: data.name,
-				email: data.email,
-				entries: data.entries,
-				joined: data.joined,
-			},
-		});
-	};
-
 	componentDidMount() {
-		fetch(`https://www.nationalbloodcaravan.com/api/donors`)
-			.then((response) => response.json())
+		baseURL.get(`/donors`)
 			.then((donors) => {
-				if (donors[0]) {
-					this.setState({ donors: donors });
+				if (donors.data[0]) {
+					this.setState({ donors: donors.data });
 				}
 			})
 			.catch((err) => console.log(err));
@@ -87,20 +71,21 @@ class App extends Component {
 
 	loadDonorData = (donors) => {
 		this.setState({ donors: donors });
-		console.log(this.state.donors);
 	};
 
 	loadAllDonor = (donors) => {
 		this.setState({ AllDonors: donors });
 	};
 
+	loadReqData = (data) => {
+		this.setState({ ReqData: data });
+		console.log(this.state.ReqData);
+	};
 	loadDonorProfile = (donor) => {
 		this.setState({ donorProfile: donor });
-		console.log(this.state.donorProfile);
 	};
 	loadLoginProfile = (donor) => {
 		this.setState({ loginProfile: donor });
-		console.log(this.state.loginProfile);
 	};
 
 	dateConverter = (timestampData) => {
@@ -145,7 +130,7 @@ class App extends Component {
 						<DonationProcess />
 						<BGCard />
 
-						<ReqBGInfo />
+						<ReqBGInfo loadReqData={this.loadReqData} />
 						<RecentDonors
 							donors={this.state.donors}
 							dateConverter={this.dateConverter}
@@ -179,12 +164,8 @@ class App extends Component {
 					<Route
 						exact
 						path='/join-donor'
-						render={() => {
-							return (
-								<JoinAsDonor
-									loadDonorProfile={this.loadDonorProfile}
-								/>
-							);
+						render={(routerProps) => {
+							return <JoinAsDonor routerProps={routerProps} />;
 						}}
 					/>
 
@@ -214,19 +195,18 @@ class App extends Component {
 								<Profile
 									dateConverter={this.dateConverter}
 									donorProfile={this.state.donorProfile}
-									loginProfile={this.state.loginProfile}
 									routerProps={routerProps}
 								/>
 							);
 						}}
-					></ProtectedRoute>
+					/>
 					<ProtectedRoute
 						exact
 						path='/blood-request'
-						component={() => {
-							return <ReqForBlood />;
+						component={(routerProps) => {
+							return <ReqForBlood routerProps={routerProps} />;
 						}}
-					></ProtectedRoute>
+					/>
 					<Route
 						exact
 						path='/login'
@@ -242,17 +222,46 @@ class App extends Component {
 					/>
 
 					<Switch>
+						<Route
+							exact
+							path='users/request/:id'
+							render={() => {
+								return (
+									<ReqForBloodDashboard
+										dateConverter={this.dateConverter}
+										ReqData={this.state.ReqData}
+									/>
+								);
+							}}
+						/>
 						<Route exact path='/recovery' component={Recovery} />
-						<Route exact path='/register'>
-							<Register loadData={this.loadData} />
-						</Route>
+						<Route
+							exact
+							path='/register'
+							render={(routerProps) => {
+								return <Register routerProps={routerProps} />;
+							}}
+						/>
 						<ProtectedRoute
 							exact
-							path='/user-dashboard'
+							path='/donor-dashboard/:id/:name'
+							component={(routerProps) => {
+								return (
+									<DonorDashboard
+										dateConverter={this.dateConverter}
+										loadLoginProfile={this.loadLoginProfile}
+										loginProfile={this.state.loginProfile}
+										routerProps={routerProps}
+									/>
+								);
+							}}
+						/>
+						<ProtectedRoute
+							exact
+							path='/user-dashboard/:id/:name'
 							component={() => {
 								return (
 									<UserDashboard
-										dateConverter={this.dateConverter}
 										loginProfile={this.state.loginProfile}
 									/>
 								);

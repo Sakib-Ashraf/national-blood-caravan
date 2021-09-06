@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
 
+import baseURL from '../Auth/baseURL';
+
 class ChangePassword extends Component {
 	constructor(props) {
 		super(props);
@@ -16,25 +18,16 @@ class ChangePassword extends Component {
 	};
 
 	onChangePassword = () => {
-		fetch(
-			`https://www.nationalbloodcaravan.com/donors/profile/change-password/${this.props.loginProfile.id}`,
+		baseURL.put(
+			`donors/profile/change-password/${this.props.loginProfile.id}`,
 			{
-				method: 'put',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
 					OldPassword: this.state.OldPassword,
 					NewPassword: this.state.NewPassword,
-				}),
 			}
 		)
-			.then((response) => response.json())
 			.then((profileData) => {
-				if (profileData.id) {
-					console.log(profileData);
-					this.props.loadLoginProfile(profileData);
+				if (profileData.data.id) {
+					this.props.loadLoginProfile(profileData.data);
 				}
 			})
 			.catch((err) => console.log(err));

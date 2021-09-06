@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../../../containers/App.css';
+import baseURL from '../../../Auth/baseURL';
 import DonorList from '../../../Donors/DonorList';
 import { NavLink } from 'react-router-dom';
 
@@ -10,19 +11,38 @@ class BloodGroup extends Component {
 			blood_group: this.props.routerProps.match.params.bg,
 			donors: [],
 			data: true,
+			message: '',
 		};
 	}
 
 	componentDidMount() {
-		fetch(`https://www.nationalbloodcaravan.com/api/donors/${this.state.blood_group}`)
-			.then((response) => response.json())
-			.then((donors) => {
-				if (donors[0].id) {
-					this.setState({ donors: donors });
-				} else {
-					this.setState({ data: false });
+		this.setState({
+			message: '',
+		});
+		baseURL
+			.get(`donors/${this.state.blood_group}`)
+			.then(
+				(donors) => {
+					if (donors.data[0]) {
+						this.setState({ donors: donors.data });
+					} else {
+						this.setState({ data: false });
+					}
+				},
+				(error) => {
+					console.log(error);
+					const resMessage =
+						(error.response &&
+							error.response.data &&
+							error.response.data.message) ||
+						error.message ||
+						error.toString();
+
+					this.setState({
+						message: resMessage,
+					});
 				}
-			})
+			)
 			.catch((err) => console.log(err));
 	}
 
@@ -105,6 +125,16 @@ class BloodGroup extends Component {
 								</>
 							)}
 							<div className='col-lg-12'>
+								{this.state.message && (
+									<div className='form-group'>
+										<div
+											className='alert alert-danger'
+											role='alert'
+										>
+											{this.state.message}
+										</div>
+									</div>
+								)}
 								<nav
 									className='pagination-wrapper'
 									aria-label='Page navigation '
