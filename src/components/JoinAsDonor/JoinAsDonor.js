@@ -716,15 +716,25 @@ class JoinAsDonor extends Component {
 												}
 											</div>
 											<div className='form-group'>
-													<input
-														onClick={
-															this
-																.onSubmitJoinDonor
-														}
-														type='submit'
-														value='Register As Donor'
-														className='submit-btn register-as-donor'
-													/>
+												<button
+													onClick={
+														this.onSubmitJoinDonor
+													}
+													type='submit'
+													value='Register As Donor'
+													className='submit-btn register-as-donor'
+													disabled={
+														this.state.loading
+													}
+												>
+													{this.state
+														.loading && (
+														<span className='spinner-border spinner-border-sm'></span>
+													)}{' '}
+													<span>
+														Register As Donor
+													</span>
+												</button>
 											</div>
 											{this.state.message && (
 												<div className='form-group'>

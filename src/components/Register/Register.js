@@ -29,6 +29,7 @@ class Register extends Component {
 			password: '',
 			showPass: false,
 			message: '',
+			loading: false,
 			icon: faEye,
 			color: '#009C55',
 		};
@@ -59,6 +60,7 @@ class Register extends Component {
 
 		this.setState({
 			message: '',
+			loading: true,
 		});
 
 		this.form.validateAll();
@@ -80,6 +82,7 @@ class Register extends Component {
 						error.toString();
 
 					this.setState({
+						loading: false,
 						message: resMessage,
 					});
 				}
@@ -87,6 +90,7 @@ class Register extends Component {
 			
 		} else {
 			this.setState({
+				loading: false,
 				data: false,
 			});
 
@@ -264,8 +268,17 @@ class Register extends Component {
 													type='submit'
 													value='Register'
 													className='submit-btn register-as-donor'
+													disabled={
+														this.state.loading
+													}
 												>
-													Register
+													{this.state
+														.loading && (
+														<span className='spinner-border spinner-border-sm'></span>
+													)}{' '}
+													<span>
+														Register As User
+													</span>
 												</button>
 											</div>
 											{this.state.message && (
