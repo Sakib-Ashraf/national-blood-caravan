@@ -315,6 +315,7 @@ class SearchBox extends Component {
 											</div>
 										</li>
 										<li style={{ marginLeft: '0px' }}>
+											<div className='form-group'>
 											<NavLink to='/donors'>
 												<input
 													onClick={
@@ -325,6 +326,7 @@ class SearchBox extends Component {
 													className='submit-btn'
 												/>
 											</NavLink>
+											</div>
 										</li>
 									</ul>
 								</div>

@@ -35,6 +35,7 @@ class ReqForBlood extends Component {
 			message: '',
 			response: {},
 			data: true,
+			loading: false,
 			resmessage: '',
 		};
 	}
@@ -48,6 +49,7 @@ class ReqForBlood extends Component {
 
 		this.setState({
 			resmessage: '',
+			loading: true,
 		});
 
 		this.form.validateAll();
@@ -72,10 +74,12 @@ class ReqForBlood extends Component {
 					(response) => {
 						this.props.routerProps.history.push(`/blood-request`);
 						console.log(response);
-						response.data ?
-							(this.setState({ data: true }))
-							:
-							(this.setState({ data: false }));
+						response.data
+							? this.setState({
+									data: true,
+									resmessage: response.statusText,
+							  })
+							: this.setState({ data: false });
 					},
 					(error) => {
 						console.log(error);
@@ -88,12 +92,18 @@ class ReqForBlood extends Component {
 
 						this.setState({
 							resmessage: resMessage,
+							loading: false,
 						});
 					}
 				)
 				.catch((err) => console.log(err));
+		} else {
+			this.setState({
+				loading: false,
+				data: false,
+			});
 		}
-	};
+	};;
 
 	render() {
 		return (
@@ -591,8 +601,16 @@ class ReqForBlood extends Component {
 												<button
 													value='Submit Request'
 													className='submit-btn register-as-donor'
+													disabled={
+														this.state.loading
+													}
 												>
-													Submit Request
+													{this.state.loading && (
+														<span className='spinner-border spinner-border-sm'></span>
+													)}{' '}
+													<span>
+														Submit Request
+													</span>
 												</button>
 											</div>
 											{this.state.resmessage && (

@@ -15,7 +15,7 @@ const SingleCard = ({
 	return (
 		<div className='single-donors-item'>
 			<div className='thumb'>
-				<img style={{ maxWidth: '300px' }} src={DP} alt='dp' />
+				<img src={DP} alt='dp' />
 			</div>
 			<div className='content'>
 				<NavLink to={`/donors/profile/${id}/${name}`}>
