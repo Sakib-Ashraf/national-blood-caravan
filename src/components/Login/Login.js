@@ -212,29 +212,6 @@ class Login extends Component {
 												<button
 													onClick={() =>
 														this.setState({
-															role: 'user',
-														})
-													}
-													type='submit'
-													value='Login'
-													disabled={
-														this.state.userloading
-													}
-													className='submit-btn register-as-donor'
-												>
-													{this.state.userloading && (
-														<span className='spinner-border spinner-border-sm'></span>
-													)}{' '}
-													<span>Login as User</span>
-												</button>
-											</div>
-											<p style={{ textAlign: 'center' }}>
-												Or
-											</p>
-											<div className='form-group'>
-												<button
-													onClick={() =>
-														this.setState({
 															role: 'donor',
 														})
 													}
@@ -249,6 +226,29 @@ class Login extends Component {
 														<span className='spinner-border spinner-border-sm'></span>
 													)}{' '}
 													<span>Login as Donor</span>
+												</button>
+											</div>
+											<p style={{ textAlign: 'center' }}>
+												Or
+											</p>
+											<div className='form-group'>
+												<button
+													onClick={() =>
+														this.setState({
+															role: 'user',
+														})
+													}
+													type='submit'
+													value='Login'
+													disabled={
+														this.state.userloading
+													}
+													className='submit-btn register-as-donor'
+												>
+													{this.state.userloading && (
+														<span className='spinner-border spinner-border-sm'></span>
+													)}{' '}
+													<span>Login as User</span>
 												</button>
 											</div>
 											<div className='extra-links form-group'>

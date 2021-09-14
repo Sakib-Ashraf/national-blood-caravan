@@ -35,7 +35,7 @@ class DonorDashboard extends Component {
 	
 
 	difference_calc() {
-		let date1 = new Date(this.converterLastDonateDate);
+		let date1 = new Date();
 		let date2 = new Date(this.converterActivationDate);
 
 		// To calculate the time difference of two dates

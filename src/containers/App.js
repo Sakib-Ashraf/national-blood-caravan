@@ -234,7 +234,17 @@ class App extends Component {
 								);
 							}}
 						/>
-						<Route exact path='/recovery' component={Recovery} />
+						<Route
+							exact
+							path='/recovery'
+							render={(routerProps) => {
+								return (
+									<Recovery
+										routerProps={routerProps}
+									/>
+								);
+							}}
+						/>
 						<Route
 							exact
 							path='/register'
