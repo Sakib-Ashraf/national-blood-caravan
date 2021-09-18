@@ -80,14 +80,12 @@ class JoinAsDonor extends Component {
 
 		if (this.checkBtn.context._errors.length === 0) {
 			auth.DonorRegister(this.state).then(
-					(val) => {
-						console.log(val);
+					() => {
 						this.props.routerProps.history.push(
 							`/login`
 						);
 					},
 					(error) => {
-						console.log(error);
 						const resMessage =
 							(error.response &&
 								error.response.data &&
