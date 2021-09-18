@@ -124,7 +124,14 @@ class Profile extends Component {
 										<li>
 											<strong>Mobile: </strong>{' '}
 											<span className='right'>
-												{mobile}
+												{gender === 'Female' ? (
+													<strong>
+														{' '}
+														Contact With Volunteer
+													</strong>
+												) : (
+													<strong>{mobile}</strong>
+												)}
 											</span>
 										</li>
 										<li>
@@ -170,7 +177,6 @@ class Profile extends Component {
 												)}
 											</span>
 										</li>
-										
 									</ul>
 								</div>
 							</div>
@@ -202,7 +208,7 @@ class Profile extends Component {
 									<span aria-hidden='true'>&times;</span>
 								</button>
 							</div>
-							<form action='/donor-contact' method='post'>
+							<form action='/donor-contact'>
 								<div className='modal-body'>
 									<div className='form-group'>
 										<label htmlFor='subject'>Subject</label>
