@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
+import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import Logo from './logo3.webp';
 import auth from '../Auth/auth';
 
-class Navbar extends Component {
+class Navigation extends Component {
 	render() {
 		const { id, name, blood_group } = this.props.loginProfile;
 		return (
-			<nav className='navbar navbar-area navbar-expand-lg'>
+			<Navbar
+				collapseOnSelect
+				expand='lg'
+				className='navbar navbar-area navbar-expand-lg'
+			>
 				<div className='container nav-container'>
-					<div className='responsive-mobile-menu'>
-						<div className='logo-wrapper'>
-							<NavLink to='/' className='logo' exact>
-								<img src={Logo} alt='site logo' />
-							</NavLink>
-						</div>
-						<button
-							className='navbar-toggler'
-							type='button'
-							data-toggle='collapse'
-							data-target='#main_menu'
-							aria-expanded='false'
-							aria-label='Toggle navigation'
-						>
-							<span className='navbar-toggler-icon'></span>
-						</button>
-					</div>
-					<div className='collapse navbar-collapse' id='main_menu'>
+					<Navbar.Brand className='logo-wrapper'>
+						<NavLink to='/' className='logo' exact>
+							<img src={Logo} alt='site logo' />
+						</NavLink>
+					</Navbar.Brand>
+					<Navbar.Toggle
+						aria-controls='responsive-navbar-nav'
+					/>
+					<Navbar.Collapse
+						className='collapse navbar-collapse'
+						id='main_menu responsive-navbar-nav'
+					>
 						<ul className='navbar-nav'>
 							<li className=''>
 								<NavLink
@@ -142,11 +141,11 @@ class Navbar extends Component {
 								</li>
 							)}
 						</ul>
-					</div>
+					</Navbar.Collapse>
 				</div>
-			</nav>
+			</Navbar>
 		);
 	}
 }
 
-export default Navbar;
+export default Navigation;

@@ -8,7 +8,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 import './App.css';
 
 import Topbar from '../components/Topbar/Topbar';
-import Navbar from '../components/Navbar/Navbar';
+import Navigation from '../components/Navigation/Navigation';
 import Header from '../components/Home/Header/Header';
 import SearchBox from '../components/Home/SearchBox/SearchBox';
 import DonationProcess from '../components/Home/DonationProcess/DonationProcess';
@@ -128,7 +128,7 @@ class App extends Component {
 						return (
 							<>
 									<Topbar />
-									<Navbar
+									<Navigation
 										routerProps={routerProps}
 										loginProfile={this.state.loginProfile}
 									/>
