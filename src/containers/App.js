@@ -156,12 +156,12 @@ class App extends Component {
 							<News />
 					</Route>
 					<Route exact path='/about'>
-						<Suspense fallback={<div>Loading...</div>}>
+						<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 							<About />
 						</Suspense>
 					</Route>
 					<Route exact path='/volunteer'>
-						<Suspense fallback={<div>Loading...</div>}>
+						<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 							<Volunteer />
 						</Suspense>
 					</Route>
@@ -170,7 +170,7 @@ class App extends Component {
 						path='/donors'
 						render={() => {
 							return (
-								<Suspense fallback={<div>Loading...</div>}>
+								<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 									<Donors
 										loadDonorData={this.loadDonorData}
 										dateConverter={this.dateConverter}
@@ -182,26 +182,40 @@ class App extends Component {
 						}}
 					/>
 
-					<Route exact path='/blog'><Suspense fallback={<div>Loading...</div>}><Blog/></Suspense></Route>
-					<Route exact path='/contact'><Suspense fallback={<div>Loading...</div>}><Contact/></Suspense></Route>
+					<Route exact path='/blog'><Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}><Blog/></Suspense></Route>
+					<Route exact path='/contact'><Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}><Contact/></Suspense></Route>
 					<Route
 						exact
 						path='/join-donor'
 						render={(routerProps) => {
 							return (
-								<Suspense fallback={<div>Loading...</div>}>
+								<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 									<JoinAsDonor routerProps={routerProps} />
 								</Suspense>
 							);
 						}}
 					/>
+					<ProtectedRoute
+							exact
+							path='/users/request/:id'
+							component={() => {
+								return (
+									<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
+										<ReqForBloodDashboard
+											dateConverter={this.dateConverter}
+											ReqData={this.state.ReqData}
+										/>
+									</Suspense>
+								);
+							}}
+						/>
 
 					<Route
 						exact
 						path='/donors/:bg'
 						render={(routerProps) => {
 							return (
-								<Suspense fallback={<div>Loading...</div>}>
+								<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 									<BloodGroup
 										dateConverter={this.dateConverter}
 										loadDonorProfile={this.loadDonorProfile}
@@ -212,7 +226,7 @@ class App extends Component {
 						}}
 					/>
 					<Route exact path='/recent-donors'>
-						<Suspense fallback={<div>Loading...</div>}>
+						<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 							<RecentDonors />
 						</Suspense>
 					</Route>
@@ -221,7 +235,7 @@ class App extends Component {
 						path='/donors/profile/:id/:name'
 						component={(routerProps) => {
 							return (
-								<Suspense fallback={<div>Loading...</div>}>
+								<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 									<Profile
 										dateConverter={this.dateConverter}
 										donorProfile={this.state.donorProfile}
@@ -236,7 +250,7 @@ class App extends Component {
 						path='/blood-request'
 						component={(routerProps) => {
 							return (
-								<Suspense fallback={<div>Loading...</div>}>
+								<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 									<ReqForBlood routerProps={routerProps} />
 								</Suspense>
 							);
@@ -247,7 +261,7 @@ class App extends Component {
 						path='/login'
 						render={(routerProps) => {
 							return (
-								<Suspense fallback={<div>Loading...</div>}>
+								<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 									<Login
 										loadLoginProfile={this.loadLoginProfile}
 										loginProfile={this.state.loginProfile}
@@ -259,26 +273,13 @@ class App extends Component {
 					/>
 
 					<Switch>
-						<Route
-							exact
-							path='users/request/:id'
-							render={() => {
-								return (
-									<Suspense fallback={<div>Loading...</div>}>
-										<ReqForBloodDashboard
-											dateConverter={this.dateConverter}
-											ReqData={this.state.ReqData}
-										/>
-									</Suspense>
-								);
-							}}
-						/>
+						
 						<Route
 							exact
 							path='/recovery'
 							render={(routerProps) => {
 								return (
-									<Suspense fallback={<div>Loading...</div>}>
+									<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 										<Recovery routerProps={routerProps} />
 									</Suspense>
 								);
@@ -289,7 +290,7 @@ class App extends Component {
 							path='/register'
 							render={(routerProps) => {
 								return (
-									<Suspense fallback={<div>Loading...</div>}>
+									<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 										<Register routerProps={routerProps} />
 									</Suspense>
 								);
@@ -300,7 +301,7 @@ class App extends Component {
 							path='/donor-dashboard/:id/:name'
 							component={(routerProps) => {
 								return (
-									<Suspense fallback={<div>Loading...</div>}>
+									<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 										<DonorDashboard
 											dateConverter={this.dateConverter}
 											loadLoginProfile={
@@ -320,7 +321,7 @@ class App extends Component {
 							path='/user-dashboard/:id/:name'
 							component={() => {
 								return (
-									<Suspense fallback={<div>Loading...</div>}>
+									<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 										<UserDashboard
 											loginProfile={
 												this.state.loginProfile
@@ -335,7 +336,7 @@ class App extends Component {
 							path='/user-edit-profile'
 							component={() => {
 								return (
-									<Suspense fallback={<div>Loading...</div>}>
+									<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 										<EditProfile
 											loadLoginProfile={
 												this.loadLoginProfile
@@ -353,7 +354,7 @@ class App extends Component {
 							path='/user-change-password'
 							component={() => {
 								return (
-									<Suspense fallback={<div>Loading...</div>}>
+									<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 										<ChangePassword
 											loadLoginProfile={
 												this.loadLoginProfile
@@ -368,17 +369,13 @@ class App extends Component {
 						/>
 					</Switch>
 					<Route path='*'>
-						<Suspense fallback={<div>Loading...</div>}>
+						<Suspense fallback={<h1 style={{textAlign : 'center'}}>Loading...</h1>}>
 							<ErrorPage />
 						</Suspense>
 					</Route>
 				</Switch>
-				<Suspense fallback={<div>Loading...</div>}>
 					<Footer />
-				</Suspense>
-				<Suspense fallback={<div>Loading...</div>}>
 					<FloatingWidget />
-				</Suspense>
 			</Router>
 		);
 	}
