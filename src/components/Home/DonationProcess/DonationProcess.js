@@ -1,5 +1,4 @@
 import React from 'react';
-// import './DonationProcess.css';
 
 const DonationProcess = () => {
     return (

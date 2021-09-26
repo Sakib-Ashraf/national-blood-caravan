@@ -1,5 +1,5 @@
 import React from 'react';
-import TP from './testimonial.png';
+import TP from './testimonial.webp';
 import OwlCarousel from 'react-owl-carousel';
 import {options1} from '../../../containers/OwlCarouselOptions';
 

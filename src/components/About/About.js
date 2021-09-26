@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import aboutUsImg from './about-us-image-917787.jpg';
-import whyDonateImg from './why-donate-image-666440.jpg';
+import aboutUsImg from './about-us-image-917787.webp';
+import whyDonateImg from './why-donate-image-666440.webp';
 import Volunteers from '../Home/Volunteers/Volunteers';
 import Counter from '../Home/Counter/Counter';
 import Testimonial from '../Home/Testimonial/Testimonial';

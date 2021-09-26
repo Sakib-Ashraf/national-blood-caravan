@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import OwlCarousel from 'react-owl-carousel';
 import { faFacebook, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import VP from './volunteer.png';
+import VP from './volunteer.webp';
 import {options} from '../../../containers/OwlCarouselOptions';
 
 const Volunteers = () => {

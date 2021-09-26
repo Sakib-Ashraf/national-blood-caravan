@@ -1,28 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from '../components/Auth/protected.route';
 import baseURL from '../components/Auth/baseURL';
 
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import './App.css';
 
 import Topbar from '../components/Topbar/Topbar';
 import Navbar from '../components/Navbar/Navbar';
-import Login from '../components/Login/Login';
-import Register from '../components/Register/Register';
-import About from '../components/About/About';
-import Blog from '../components/Blog/Blog';
-import Contact from '../components/Contact/Contact';
-import Donors from '../components/Donors/Donors';
-import JoinAsDonor from '../components/JoinAsDonor/JoinAsDonor';
-import Profile from '../components/Profile/Profile';
-import Recovery from '../components/Recovery/Recovery';
-import Volunteer from '../components/Volunteer/Volunteer';
-import ErrorPage from '../components/ErrorPage/ErrorPage';
-import Footer from '../components/Footer/Footer';
-import FloatingWidget from '../components/FloatingWidget/FloatingWidget';
-import './App.css';
-
 import Header from '../components/Home/Header/Header';
 import SearchBox from '../components/Home/SearchBox/SearchBox';
 import DonationProcess from '../components/Home/DonationProcess/DonationProcess';
@@ -35,14 +21,44 @@ import Counter from '../components/Home/Counter/Counter';
 import Testimonial from '../components/Home/Testimonial/Testimonial';
 import CTA from '../components/Home/CTA/CTA';
 import News from '../components/Home/News/News';
+import Footer from '../components/Footer/Footer';
+import FloatingWidget from '../components/FloatingWidget/FloatingWidget';
 
-import BloodGroup from '../components/Home/BGCard/BloodGroup/BloodGroup';
-import UserDashboard from '../components/Dashboard/UserDashboard';
-import DonorDashboard from '../components/Dashboard/DonorDashboard';
-import EditProfile from '../components/EditProfile/EditProfile';
-import ChangePassword from '../components/ChangePassword/ChangePassword';
-import ReqForBlood from '../components/ReqForBlood/ReqForBlood';
-import ReqForBloodDashboard from '../components/ReqForBlood/ReqForBloodDashboard';
+const Login = React.lazy(() => import('../components/Login/Login'));
+const Register = React.lazy(() => import('../components/Register/Register'));
+const About = React.lazy(() => import('../components/About/About'));
+const Blog = React.lazy(() => import('../components/Blog/Blog'));
+const Contact = React.lazy(() => import('../components/Contact/Contact'));
+const Donors = React.lazy(() => import('../components/Donors/Donors'));
+const JoinAsDonor = React.lazy(() =>
+	import('../components/JoinAsDonor/JoinAsDonor')
+);
+const Profile = React.lazy(() => import('../components/Profile/Profile'));
+const Recovery = React.lazy(() => import('../components/Recovery/Recovery'));
+const Volunteer = React.lazy(() => import('../components/Volunteer/Volunteer'));
+const ErrorPage = React.lazy(() => import('../components/ErrorPage/ErrorPage'));
+
+const BloodGroup = React.lazy(() =>
+	import('../components/Home/BGCard/BloodGroup/BloodGroup')
+);
+const UserDashboard = React.lazy(() =>
+	import('../components/Dashboard/UserDashboard')
+);
+const DonorDashboard = React.lazy(() =>
+	import('../components/Dashboard/DonorDashboard')
+);
+const EditProfile = React.lazy(() =>
+	import('../components/EditProfile/EditProfile')
+);
+const ChangePassword = React.lazy(() =>
+	import('../components/ChangePassword/ChangePassword')
+);
+const ReqForBlood = React.lazy(() =>
+	import('../components/ReqForBlood/ReqForBlood')
+);
+const ReqForBloodDashboard = React.lazy(() =>
+	import('../components/ReqForBlood/ReqForBloodDashboard')
+);
 
 const initState = {
 	donors: {},
@@ -58,15 +74,14 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		baseURL.get(`/donors`)
+		baseURL
+			.get(`/donors`)
 			.then((donors) => {
 				if (donors.data[0]) {
 					this.setState({ donors: donors.data });
 				}
 			})
 			.catch((err) => console.log(err));
-
-			
 	}
 
 	loadDonorData = (donors) => {
@@ -105,7 +120,6 @@ class App extends Component {
 		return finalDate;
 	};
 
-	
 	render() {
 		return (
 			<Router>
@@ -113,11 +127,11 @@ class App extends Component {
 					render={(routerProps) => {
 						return (
 							<>
-								<Topbar />
-								<Navbar
-									routerProps={routerProps}
-									loginProfile={this.state.loginProfile}
-								/>
+									<Topbar />
+									<Navbar
+										routerProps={routerProps}
+										loginProfile={this.state.loginProfile}
+									/>
 							</>
 						);
 					}}
@@ -125,47 +139,60 @@ class App extends Component {
 
 				<Switch>
 					<Route exact path='/'>
-						<Header />
-						<SearchBox loadDonorData={this.loadDonorData} />
-						<DonationProcess />
-						<BGCard />
-
-						<ReqBGInfo loadReqData={this.loadReqData} />
-						<RecentDonors
-							donors={this.state.donors}
-							dateConverter={this.dateConverter}
-						/>
-						<Motivation />
-						<Volunteers />
-						<Counter />
-						<Testimonial />
-						<CTA />
-						<News />
+							<Header />
+							<SearchBox loadDonorData={this.loadDonorData} />
+							<DonationProcess />
+							<BGCard />
+							<ReqBGInfo loadReqData={this.loadReqData} />
+							<RecentDonors
+								donors={this.state.donors}
+								dateConverter={this.dateConverter}
+							/>
+							<Motivation />
+							<Volunteers />
+							<Counter />
+							<Testimonial />
+							<CTA />
+							<News />
 					</Route>
-					<Route exact path='/about' component={About} />
-					<Route exact path='/volunteer' component={Volunteer} />
+					<Route exact path='/about'>
+						<Suspense fallback={<div>Loading...</div>}>
+							<About />
+						</Suspense>
+					</Route>
+					<Route exact path='/volunteer'>
+						<Suspense fallback={<div>Loading...</div>}>
+							<Volunteer />
+						</Suspense>
+					</Route>
 					<Route
 						exact
 						path='/donors'
 						render={() => {
 							return (
-								<Donors
-									loadDonorData={this.loadDonorData}
-									dateConverter={this.dateConverter}
-									loadDonorProfile={this.loadDonorProfile}
-									donors={this.state.donors}
-								/>
+								<Suspense fallback={<div>Loading...</div>}>
+									<Donors
+										loadDonorData={this.loadDonorData}
+										dateConverter={this.dateConverter}
+										loadDonorProfile={this.loadDonorProfile}
+										donors={this.state.donors}
+									/>
+								</Suspense>
 							);
 						}}
 					/>
 
-					<Route exact path='/blog' component={Blog} />
-					<Route exact path='/contact' component={Contact} />
+					<Route exact path='/blog'><Suspense fallback={<div>Loading...</div>}><Blog/></Suspense></Route>
+					<Route exact path='/contact'><Suspense fallback={<div>Loading...</div>}><Contact/></Suspense></Route>
 					<Route
 						exact
 						path='/join-donor'
 						render={(routerProps) => {
-							return <JoinAsDonor routerProps={routerProps} />;
+							return (
+								<Suspense fallback={<div>Loading...</div>}>
+									<JoinAsDonor routerProps={routerProps} />
+								</Suspense>
+							);
 						}}
 					/>
 
@@ -174,29 +201,33 @@ class App extends Component {
 						path='/donors/:bg'
 						render={(routerProps) => {
 							return (
-								<BloodGroup
-									dateConverter={this.dateConverter}
-									loadDonorProfile={this.loadDonorProfile}
-									routerProps={routerProps}
-								/>
+								<Suspense fallback={<div>Loading...</div>}>
+									<BloodGroup
+										dateConverter={this.dateConverter}
+										loadDonorProfile={this.loadDonorProfile}
+										routerProps={routerProps}
+									/>
+								</Suspense>
 							);
 						}}
 					/>
-					<Route
-						exact
-						path='/recent-donors'
-						component={RecentDonors}
-					/>
+					<Route exact path='/recent-donors'>
+						<Suspense fallback={<div>Loading...</div>}>
+							<RecentDonors />
+						</Suspense>
+					</Route>
 					<ProtectedRoute
 						exact
 						path='/donors/profile/:id/:name'
 						component={(routerProps) => {
 							return (
-								<Profile
-									dateConverter={this.dateConverter}
-									donorProfile={this.state.donorProfile}
-									routerProps={routerProps}
-								/>
+								<Suspense fallback={<div>Loading...</div>}>
+									<Profile
+										dateConverter={this.dateConverter}
+										donorProfile={this.state.donorProfile}
+										routerProps={routerProps}
+									/>
+								</Suspense>
 							);
 						}}
 					/>
@@ -204,7 +235,11 @@ class App extends Component {
 						exact
 						path='/blood-request'
 						component={(routerProps) => {
-							return <ReqForBlood routerProps={routerProps} />;
+							return (
+								<Suspense fallback={<div>Loading...</div>}>
+									<ReqForBlood routerProps={routerProps} />
+								</Suspense>
+							);
 						}}
 					/>
 					<Route
@@ -212,11 +247,13 @@ class App extends Component {
 						path='/login'
 						render={(routerProps) => {
 							return (
-								<Login
-									loadLoginProfile={this.loadLoginProfile}
-									loginProfile={this.state.loginProfile}
-									routerProps={routerProps}
-								/>
+								<Suspense fallback={<div>Loading...</div>}>
+									<Login
+										loadLoginProfile={this.loadLoginProfile}
+										loginProfile={this.state.loginProfile}
+										routerProps={routerProps}
+									/>
+								</Suspense>
 							);
 						}}
 					/>
@@ -227,10 +264,12 @@ class App extends Component {
 							path='users/request/:id'
 							render={() => {
 								return (
-									<ReqForBloodDashboard
-										dateConverter={this.dateConverter}
-										ReqData={this.state.ReqData}
-									/>
+									<Suspense fallback={<div>Loading...</div>}>
+										<ReqForBloodDashboard
+											dateConverter={this.dateConverter}
+											ReqData={this.state.ReqData}
+										/>
+									</Suspense>
 								);
 							}}
 						/>
@@ -239,9 +278,9 @@ class App extends Component {
 							path='/recovery'
 							render={(routerProps) => {
 								return (
-									<Recovery
-										routerProps={routerProps}
-									/>
+									<Suspense fallback={<div>Loading...</div>}>
+										<Recovery routerProps={routerProps} />
+									</Suspense>
 								);
 							}}
 						/>
@@ -249,7 +288,11 @@ class App extends Component {
 							exact
 							path='/register'
 							render={(routerProps) => {
-								return <Register routerProps={routerProps} />;
+								return (
+									<Suspense fallback={<div>Loading...</div>}>
+										<Register routerProps={routerProps} />
+									</Suspense>
+								);
 							}}
 						/>
 						<ProtectedRoute
@@ -257,12 +300,18 @@ class App extends Component {
 							path='/donor-dashboard/:id/:name'
 							component={(routerProps) => {
 								return (
-									<DonorDashboard
-										dateConverter={this.dateConverter}
-										loadLoginProfile={this.loadLoginProfile}
-										loginProfile={this.state.loginProfile}
-										routerProps={routerProps}
-									/>
+									<Suspense fallback={<div>Loading...</div>}>
+										<DonorDashboard
+											dateConverter={this.dateConverter}
+											loadLoginProfile={
+												this.loadLoginProfile
+											}
+											loginProfile={
+												this.state.loginProfile
+											}
+											routerProps={routerProps}
+										/>
+									</Suspense>
 								);
 							}}
 						/>
@@ -271,9 +320,13 @@ class App extends Component {
 							path='/user-dashboard/:id/:name'
 							component={() => {
 								return (
-									<UserDashboard
-										loginProfile={this.state.loginProfile}
-									/>
+									<Suspense fallback={<div>Loading...</div>}>
+										<UserDashboard
+											loginProfile={
+												this.state.loginProfile
+											}
+										/>
+									</Suspense>
 								);
 							}}
 						/>
@@ -282,10 +335,16 @@ class App extends Component {
 							path='/user-edit-profile'
 							component={() => {
 								return (
-									<EditProfile
-										loadLoginProfile={this.loadLoginProfile}
-										loginProfile={this.state.loginProfile}
-									/>
+									<Suspense fallback={<div>Loading...</div>}>
+										<EditProfile
+											loadLoginProfile={
+												this.loadLoginProfile
+											}
+											loginProfile={
+												this.state.loginProfile
+											}
+										/>
+									</Suspense>
 								);
 							}}
 						/>
@@ -294,18 +353,32 @@ class App extends Component {
 							path='/user-change-password'
 							component={() => {
 								return (
-									<ChangePassword
-										loadLoginProfile={this.loadLoginProfile}
-										loginProfile={this.state.loginProfile}
-									/>
+									<Suspense fallback={<div>Loading...</div>}>
+										<ChangePassword
+											loadLoginProfile={
+												this.loadLoginProfile
+											}
+											loginProfile={
+												this.state.loginProfile
+											}
+										/>
+									</Suspense>
 								);
 							}}
 						/>
 					</Switch>
-					<Route path='*' component={ErrorPage} />
+					<Route path='*'>
+						<Suspense fallback={<div>Loading...</div>}>
+							<ErrorPage />
+						</Suspense>
+					</Route>
 				</Switch>
-				<Footer />
-				<FloatingWidget />
+				<Suspense fallback={<div>Loading...</div>}>
+					<Footer />
+				</Suspense>
+				<Suspense fallback={<div>Loading...</div>}>
+					<FloatingWidget />
+				</Suspense>
 			</Router>
 		);
 	}

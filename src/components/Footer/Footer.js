@@ -1,9 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import aboutLogo from './logo3.png';
-// import './Footer.css';
-import bGrid3 from './blog-grid-3.jpg';
-import bGrid4 from './blog-grid-4.jpg';
+import aboutLogo from './logo3.webp';
+import bGrid3 from './blog-grid-3.webp';
+import bGrid4 from './blog-grid-4.webp';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faFacebook,

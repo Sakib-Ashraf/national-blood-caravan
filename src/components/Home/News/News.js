@@ -1,9 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'
-// import './News.css';
-import BGrid2 from './blog-grid-2.jpg';
-import BGrid3 from './blog-grid-3.jpg';
-import BGrid4 from './blog-grid-4.jpg';
+import { NavLink } from 'react-router-dom';
+import BGrid2 from './blog-grid-2.webp';
+import BGrid3 from './blog-grid-3.webp';
+import BGrid4 from './blog-grid-4.webp';
 
 
 const News = () => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
-import dp from './Donor.png';
+import dp from './Donor.webp';
 
 
 const initialState = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import DP from './Donor.png';
+import DP from './Donor.webp';
 
 
 

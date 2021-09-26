@@ -1,7 +1,6 @@
 import React from 'react';
-// import './Motivation.css';
-import HealthBenifitImg1 from './health-benefit-one-39566.png';
-import HealthBenifitImg2 from './health-benefit-two-76075.png';
+import HealthBenifitImg1 from './health-benefit-one-39566.webp';
+import HealthBenifitImg2 from './health-benefit-two-76075.webp';
 
 const Motivation = () => {
     return (

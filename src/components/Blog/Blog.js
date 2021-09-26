@@ -2,10 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
 import './Blog.css';
-import BlogGrid1 from './blog-grid-1.jpg';
-import BlogGrid2 from './blog-grid-2.jpg';
-import BlogGrid3 from './blog-grid-3.jpg';
-import BlogGrid4 from './blog-grid-4.jpg';
+import BlogGrid1 from './blog-grid-1.webp';
+import BlogGrid2 from './blog-grid-2.webp';
+import BlogGrid3 from './blog-grid-3.webp';
+import BlogGrid4 from './blog-grid-4.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faCalendar } from '@fortawesome/free-solid-svg-icons';
 
