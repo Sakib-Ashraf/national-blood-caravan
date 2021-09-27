@@ -8,7 +8,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 import './App.css';
 
 import Topbar from '../components/Topbar/Topbar';
-import Navigation from '../components/Navigation/Navigation';
+import Navigation from '../components/Navbar/Navigation';
 import Header from '../components/Home/Header/Header';
 import SearchBox from '../components/Home/SearchBox/SearchBox';
 import DonationProcess from '../components/Home/DonationProcess/DonationProcess';
