@@ -7,8 +7,7 @@
 			rel="dns-prefetch"
 			src="https://www.googletagmanager.com/gtag/js?id=UA-154576931-1"
 		></script>
-		<script defer
-			rel="dns-prefetch">
+		<script defer rel="dns-prefetch">
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
 				dataLayer.push(arguments);
@@ -19,7 +18,7 @@
 		</script>
 
 		<meta charset="utf-8" />
-		<link rel="icon" href="%PUBLIC_URL%/favicon.ico"  type="image/png" />
+		<link rel="icon" href="%PUBLIC_URL%/favicon.ico" type="image/png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<meta
@@ -30,14 +29,32 @@
 			name="tags"
 			content="blood donation,donation oragization, national blood caravan"
 		/>
-		
-		<link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
-		<link rel="manifest" href="%PUBLIC_URL%/site.webmanifest">
-		<link rel="mask-icon" href="%PUBLIC_URL%/safari-pinned-tab.svg" color="#009C55">
-		<meta name="msapplication-TileColor" content="#ffffff">
-		<meta name="theme-color" content="#ffffff">
+
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="%PUBLIC_URL%/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="%PUBLIC_URL%/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="%PUBLIC_URL%/favicon-16x16.png"
+		/>
+		<link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
+		<link
+			rel="mask-icon"
+			href="%PUBLIC_URL%/safari-pinned-tab.svg"
+			color="#009C55"
+		/>
+		<meta name="msapplication-TileColor" content="#ffffff" />
+		<meta name="theme-color" content="#ffffff" />
 
 		<!--
       manifest.json provides metadata used when your web app is installed on a
@@ -55,18 +72,14 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
 
-		
-
-
 		<title>NBC - A Blood Donation Organization</title>
 
-<style>
-
+		<style>
 			.svgLoader {
 				animation: spin 0.5s linear infinite;
 				margin: auto;
 			}
-		
+
 			.divLoader {
 				width: 100vw;
 				height: 100vh;
@@ -74,12 +87,12 @@
 				align-items: center;
 				justify-content: center;
 			}
-		
+
 			@keyframes spin {
 				0% {
 					transform: rotate(0deg);
 				}
-		
+
 				100% {
 					transform: rotate(360deg);
 				}
@@ -89,14 +102,33 @@
 
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
-		
+
 		<div id="root">
 			<div class="divLoader">
-				<svg class="svgLoader" viewBox="0 0 100 100" width="5em" height="5em">
-					<path ng-attr-d="{{config.pathCmd}}" ng-attr-fill="{{config.color}}" stroke="none"
-						d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50" fill="#e83530" transform="rotate(179.719 50 51)">
-						<animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 51;360 50 51"
-							keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animateTransform>
+				<svg
+					class="svgLoader"
+					viewBox="0 0 100 100"
+					width="5em"
+					height="5em"
+				>
+					<path
+						ng-attr-d="{{config.pathCmd}}"
+						ng-attr-fill="{{config.color}}"
+						stroke="none"
+						d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50"
+						fill="#e83530"
+						transform="rotate(179.719 50 51)"
+					>
+						<animateTransform
+							attributeName="transform"
+							type="rotate"
+							calcMode="linear"
+							values="0 50 51;360 50 51"
+							keyTimes="0;1"
+							dur="1s"
+							begin="0s"
+							repeatCount="indefinite"
+						></animateTransform>
 					</path>
 				</svg>
 			</div>
@@ -112,29 +144,36 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-	<!-- all stylesheets -->
-	<link rel="stylesheet" href="cleancss/tidy.css" />
-	<!-- <link rel="stylesheet" href="assets/frontend/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="assets/frontend/css/style.css" />-->
-	<link rel="stylesheet" href="assets/frontend/css/all.min.css" />
-	<!-- <link rel="stylesheet" href="assets/frontend/css/responsive.css" />  -->
+		<!-- all stylesheets -->
+		<link rel="stylesheet preconnect" href="cleancss/tidy.css" />
+		<link rel="stylesheet preconnect" href="assets/frontend/css/all.min.css" />
+		<!-- <link rel="stylesheet" href="assets/frontend/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/frontend/css/style.css" />-->
+		<!-- <link rel="stylesheet" href="assets/frontend/css/responsive.css" />  -->
 
 		<!-- All scripts -->
 
-		<script
-			rel="dns-prefetch">
-		var cb = function () {
-				var l = document.createElement('link'); l.rel = 'stylesheet';
-				l.href = "assets/frontend/css/style.min.css";
-				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+		<script rel="dns-prefetch">
+			var cb = function () {
+				var l = document.createElement('link');
+				l.rel = 'stylesheet';
+				l.href = 'assets/frontend/css/style.min.css';
+				var h = document.getElementsByTagName('head')[0];
+				h.parentNode.insertBefore(l, h);
 			};
-			var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-				webkitRequestAnimationFrame || msRequestAnimationFrame;
+			var raf =
+				requestAnimationFrame ||
+				mozRequestAnimationFrame ||
+				webkitRequestAnimationFrame ||
+				msRequestAnimationFrame;
 			if (raf) raf(cb);
 			else window.addEventListener('load', cb);
 		</script>
 
-		<script rel="preconnect dns-prefetch" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script
+			rel="preconnect dns-prefetch"
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+		></script>
 		<script src="assets/frontend/js/jquery-migrate-3.1.0.min.js"></script>
 		<script src="assets/frontend/js/jquery.waypoints.js"></script>
 		<script src="assets/frontend/js/jquery.rcounter.js"></script>
