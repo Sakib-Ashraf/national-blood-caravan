@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../containers/App.css';
 import Form from 'react-validation/build/form';
+import input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 
 import baseURL from '../Auth/baseURL';

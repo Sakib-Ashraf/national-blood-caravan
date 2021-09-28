@@ -31,8 +31,7 @@ const Topbar = () => {
 											<a
 												rel='noreferrer'
 												target='_blank'
-											  href='https://www.facebook.com'
-											  alt='facebook'
+												href='https://www.facebook.com'
 											>
 												<FontAwesomeIcon
 													icon={faFacebook}
@@ -44,7 +43,6 @@ const Topbar = () => {
 												rel='noreferrer'
 												target='_blank'
 												href='https://www.twitter.com'
-												alt='twitter'
 											>
 												<FontAwesomeIcon
 													icon={faTwitter}
@@ -56,7 +54,6 @@ const Topbar = () => {
 												rel='noreferrer'
 												target='_blank'
 												href='https://www.instagram.com'
-												alt='instagram'
 											>
 												<FontAwesomeIcon
 													icon={faInstagram}
@@ -68,7 +65,6 @@ const Topbar = () => {
 												rel='noreferrer'
 												target='_blank'
 												href='https://www.linkedin.com'
-												alt='linkedin'
 											>
 												<FontAwesomeIcon
 													icon={faLinkedin}

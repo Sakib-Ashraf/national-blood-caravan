@@ -151,15 +151,16 @@
 		<link rel="stylesheet" href="assets/frontend/css/style.css" />-->
 		<!-- <link rel="stylesheet" href="assets/frontend/css/responsive.css" />  -->
 
+
 		<!-- All scripts -->
 
-		<script rel="dns-prefetch">
-			var cb = function () {
-				var l = document.createElement('link');
-				l.rel = 'stylesheet';
-				l.href = 'assets/frontend/css/style.min.css';
-				var h = document.getElementsByTagName('head')[0];
-				h.parentNode.insertBefore(l, h);
+		<script
+		async
+			rel="dns-prefetch">
+		var cb = function () {
+				var l = document.createElement('link'); l.rel = 'stylesheet';
+				l.href = "assets/frontend/css/style.min.css";
+				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
 			};
 			var raf =
 				requestAnimationFrame ||
@@ -170,10 +171,7 @@
 			else window.addEventListener('load', cb);
 		</script>
 
-		<script
-			rel="preconnect dns-prefetch"
-			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-		></script>
+		<script rel="preconnect dns-prefetch" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="assets/frontend/js/jquery-migrate-3.1.0.min.js"></script>
 		<script src="assets/frontend/js/jquery.waypoints.js"></script>
 		<script src="assets/frontend/js/jquery.rcounter.js"></script>
