@@ -15,7 +15,7 @@ const SingleCard = ({
 	return (
 		<div className='single-donors-item'>
 			<div className='thumb'>
-				<img src={DP} alt='dp' />
+				<img style={{ maxWidth: '360px' }} src={DP} alt='dp' />
 			</div>
 			<div className='content'>
 				<NavLink to={`/donors/profile/${id}/${name}`}>
@@ -28,7 +28,8 @@ const SingleCard = ({
 					Total Donate: <strong>{donated}</strong> Times
 				</span>
 				<span className='total-donate'>
-					Last Donate Date: <strong>{dateConverter(last_donate_date)}</strong>
+					Last Donate Date:{' '}
+					<strong>{dateConverter(last_donate_date)}</strong>
 				</span>
 			</div>
 		</div>
