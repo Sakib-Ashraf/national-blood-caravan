@@ -14,7 +14,7 @@ class RecentDonors extends Component {
 	}
 
 	componentDidMount() {
-		baseURL.get(`donors`)
+		baseURL.get(`recent-donors`)
 			.then((donors) => {
 				if (donors.data[0]) {
 					this.setState({ donors: donors.data });
