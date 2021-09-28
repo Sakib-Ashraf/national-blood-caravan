@@ -26,7 +26,7 @@ const ReqBGTable = ({
 	return (
 		<tr>
 			<th onClick={onClickProfile} scope='row'>
-				<NavLink alt={name} to={`users/request/${id}`}>{name}</NavLink>
+				<NavLink to={`users/request/${id}`}>{name}</NavLink>
 			</th>
 			
 

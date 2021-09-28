@@ -36,10 +36,10 @@ const DonorList = (props) => {
 			<div className='col-lg-3 col-md-6'>
 				<div className='single-donors-item margin-bottom-30'>
 					<div className='thumb'>
-						<img style={{maxWidth: '210px'}} src={dp} alt='dp' />
+						<img src={dp} alt='dp' />
 					</div>
 					<div className='content'>
-						<NavLink alt={name} to={`/donors/profile/${id}/${name}`}>
+						<NavLink to={`/donors/profile/${id}/${name}`}>
 							{' '}
 							<h4
 								onClick={onClickProfile}
