@@ -20,14 +20,10 @@ const Blog = () => {
 								<h2 className='page-title'>Blog</h2>
 								<ul className='page-list'>
 									<li>
-										<NavLink to='/'>
-											Home
-										</NavLink>
+										<NavLink to='/'>Home</NavLink>
 									</li>
 									<li>
-										<NavLink to='/blog'>
-											Blog
-										</NavLink>
+										<NavLink to='/blog'>Blog</NavLink>
 									</li>
 								</ul>
 							</div>
@@ -54,7 +50,10 @@ const Blog = () => {
 												Posted By Sharifur
 											</span>
 											<h4 className='title'>
-												<NavLink to='/blog/4/subjects-to-ecstatic-children-up-as-built-match-gravida'>
+												<NavLink
+													to='/blog/4/subjects-to-ecstatic-children-up-as-built-match-gravida'
+													alt='Subjects to ecstatic children  up as built match gravida'
+												>
 													Subjects to ecstatic
 													children up as built match
 													gravida
@@ -76,6 +75,7 @@ const Blog = () => {
 											<NavLink
 												to='/blog/4/subjects-to-ecstatic-children-up-as-built-match-gravida'
 												className='readmore'
+												alt='Subjects to ecstatic children  up as built match gravida'
 											>
 												Read More
 											</NavLink>
@@ -95,7 +95,10 @@ const Blog = () => {
 												Posted By Sharifur
 											</span>
 											<h4 className='title'>
-												<NavLink to='/blog/3/nam-nec-tellus-sed-odio-sit-amet-nibh-vulputate-cursus'>
+												<NavLink
+													to='/blog/3/nam-nec-tellus-sed-odio-sit-amet-nibh-vulputate-cursus'
+													alt='Nam nec tellus sed odio sit amet nibh vulputate cursus'
+												>
 													Nam nec tellus sed odio sit
 													amet nibh vulputate cursus
 												</NavLink>
@@ -122,6 +125,7 @@ const Blog = () => {
 											<NavLink
 												to='/blog/3/nam-nec-tellus-sed-odio-sit-amet-nibh-vulputate-cursus'
 												className='readmore'
+												alt='Nam nec tellus sed odio sit amet nibh vulputate cursus'
 											>
 												Read More
 											</NavLink>
@@ -141,7 +145,10 @@ const Blog = () => {
 												Posted By Sharifur
 											</span>
 											<h4 className='title'>
-												<NavLink to='/blog/2/dejection-agreeable-attention-set-led-offending'>
+												<NavLink
+													to='/blog/2/dejection-agreeable-attention-set-led-offending'
+													alt='Dejection agreeable attention set led offending'
+												>
 													Dejection agreeable
 													attention set led offending
 												</NavLink>
@@ -168,6 +175,7 @@ const Blog = () => {
 											<NavLink
 												to='/blog/2/dejection-agreeable-attention-set-led-offending'
 												className='readmore'
+												alt='Dejection agreeable attention set led offending'
 											>
 												Read More
 											</NavLink>
@@ -187,7 +195,10 @@ const Blog = () => {
 												Posted By Sharifur
 											</span>
 											<h4 className='title'>
-												<NavLink to='/blog/1/in-show-dull-give-need-so-held-her-gay-style-wrote'>
+												<NavLink
+													to='/blog/1/in-show-dull-give-need-so-held-her-gay-style-wrote'
+													alt='In show dull give need so held her gay style wrote'
+												>
 													In show dull give need so
 													held her gay style wrote
 												</NavLink>
@@ -214,6 +225,7 @@ const Blog = () => {
 											<NavLink
 												to='/blog/1/in-show-dull-give-need-so-held-her-gay-style-wrote'
 												className='readmore'
+												alt='In show dull give need so held her gay style wrote'
 											>
 												Read More
 											</NavLink>

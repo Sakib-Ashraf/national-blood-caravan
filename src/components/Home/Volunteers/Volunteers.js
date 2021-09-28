@@ -24,6 +24,7 @@ const Volunteers = () => {
 								<div className='thumb'>
 									<span className='blood-group'>o+</span>
 									<img
+									style={{maxWidth: '360px'}}
 										src={VP}
 										alt='Jorge Amos'
 									/>

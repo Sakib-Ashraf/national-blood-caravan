@@ -4,7 +4,6 @@ import '../../containers/App.css';
 import auth from '../Auth/auth';
 
 import Form from 'react-validation/build/form';
-import input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 
 

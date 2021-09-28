@@ -3,11 +3,12 @@
 	<head>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script
-			async
-			rel="preconnect dns-prefetch"
+			defer
+			rel="dns-prefetch"
 			src="https://www.googletagmanager.com/gtag/js?id=UA-154576931-1"
 		></script>
-		<script>
+		<script defer
+			rel="dns-prefetch">
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
 				dataLayer.push(arguments);
@@ -54,20 +55,13 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
 
-		<!-- all stylesheets -->
-		<link rel="stylesheet" href="assets/frontend/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/frontend/css/style.css" />
-		<link rel="stylesheet" href="assets/frontend/css/all.min.css" />
-		<link rel="stylesheet" href="assets/frontend/css/responsive.css" />
+		
 
-		<style>
-			:root {
-				--main-color-one: #e83530;
-			}
-		</style>
 
 		<title>NBC - A Blood Donation Organization</title>
-		<style>
+
+<style>
+
 			.svgLoader {
 				animation: spin 0.5s linear infinite;
 				margin: auto;
@@ -118,7 +112,28 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
+	<!-- all stylesheets -->
+	<link rel="stylesheet" href="cleancss/tidy.css" />
+	<!-- <link rel="stylesheet" href="assets/frontend/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="assets/frontend/css/style.css" />-->
+	<link rel="stylesheet" href="assets/frontend/css/all.min.css" />
+	<!-- <link rel="stylesheet" href="assets/frontend/css/responsive.css" />  -->
+
 		<!-- All scripts -->
+
+		<script
+			rel="dns-prefetch">
+		var cb = function () {
+				var l = document.createElement('link'); l.rel = 'stylesheet';
+				l.href = "assets/frontend/css/style.min.css";
+				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+			};
+			var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+				webkitRequestAnimationFrame || msRequestAnimationFrame;
+			if (raf) raf(cb);
+			else window.addEventListener('load', cb);
+		</script>
+
 		<script rel="preconnect dns-prefetch" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="assets/frontend/js/jquery-migrate-3.1.0.min.js"></script>
 		<script src="assets/frontend/js/jquery.waypoints.js"></script>
