@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import Logo from './logo3.webp';
+import './Navigation.css';
 import auth from '../Auth/auth';
 
 class Navigation extends Component {
