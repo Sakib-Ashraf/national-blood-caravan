@@ -1,0 +1,186 @@
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+input[type="button"]:focus,
+input[type="reset"]:focus,
+input[type="submit"]:focus,
+select:focus {
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #ddd;
+}
+.widget_search .search-form {
+    position: relative;
+}
+
+.widget_search .search-form .form-group {
+    margin-bottom: 0;
+}
+
+.widget_search .search-form .form-group .form-control {
+    height: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 70px 0 15px;
+}
+
+.widget_search .search-form .submit-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 60px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+    font-size: 18px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: var(--main-color-one);
+    color: #fff;
+    -webkit-transition: .3s ease-in;
+    -o-transition: .3s ease-in;
+    transition: .3s ease-in;
+    border: none;
+    cursor: pointer;
+}
+
+.widget_search .search-form .submit-btn:hover {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+.blood-search-warpper {
+    padding: 40px;
+    -webkit-box-shadow: 0 4px 65px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 65px 0 rgba(0, 0, 0, 0.08);
+    margin-top: -60px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.blood-search-form .fields-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 20px;
+}
+
+.blood-search-form .fields-list li {
+    display: inline-block;
+    width: calc(100% / 3 - 20px);
+}
+
+.blood-search-form .fields-list li ul.list {
+    display: block;
+    width: 100%;
+}
+
+.blood-search-form .fields-list li ul.list li {
+    display: block;
+    width: 100%;
+    margin-left: 0px;
+}
+
+.blood-search-form .fields-list li .submit-btn {
+    width: 100%;
+    line-height: 45px;
+}
+
+.blood-search-form .fields-list li .form-group {
+    margin-bottom: 0px;
+}
+
+.blood-search-form .fields-list li .form-group.has-icon {
+    position: relative;
+    z-index: 0;
+}
+
+.blood-search-form .fields-list li .form-group.has-icon .the-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.blood-search-form .fields-list li .form-group .form-control {
+    height: 50px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    line-height: 50px;
+    padding: 0 15px;
+    width: 100%;
+    border: 2px solid #e2e2e2;
+}
+
+.blood-search-form .fields-list li .form-group .form-control:focus {
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.blood-search-form .fields-list li + li {
+    margin-left: 20px;
+}
+
+.submit-btn {
+    display: block;
+    width: 180px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    background-color: var(--main-color-one);
+    border: none;
+    border-radius: 3px;
+    -webkit-transition: all 500ms;
+    -o-transition: all 500ms;
+    transition: all 500ms;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid transparent;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.submit-btn:hover {
+    background-color: transparent;
+    color: var(--main-color-one);
+    border-color: var(--main-color-one);
+}
+@media only screen and (max-width: 767px) {
+    .blood-search-warpper {
+		padding: 20px;
+	}
+}
+@media only screen and (max-width: 450px) {
+	.blood-search-form .fields-list li + li {
+		margin-top: 10px !important;
+	}
+	.blood-search-form .fields-list li {
+		display: inline-block;
+		width: 100%;
+		margin-left: 0px !important;
+	}
+}
+@media only screen and (max-width: 384px) {
+    .blood-search-form .fields-list li + li {
+		margin-top: 10px !important;
+	}
+	.blood-search-form .fields-list li {
+		display: inline-block;
+		width: 100%;
+		margin-left: 0px !important;
+	}
+}

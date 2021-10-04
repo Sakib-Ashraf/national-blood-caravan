@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import './SearchBox.css';
 import baseURL from '../../Auth/baseURL';
 
 class SearchBox extends Component {
