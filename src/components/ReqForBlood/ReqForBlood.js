@@ -72,14 +72,17 @@ class ReqForBlood extends Component {
 				})
 				.then(
 					(response) => {
-						this.props.routerProps.history.push(`/blood-request`);
+						if (response.statusText === 'OK') {
+							this.props.routerProps.history.push(`/#blood-requests`);
+						
 						console.log(response);
 						response.data
 							? this.setState({
 									data: true,
 									resmessage: response.statusText,
 							  })
-							: this.setState({ data: false });
+								: this.setState({ data: false });
+						}
 					},
 					(error) => {
 						console.log(error);

@@ -26,7 +26,7 @@ class RecentDonors extends Component {
     render() {
         const { donors } = this.state;
 		return (
-			<div className='recently-donated-donors padding-bottom-120'>
+			<section className='recently-donated-donors padding-bottom-120'>
 				<div className='container'>
 					<div className='row justify-content-center'>
 						<div className='col-lg-8'>
@@ -84,7 +84,7 @@ class RecentDonors extends Component {
                         </div>
                         }
 					</div>
-				</div>
+				</section>
 		);
 	}
 };

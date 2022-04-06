@@ -22,7 +22,7 @@ class ReqBGInfo extends Component {
 
 	render() {
 		return (
-			<div className='recently-requested-area padding-bottom-90'>
+			<section className='recently-requested-area padding-bottom-90' id="blood-requests">
 				<div className='container'>
 					<div className='row justify-content-center'>
 						<div className='col-lg-8'>
@@ -141,7 +141,7 @@ class ReqBGInfo extends Component {
 						</div>
 					)}
 				</div>
-			</div>
+			</section>
 		);
 	}
 }
